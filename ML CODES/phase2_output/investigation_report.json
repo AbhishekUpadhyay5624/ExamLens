@@ -1,0 +1,301 @@
+{
+  "exam_info": {
+    "exam_type": "PAPER_PEN",
+    "exam_description": "Paper-Based Exam - No electronic devices allowed"
+  },
+  "video_info": {
+    "filename": "full_recording.mp4",
+    "total_frames": 9854,
+    "duration_seconds": 8061.433340286978,
+    "resolution": "1280x720"
+  },
+  "processing_summary": {
+    "persons_tracked": 1674,
+    "total_detections": 519102,
+    "accessibility_cases": 89
+  },
+  "events_summary": {
+    "total_events": 170,
+    "high_severity": 163,
+    "medium_severity": 7,
+    "by_type": {
+      "SUSPICIOUS_STILLNESS": 259,
+      "LAPTOP_INTERACTION": 17,
+      "EXCESSIVE_MOVEMENT": 7
+    }
+  },
+  "investigation_priority": {
+    "immediate_review": [
+      {
+        "event_id": 1,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 10,
+        "time": "00:14",
+        "duration": "18.8s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 2,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 8,
+        "time": "00:16",
+        "duration": "17.2s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 3,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 14,
+        "time": "00:51",
+        "duration": "19.6s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 5,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 20,
+        "time": "01:07",
+        "duration": "12.3s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 9,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 54,
+        "time": "04:20",
+        "duration": "48.3s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 10,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 69,
+        "time": "05:13",
+        "duration": "76.1s",
+        "confidence": "0.54"
+      },
+      {
+        "event_id": 13,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 81,
+        "time": "06:36",
+        "duration": "49.9s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 15,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 92,
+        "time": "07:16",
+        "duration": "12.3s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 17,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 108,
+        "time": "08:35",
+        "duration": "10.6s",
+        "confidence": "0.90"
+      },
+      {
+        "event_id": 18,
+        "type": "SUSPICIOUS_STILLNESS",
+        "person": 110,
+        "time": "08:43",
+        "duration": "18.0s",
+        "confidence": "0.90"
+      }
+    ],
+    "secondary_review": [
+      {
+        "event_id": 277,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 6,
+        "time": "00:37"
+      },
+      {
+        "event_id": 278,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 384,
+        "time": "28:36"
+      },
+      {
+        "event_id": 279,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 384,
+        "time": "29:05"
+      },
+      {
+        "event_id": 280,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 1001,
+        "time": "54:05"
+      },
+      {
+        "event_id": 281,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 2116,
+        "time": "114:07"
+      },
+      {
+        "event_id": 282,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 2163,
+        "time": "115:40"
+      },
+      {
+        "event_id": 283,
+        "type": "EXCESSIVE_MOVEMENT",
+        "person": 2346,
+        "time": "124:52"
+      }
+    ]
+  },
+  "recommendations": {
+    "manual_review_required": 163,
+    "estimated_review_time_minutes": 340,
+    "attention_persons": [
+      1024,
+      2560,
+      8,
+      10,
+      1037,
+      14,
+      2578,
+      20,
+      2069,
+      1561,
+      1570,
+      2596,
+      553,
+      1580,
+      2096,
+      2099,
+      54,
+      1078,
+      2104,
+      1599,
+      1604,
+      69,
+      81,
+      92,
+      1632,
+      2146,
+      1636,
+      615,
+      618,
+      108,
+      110,
+      111,
+      114,
+      1653,
+      631,
+      127,
+      128,
+      130,
+      131,
+      1667,
+      645,
+      136,
+      1674,
+      2192,
+      1683,
+      1177,
+      154,
+      156,
+      671,
+      161,
+      163,
+      1704,
+      2225,
+      2227,
+      693,
+      182,
+      2230,
+      1720,
+      1209,
+      699,
+      2237,
+      704,
+      2240,
+      196,
+      2260,
+      2261,
+      214,
+      1762,
+      2277,
+      1255,
+      744,
+      1767,
+      747,
+      240,
+      247,
+      255,
+      1791,
+      776,
+      1815,
+      282,
+      1820,
+      285,
+      2332,
+      2337,
+      290,
+      1828,
+      2343,
+      2352,
+      307,
+      1331,
+      1848,
+      315,
+      2364,
+      1344,
+      1869,
+      344,
+      866,
+      2406,
+      2408,
+      1385,
+      881,
+      882,
+      2420,
+      895,
+      907,
+      910,
+      1442,
+      420,
+      2469,
+      1958,
+      425,
+      1450,
+      2479,
+      2481,
+      440,
+      1465,
+      446,
+      1983,
+      1986,
+      2500,
+      966,
+      1998,
+      975,
+      464,
+      465,
+      1497,
+      475,
+      2527,
+      481,
+      2532,
+      485,
+      997,
+      2542,
+      2546,
+      1020,
+      1021
+    ]
+  },
+  "accessibility_notes": {
+    "persons_with_needs": 89,
+    "adjustments_applied": 55
+  }
+}
