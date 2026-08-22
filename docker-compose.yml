@@ -1,0 +1,79 @@
+# ExamLens — backend stack.
+#
+# Default (no profile):   MongoDB + API. Video processing runs in an in-process
+#                         background thread inside the API container.
+#
+#   docker compose up --build
+#
+# Celery mode (scale processing to separate workers):
+#
+#   docker compose --profile celery up --build
+#
+# (also set USE_CELERY=true in backend/.env)
+
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      DB_NAME: examlens
+      STORAGE_DIR: /app/storage
+      # Override the rest via an env_file or add them here as needed.
+    env_file:
+      - path: ./backend/.env
+        required: false
+    volumes:
+      - storage_data:/app/storage
+
+  # --- Optional Celery worker (enable with: --profile celery) ---
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    profiles: ["celery"]
+    ports:
+      - "6379:6379"
+
+  worker:
+    build: ./backend
+    restart: unless-stopped
+    profiles: ["celery"]
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    command: celery -A worker.celery_app.celery_app worker --loglevel=info
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      DB_NAME: examlens
+      STORAGE_DIR: /app/storage
+      USE_CELERY: "true"
+      CELERY_BROKER_URL: redis://redis:6379/0
+    env_file:
+      - path: ./backend/.env
+        required: false
+    volumes:
+      - storage_data:/app/storage
+
+volumes:
+  mongo_data:
+  storage_data:
