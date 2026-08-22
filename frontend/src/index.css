@@ -15,38 +15,62 @@
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
     "Menlo", "Consolas", monospace;
 
-  /* ---- Brand accent -----------------------------------------------------
-     The accent is a refined INDIGO. We override Tailwind's built-in `blue`
-     ramp so every existing `blue-*` utility becomes the brand accent
-     cohesively. Treat `blue-*` in this codebase as "brand accent", not the
-     literal color blue. Severity/status colors (red / amber / slate / green)
-     are intentionally left alone — they are reserved for risk signaling. */
-  --color-blue-50: #eef2ff;
-  --color-blue-100: #e0e7ff;
-  --color-blue-200: #c7d2fe;
-  --color-blue-300: #a5b4fc;
-  --color-blue-400: #818cf8;
-  --color-blue-500: #6366f1;
-  --color-blue-600: #4f46e5;
-  --color-blue-700: #4338ca;
-  --color-blue-800: #3730a3;
-  --color-blue-900: #312e81;
+  /* ---- Brand accent (Cyber/AI Cyan-Teal) -------------------------------- */
+  --color-blue-50: #ecfeff;
+  --color-blue-100: #cffafe;
+  --color-blue-200: #a5f3fc;
+  --color-blue-300: #67e8f9;
+  --color-blue-400: #22d3ee;
+  --color-blue-500: #06b6d4;
+  --color-blue-600: #0891b2;
+  --color-blue-700: #0e7490;
+  --color-blue-800: #155e75;
+  --color-blue-900: #164e63;
 }
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+@keyframes shine {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
 }
 
 html,
 body,
 #root {
   height: 100%;
+  @apply bg-slate-50 text-slate-900 transition-colors duration-300;
+}
+
+html.dark,
+html.dark body,
+html.dark #root {
+  @apply bg-slate-950 text-slate-100;
 }
 
 body {
   margin: 0;
-  background-color: #f6f7f9; /* cool near-white "paper" */
-  color: #0f172a; /* slate-900 */
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

@@ -29,10 +29,10 @@ export default function Reports() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900 font-display">
-          Reports
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-display">
+          Investigation Reports
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           Investigation reports for exams that finished processing.
         </p>
       </div>
@@ -44,7 +44,7 @@ export default function Reports() {
           ))}
         </div>
       ) : isError ? (
-        <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-sm text-red-600 shadow-sm">
+        <div className="rounded-2xl border border-red-200 dark:border-red-900/50 bg-red-50/50 dark:bg-red-900/10 backdrop-blur-md p-10 text-center text-sm text-red-600 dark:text-red-400 shadow-sm">
           Couldn't load reports. Check that the backend is running, then retry.
         </div>
       ) : items.length === 0 ? (
@@ -56,19 +56,20 @@ export default function Reports() {
               const high = exam.summary?.eventsBySeverity?.HIGH ?? 0;
               const total = exam.summary?.totalEvents ?? 0;
               return (
-                <div
+                <Link
                   key={exam.id}
-                  className="flex flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                  to={`/exams/${exam.id}/report`}
+                  className="flex flex-col rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-900/50 group"
                 >
                   <div className="flex items-start gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition-colors group-hover:bg-blue-600 group-hover:text-white">
                       <FileText size={20} />
                     </span>
                     <div className="min-w-0">
-                      <h3 className="truncate text-base font-semibold text-slate-900">
+                      <h3 className="truncate text-base font-semibold text-slate-900 dark:text-slate-100">
                         {exam.examName}
                       </h3>
-                      <p className="text-sm text-slate-500">
+                      <p className="text-sm text-slate-500 dark:text-slate-400">
                         {EXAM_TYPE_LABELS[exam.examType] || exam.examType}
                         {exam.processedAt ? (
                           <>
@@ -85,32 +86,16 @@ export default function Reports() {
                   </div>
 
                   <div className="mt-4 flex items-center gap-4 text-sm">
-                    <span className="inline-flex items-center gap-1.5 text-slate-600">
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                       <Flag size={15} className="text-blue-500" />
                       <span className="font-mono">{total}</span> events
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-slate-600">
+                    <span className="inline-flex items-center gap-1.5 text-slate-600 dark:text-slate-400">
                       <ShieldAlert size={15} className="text-red-500" />
                       <span className="font-mono">{high}</span> high
                     </span>
                   </div>
-
-                  <div className="mt-4 flex gap-2 border-t border-slate-100 pt-4">
-                    <Link
-                      to={`/exams/${exam.id}/report`}
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                    >
-                      View report
-                      <ArrowRight size={15} />
-                    </Link>
-                    <Link
-                      to={`/exams/${exam.id}`}
-                      className="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50"
-                    >
-                      Dashboard
-                    </Link>
-                  </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -131,14 +116,12 @@ export default function Reports() {
 
 function EmptyState() {
   return (
-    <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-white px-6 py-16 text-center shadow-sm">
-      <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-        <Inbox size={24} />
-      </span>
-      <h3 className="text-base font-medium text-slate-900 font-display">
-        No reports yet
-      </h3>
-      <p className="mt-1 max-w-sm text-sm text-slate-500">
+    <div className="flex flex-col items-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md px-6 py-16 text-center shadow-sm">
+      <div className="mb-4 rounded-full bg-slate-50 dark:bg-slate-800 p-3">
+        <FileText size={32} className="text-slate-400 dark:text-slate-500" />
+      </div>
+      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">No reports found</h3>
+      <p className="mt-2 max-w-sm text-sm text-slate-500 dark:text-slate-400">
         Reports appear here once an uploaded exam finishes processing. Upload a
         recording to generate your first one.
       </p>

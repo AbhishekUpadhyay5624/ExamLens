@@ -108,11 +108,18 @@ export default function EventsTable({ examId }) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {items.map((ev) => (
+                {items.map((ev, i) => (
                   <tr
                     key={ev.id}
                     onClick={() => navigate(`/events/${ev.id}`)}
-                    className="cursor-pointer transition hover:bg-slate-50"
+                    style={{ animationDelay: `${Math.min(i, 12) * 25}ms` }}
+                    className={`animate-fade-up cursor-pointer transition-all duration-200 ${
+                      ev.severity === "high" || ev.severity === "critical"
+                        ? "hover:bg-red-50 hover:shadow-[inset_0_0_12px_rgba(239,68,68,0.15)]"
+                        : ev.severity === "medium"
+                        ? "hover:bg-amber-50 hover:shadow-[inset_0_0_12px_rgba(245,158,11,0.15)]"
+                        : "hover:bg-slate-50"
+                    }`}
                   >
                     <td className="whitespace-nowrap px-4 py-3 font-mono font-medium text-slate-900">
                       {ev.startTimeFormatted || formatTimestamp(ev.startTime)}

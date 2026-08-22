@@ -68,7 +68,7 @@ const EVENTS = [
 
 function SectionTitle({ children }) {
   return (
-    <h2 className="mb-4 text-lg font-semibold text-slate-900 font-display">
+    <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100 font-display">
       {children}
     </h2>
   );
@@ -78,21 +78,21 @@ export default function About() {
   return (
     <div className="mx-auto max-w-4xl space-y-10">
       {/* Intro */}
-      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
+      <section className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-8 shadow-sm sm:p-10">
         <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">
           <ScanEye size={24} />
         </span>
-        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 font-display">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 font-display">
           About ExamLens
         </h1>
-        <p className="mt-3 max-w-2xl text-slate-600">
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
           ExamLens is an exam-proctoring assistant that reviews recorded exam
           footage for you. Instead of scrubbing through hours of CCTV, an
           invigilator uploads a recording and ExamLens does the watching —
           tracking each person, flagging behavior that looks suspicious, and
           collecting the evidence into a single dashboard and report.
         </p>
-        <p className="mt-3 max-w-2xl text-slate-600">
+        <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-400">
           It doesn't accuse anyone. It surfaces moments worth a human's
           attention and ranks them by severity, so limited review time goes to
           the events that matter most.
@@ -108,18 +108,18 @@ export default function About() {
             return (
               <div
                 key={step.title}
-                className="relative rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                className="relative rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm"
               >
-                <span className="absolute right-4 top-4 font-mono text-2xl font-bold text-slate-100">
+                <span className="absolute right-4 top-4 font-mono text-2xl font-bold text-slate-100 dark:text-slate-800/50">
                   {i + 1}
                 </span>
-                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400">
                   <Icon size={20} />
                 </span>
-                <h3 className="text-base font-semibold text-slate-900">
+                <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                   {step.title}
                 </h3>
-                <p className="mt-1 text-sm text-slate-500">{step.body}</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{step.body}</p>
               </div>
             );
           })}
@@ -135,16 +135,16 @@ export default function About() {
             return (
               <div
                 key={e.title}
-                className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                className="flex gap-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400">
                   <Icon size={20} />
                 </span>
                 <div>
-                  <h3 className="text-base font-semibold text-slate-900">
+                  <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                     {e.title}
                   </h3>
-                  <p className="mt-1 text-sm text-slate-500">{e.body}</p>
+                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{e.body}</p>
                 </div>
               </div>
             );
@@ -155,7 +155,7 @@ export default function About() {
       {/* Exam types */}
       <section>
         <SectionTitle>Tuned to the exam type</SectionTitle>
-        <p className="mb-4 max-w-2xl text-sm text-slate-500">
+        <p className="mb-4 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
           The same footage means different things in different exams, so
           ExamLens adjusts which behaviors it flags based on the exam type you
           choose at upload.
@@ -164,28 +164,28 @@ export default function About() {
           {EXAM_TYPES.map((t) => (
             <div
               key={t.value}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+              className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm"
             >
-              <h3 className="text-base font-semibold text-slate-900">
+              <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
                 {t.label}
               </h3>
-              <p className="mt-1 text-sm text-slate-500">{t.hint}</p>
+              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{t.hint}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Privacy */}
-      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/50 backdrop-blur-md p-6">
         <div className="flex gap-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-700">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
             <Lock size={20} />
           </span>
           <div>
-            <h3 className="text-base font-semibold text-slate-900">
+            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
               Private by design
             </h3>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
               ExamLens runs entirely on your own machine — the footage,
               analysis, clips, and reports never leave it, and no internet
               connection is required to process a recording. Sensitive exam

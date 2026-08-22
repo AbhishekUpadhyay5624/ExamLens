@@ -76,7 +76,7 @@ export default function EventDetail() {
   if (isError || !event) {
     return (
       <div className="mx-auto max-w-xl py-16 text-center">
-        <p className="text-slate-600">
+        <p className="text-slate-600 dark:text-slate-400">
           We couldn't load this event. It may have been removed, or the backend
           isn't reachable.
         </p>
@@ -88,14 +88,14 @@ export default function EventDetail() {
     <div className="mx-auto max-w-4xl">
       <Link
         to={`/exams/${event.examId}`}
-        className="mb-4 inline-flex items-center gap-1.5 text-sm text-slate-500 transition hover:text-slate-700"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400 transition hover:text-slate-700 dark:hover:text-slate-200"
       >
         <ArrowLeft size={16} />
         Back to exam
       </Link>
 
       <div className="mb-6 flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold text-slate-900 font-display">
+        <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100 font-display">
           {EVENT_TYPE_LABELS[event.eventType] || event.eventType}
         </h1>
         <SeverityBadge severity={event.severity} />
@@ -107,43 +107,43 @@ export default function EventDetail() {
         <div className="space-y-4 lg:col-span-3">
           <ClipPlayer eventId={event.id} hasClip={event.hasClip} />
           {event.description && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-sm font-semibold text-slate-800 font-display">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm">
+              <h3 className="mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200 font-display">
                 Description
               </h3>
-              <p className="text-sm text-slate-600">{event.description}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">{event.description}</p>
             </div>
           )}
         </div>
 
         {/* Metadata + review controls */}
         <div className="space-y-4 lg:col-span-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 className="mb-3 text-sm font-semibold text-slate-800 font-display">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm">
+            <h3 className="mb-3 text-sm font-semibold text-slate-800 dark:text-slate-200 font-display">
               Details
             </h3>
             <dl className="grid grid-cols-2 gap-y-2 text-sm">
-              <dt className="text-slate-500">Person</dt>
-              <dd className="font-mono text-slate-800">#{event.personId}</dd>
-              <dt className="text-slate-500">Start</dt>
-              <dd className="font-mono text-slate-800">
+              <dt className="text-slate-500 dark:text-slate-400">Person</dt>
+              <dd className="font-mono text-slate-800 dark:text-slate-200">#{event.personId}</dd>
+              <dt className="text-slate-500 dark:text-slate-400">Start</dt>
+              <dd className="font-mono text-slate-800 dark:text-slate-200">
                 {event.startTimeFormatted || formatTimestamp(event.startTime)}
               </dd>
-              <dt className="text-slate-500">End</dt>
-              <dd className="font-mono text-slate-800">
+              <dt className="text-slate-500 dark:text-slate-400">End</dt>
+              <dd className="font-mono text-slate-800 dark:text-slate-200">
                 {event.endTimeFormatted || formatTimestamp(event.endTime)}
               </dd>
-              <dt className="text-slate-500">Duration</dt>
-              <dd className="font-mono text-slate-800">
+              <dt className="text-slate-500 dark:text-slate-400">Duration</dt>
+              <dd className="font-mono text-slate-800 dark:text-slate-200">
                 {event.duration != null ? `${event.duration.toFixed(1)}s` : "—"}
               </dd>
-              <dt className="text-slate-500">Event ID</dt>
-              <dd className="font-mono text-slate-800">#{event.eventId}</dd>
+              <dt className="text-slate-500 dark:text-slate-400">Event ID</dt>
+              <dd className="font-mono text-slate-800 dark:text-slate-200">#{event.eventId}</dd>
             </dl>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 className="mb-3 text-sm font-semibold text-slate-800 font-display">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md p-5 shadow-sm">
+            <h3 className="mb-3 text-sm font-semibold text-slate-800 dark:text-slate-200 font-display">
               Review
             </h3>
 
@@ -158,9 +158,9 @@ export default function EventDetail() {
                     className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium transition ${
                       active
                         ? r.value === "confirmed"
-                          ? "border-red-500 bg-red-50 text-red-700"
-                          : "border-slate-400 bg-slate-100 text-slate-700"
-                        : "border-slate-200 text-slate-600 hover:bg-slate-50"
+                          ? "border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400"
+                          : "border-slate-400 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
                     }`}
                   >
                     {r.label}
@@ -169,7 +169,7 @@ export default function EventDetail() {
               })}
             </div>
 
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
               Notes
             </label>
             <textarea
@@ -177,7 +177,7 @@ export default function EventDetail() {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Add reviewer notes…"
-              className="mb-3 w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="mb-3 w-full resize-none rounded-lg border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
 
             {mutation.isError && (

@@ -30,9 +30,12 @@ export default function Register() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm animate-fade-up">
         <div className="mb-6 flex flex-col items-center text-center">
-          <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white">
+          <span
+            className="mb-3 flex h-11 w-11 animate-scale-in items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm"
+            style={{ animationDelay: "150ms" }}
+          >
             <ScanEye size={22} />
           </span>
           <h1 className="text-xl font-semibold text-slate-900 font-display">
@@ -93,7 +96,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 disabled:opacity-60"
+            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60"
           >
             {submitting ? "Creating account…" : "Create account"}
           </button>

@@ -155,12 +155,18 @@ export default function EventTimeline({ examId, durationSeconds }) {
                     style={{ left: `${pct}%`, zIndex: isActive ? 5 : undefined }}
                   >
                     <span
-                      className="rounded-t-sm transition-all group-hover:opacity-100 group-focus-visible:ring-2 group-focus-visible:ring-slate-900/40"
+                      className="origin-bottom animate-rise rounded-t-sm transition-all duration-300 group-hover:opacity-100 group-focus-visible:ring-2 group-focus-visible:ring-slate-900/40"
                       style={{
-                        width: isActive ? 5 : 3,
+                        width: isActive ? 6 : 3,
                         height: MARK_HEIGHT[ev.severity] || "42%",
                         backgroundColor: SEVERITY_FILL[ev.severity],
                         opacity: isActive ? 1 : 0.85,
+                        boxShadow: isActive 
+                          ? `0 0 12px ${SEVERITY_FILL[ev.severity]}` 
+                          : "none",
+                        // Cascade the marks in left-to-right by their position
+                        // on the timeline, so the plot "draws" as it appears.
+                        animationDelay: `${60 + pct * 4}ms`,
                       }}
                     />
                   </button>

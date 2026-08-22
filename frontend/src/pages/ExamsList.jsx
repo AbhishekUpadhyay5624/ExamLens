@@ -37,10 +37,10 @@ export default function ExamsList() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-slate-900 font-display">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-display">
             Uploads
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Uploaded CCTV footage and proctoring insights.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function ExamsList() {
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md shadow-sm">
         {isLoading ? (
           <SkeletonRows rows={6} cols={5} />
         ) : isError ? (
@@ -67,35 +67,48 @@ export default function ExamsList() {
             <table className="w-full text-left text-sm">
               <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Exam</th>
-                  <th className="px-4 py-3 font-medium">Type</th>
-                  <th className="px-4 py-3 font-medium">Status</th>
-                  <th className="px-4 py-3 font-medium">Events</th>
-                  <th className="px-4 py-3 font-medium">Uploaded</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Exam Title
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Candidate
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Status
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Events
+                  </th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Uploaded
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {items.map((exam) => (
-                  <tr key={exam.id} className="transition hover:bg-slate-50">
+                  <tr key={exam.id} className="group transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
                     <td className="px-4 py-3">
                       <Link
                         to={`/exams/${exam.id}`}
-                        className="flex items-center gap-2 font-medium text-slate-900 hover:text-blue-600"
+                        className="flex items-center gap-2 font-medium text-slate-900 dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400"
                       >
-                        <Film size={16} className="text-slate-400" />
+                        <Film size={16} className="text-slate-400 dark:text-slate-500" />
                         {exam.examName}
                       </Link>
                     </td>
-                    <td className="px-4 py-3 text-slate-600">
-                      {EXAM_TYPE_LABELS[exam.examType] || exam.examType}
+                    <td className="px-4 py-3">
+                      <div className="font-medium text-slate-900 dark:text-slate-100">{exam.candidate || "Unknown"}</div>
+                      <div className="text-slate-500 dark:text-slate-400 text-xs">
+                        {EXAM_TYPE_LABELS[exam.examType] || exam.examType}
+                      </div>
                     </td>
                     <td className="px-4 py-3">
                       <StatusBadge status={exam.status} />
                     </td>
-                    <td className="px-4 py-3 font-mono text-slate-600">
+                    <td className="whitespace-nowrap px-6 py-4 text-sm text-slate-600 dark:text-slate-300">
                       {exam.summary?.totalEvents ?? "—"}
                     </td>
-                    <td className="px-4 py-3 font-mono text-slate-500">
+                    <td className="px-4 py-3 font-mono text-slate-500 dark:text-slate-400">
                       {formatDateTime(exam.uploadedAt)}
                     </td>
                   </tr>

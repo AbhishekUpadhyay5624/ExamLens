@@ -30,16 +30,16 @@ export default function UploadDropzone({ file, onFile, disabled }) {
 
   if (file) {
     return (
-      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex items-center justify-between rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm p-4">
         <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
             <Film size={20} />
           </span>
           <div>
-            <div className="text-sm font-medium text-slate-900">
+            <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
               {file.name}
             </div>
-            <div className="font-mono text-xs text-slate-500">
+            <div className="font-mono text-xs text-slate-500 dark:text-slate-400">
               {formatBytes(file.size)}
             </div>
           </div>
@@ -48,7 +48,7 @@ export default function UploadDropzone({ file, onFile, disabled }) {
           <button
             type="button"
             onClick={() => onFile(null)}
-            className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-200 hover:text-slate-600"
+            className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-200 dark:hover:bg-slate-700 hover:text-slate-600 dark:hover:text-slate-200"
             title="Remove"
           >
             <X size={18} />
@@ -70,17 +70,17 @@ export default function UploadDropzone({ file, onFile, disabled }) {
         onDrop={handleDrop}
         className={`flex cursor-pointer flex-col items-center rounded-xl border-2 border-dashed px-6 py-10 text-center transition ${
           dragging
-            ? "border-blue-400 bg-blue-50"
-            : "border-slate-300 bg-white hover:border-slate-400"
+            ? "border-blue-400 dark:border-blue-500 bg-blue-50/50 dark:bg-blue-900/20"
+            : "border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-900/50 hover:border-slate-400 dark:hover:border-slate-500"
         } ${disabled ? "cursor-not-allowed opacity-60" : ""}`}
       >
-        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
           <UploadCloud size={24} />
         </span>
-        <p className="text-sm font-medium text-slate-800">
+        <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
           Drop exam footage here, or click to browse
         </p>
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
           MP4, AVI, MOV, MKV, WEBM, or M4V
         </p>
         <input

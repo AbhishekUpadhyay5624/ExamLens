@@ -1,17 +1,38 @@
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, FileText, Video } from "lucide-react";
+import { motion } from "framer-motion";
 import { api } from "../lib/api";
+import TiltCard from "../components/TiltCard";
 import { StatusBadge } from "../components/Badge";
 import ProcessingStatus from "../components/ProcessingStatus";
 import SummaryCards from "../components/SummaryCards";
 import SeverityCharts from "../components/SeverityCharts";
 import EventTimeline from "../components/EventTimeline";
-import HeatmapImage from "../components/HeatmapImage";
 import EventsTable from "../components/EventsTable";
 import Skeleton, { SkeletonCard } from "../components/Skeleton";
 import { ACTIVE_STATUSES, EXAM_TYPE_LABELS } from "../lib/constants";
 import { formatDateTime } from "../lib/format";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 },
+  },
+};
 
 export default function ExamDashboard() {
   const { id } = useParams();
@@ -133,22 +154,33 @@ export default function ExamDashboard() {
       )}
 
       {isDone && (
-        <div className="space-y-6">
-          <SummaryCards summary={exam.summary} />
-          <EventTimeline examId={id} durationSeconds={vp?.durationSeconds} />
-          <SeverityCharts summary={exam.summary} />
+        <motion.div
+          className="space-y-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants}>
+            <TiltCard>
+              <SummaryCards summary={exam.summary} />
+            </TiltCard>
+          </motion.div>
+          
+          <motion.div variants={itemVariants}>
+            <TiltCard>
+              <EventTimeline examId={id} durationSeconds={vp?.durationSeconds} />
+            </TiltCard>
+          </motion.div>
+          
+          <motion.div variants={itemVariants}>
+            <TiltCard>
+              <SeverityCharts summary={exam.summary} />
+            </TiltCard>
+          </motion.div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
-            {exam.hasHeatmap ? (
-              <HeatmapImage examId={id} />
-            ) : (
-              <div className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-400 shadow-sm">
-                <Video size={16} className="mr-2" />
-                No heatmap generated for this exam.
-              </div>
-            )}
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-3 text-sm font-semibold text-slate-800 font-display">
+          <motion.div variants={itemVariants}>
+            <TiltCard className="p-5">
+              <h3 className="mb-3 text-sm font-semibold text-slate-800 dark:text-slate-100 font-display">
                 Video properties
               </h3>
               <dl className="grid grid-cols-2 gap-y-2 text-sm">
@@ -175,11 +207,15 @@ export default function ExamDashboard() {
                   {formatDateTime(exam.processedAt)}
                 </dd>
               </dl>
-            </div>
-          </div>
+            </TiltCard>
+          </motion.div>
 
-          <EventsTable examId={id} />
-        </div>
+          <motion.div variants={itemVariants}>
+            <TiltCard>
+              <EventsTable examId={id} />
+            </TiltCard>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );

@@ -6,6 +6,8 @@ import { queryClient } from "./lib/queryClient";
 import { AuthProvider } from "./lib/auth";
 import App from "./App";
 
+import { ThemeProvider } from "./contexts/ThemeContext";
+
 // Self-hosted variable fonts (weight axis) — no external CDN, so the dashboard
 // works fully offline, matching the product's private-by-design positioning.
 import "@fontsource-variable/inter/wght.css";
@@ -18,9 +20,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>

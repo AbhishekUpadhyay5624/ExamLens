@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { ScanEye } from "lucide-react";
 import { useAuth } from "../lib/auth";
 import { apiErrorMessage } from "../lib/api";
@@ -30,31 +31,38 @@ export default function Login() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
-      <div className="w-full max-w-sm">
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
+      <div className="w-full max-w-sm animate-fade-up">
         <div className="mb-6 flex flex-col items-center text-center">
-          <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white">
+          <motion.span
+            layoutId="app-logo-icon"
+            className="mb-3 flex h-11 w-11 animate-scale-in items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm"
+            style={{ animationDelay: "150ms" }}
+          >
             <ScanEye size={22} />
-          </span>
-          <h1 className="text-xl font-semibold text-slate-900 font-display">
+          </motion.span>
+          <motion.h1 
+            layoutId="app-logo-text"
+            className="text-xl font-semibold text-slate-900 dark:text-slate-100 font-display"
+          >
             Sign in to ExamLens
-          </h1>
-          <p className="mt-1 text-sm text-slate-500">
+          </motion.h1>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             Exam proctoring insights dashboard
           </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+          className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 backdrop-blur-md p-6 shadow-sm"
         >
           {error && (
-            <div className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-inset ring-red-600/20">
+            <div className="mb-4 rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-400 ring-1 ring-inset ring-red-600/20 dark:ring-red-500/20">
               {error}
             </div>
           )}
 
-          <label className="mb-1 block text-sm font-medium text-slate-700">
+          <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             Email
           </label>
           <input
@@ -63,10 +71,10 @@ export default function Login() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mb-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            className="mb-4 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
 
-          <label className="mb-1 block text-sm font-medium text-slate-700">
+          <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
             Password
           </label>
           <input
@@ -75,13 +83,13 @@ export default function Login() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mb-5 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            className="mb-5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
           />
 
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 disabled:opacity-60"
+            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60"
           >
             {submitting ? "Signing in…" : "Sign in"}
           </button>
