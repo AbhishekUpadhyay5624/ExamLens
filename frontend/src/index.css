@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/* ExamLens — light, professional theme for a forensic exam-review instrument.
+   Tailwind v4 is configured entirely in CSS (no tailwind.config.js). */
+
+@theme {
+  /* ---- Typography -------------------------------------------------------
+     Body: Inter (clean, legible). Display: Space Grotesk (measured, technical
+     character for headings + the wordmark). Mono: JetBrains Mono — used for
+     every technical readout (timecodes, IDs, confidence %, durations), which
+     reads as an instrument display and keeps tabular data aligned. */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk Variable", var(--font-sans);
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
+    "Menlo", "Consolas", monospace;
+
+  /* ---- Brand accent -----------------------------------------------------
+     The accent is a refined INDIGO. We override Tailwind's built-in `blue`
+     ramp so every existing `blue-*` utility becomes the brand accent
+     cohesively. Treat `blue-*` in this codebase as "brand accent", not the
+     literal color blue. Severity/status colors (red / amber / slate / green)
+     are intentionally left alone — they are reserved for risk signaling. */
+  --color-blue-50: #eef2ff;
+  --color-blue-100: #e0e7ff;
+  --color-blue-200: #c7d2fe;
+  --color-blue-300: #a5b4fc;
+  --color-blue-400: #818cf8;
+  --color-blue-500: #6366f1;
+  --color-blue-600: #4f46e5;
+  --color-blue-700: #4338ca;
+  --color-blue-800: #3730a3;
+  --color-blue-900: #312e81;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f6f7f9; /* cool near-white "paper" */
+  color: #0f172a; /* slate-900 */
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tabular figures for mono readouts so columns of numbers line up. */
+.font-mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Native video controls sit on a dark surface for contrast */
+video {
+  background-color: #000;
+}
+
+/* ---- Accessibility: honor reduced-motion (spinners, pulse, shimmer) ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Print styles: used by the investigation report (Report.jsx) ---- */
+@media print {
+  /* Hide app chrome so only the report prints */
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .print-container {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  /* Avoid awkward breaks inside cards/rows */
+  .print-avoid-break {
+    break-inside: avoid;
+  }
+}
