@@ -2,13 +2,16 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, Printer, FileText } from "lucide-react";
 import { api } from "../lib/api";
+import Skeleton from "../components/Skeleton";
 import { EVENT_TYPE_LABELS } from "../lib/constants";
 import { formatDateTime } from "../lib/format";
 
 function Stat({ label, value }) {
   return (
     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 print-avoid-break">
-      <div className="text-2xl font-semibold text-slate-900">{value}</div>
+      <div className="text-2xl font-semibold text-slate-900 font-display">
+        {value}
+      </div>
       <div className="text-xs text-slate-500">{label}</div>
     </div>
   );
@@ -18,7 +21,9 @@ function ReviewTable({ title, rows, showDuration }) {
   if (!rows || rows.length === 0) return null;
   return (
     <div className="print-avoid-break">
-      <h3 className="mb-2 text-sm font-semibold text-slate-800">{title}</h3>
+      <h3 className="mb-2 text-sm font-semibold text-slate-800 font-display">
+        {title}
+      </h3>
       <div className="overflow-hidden rounded-xl border border-slate-200">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
@@ -33,14 +38,20 @@ function ReviewTable({ title, rows, showDuration }) {
           <tbody className="divide-y divide-slate-100">
             {rows.map((r) => (
               <tr key={r.event_id}>
-                <td className="px-3 py-2 text-slate-700">#{r.event_id}</td>
+                <td className="px-3 py-2 font-mono text-slate-700">
+                  #{r.event_id}
+                </td>
                 <td className="px-3 py-2 text-slate-600">
                   {EVENT_TYPE_LABELS[r.type] || r.type}
                 </td>
-                <td className="px-3 py-2 text-slate-600">#{r.person}</td>
-                <td className="px-3 py-2 text-slate-600">{r.time}</td>
+                <td className="px-3 py-2 font-mono text-slate-600">
+                  #{r.person}
+                </td>
+                <td className="px-3 py-2 font-mono text-slate-600">{r.time}</td>
                 {showDuration && (
-                  <td className="px-3 py-2 text-slate-600">{r.duration}</td>
+                  <td className="px-3 py-2 font-mono text-slate-600">
+                    {r.duration}
+                  </td>
                 )}
               </tr>
             ))}
@@ -71,7 +82,32 @@ export default function Report() {
   });
 
   if (isLoading) {
-    return <div className="py-16 text-center text-slate-400">Loading report…</div>;
+    return (
+      <div className="mx-auto max-w-3xl">
+        <Skeleton className="mb-4 h-4 w-24" />
+        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="mb-6 flex items-center gap-3 border-b border-slate-200 pb-6">
+            <Skeleton className="h-11 w-11 rounded-xl" />
+            <div className="flex-1 space-y-2">
+              <Skeleton className="h-6 w-56" />
+              <Skeleton className="h-4 w-72" />
+            </div>
+          </div>
+          <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+              >
+                <Skeleton className="mb-2 h-7 w-10 bg-slate-200" />
+                <Skeleton className="h-3 w-20 bg-slate-200" />
+              </div>
+            ))}
+          </div>
+          <Skeleton className="h-40 w-full rounded-xl" />
+        </div>
+      </div>
+    );
   }
 
   if (isError) {
@@ -128,15 +164,22 @@ export default function Report() {
             <FileText size={22} />
           </span>
           <div>
-            <h1 className="text-xl font-semibold text-slate-900">
+            <h1 className="text-xl font-semibold text-slate-900 font-display">
               Investigation Report
             </h1>
             <p className="text-sm text-slate-500">
               {exam?.examName ? `${exam.examName} · ` : ""}
               {info.exam_type}
-              {exam?.processedAt
-                ? ` · ${formatDateTime(exam.processedAt)}`
-                : ""}
+              {exam?.processedAt ? (
+                <>
+                  {" · "}
+                  <span className="font-mono">
+                    {formatDateTime(exam.processedAt)}
+                  </span>
+                </>
+              ) : (
+                ""
+              )}
             </p>
           </div>
         </div>
@@ -156,37 +199,47 @@ export default function Report() {
         {/* Video + processing details */}
         <div className="mb-6 grid gap-6 sm:grid-cols-2 print-avoid-break">
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-800">
+            <h3 className="mb-2 text-sm font-semibold text-slate-800 font-display">
               Recording
             </h3>
             <dl className="grid grid-cols-2 gap-y-1.5 text-sm">
               <dt className="text-slate-500">Resolution</dt>
-              <dd className="text-slate-800">{video.resolution || "—"}</dd>
+              <dd className="font-mono text-slate-800">
+                {video.resolution || "—"}
+              </dd>
               <dt className="text-slate-500">Duration</dt>
-              <dd className="text-slate-800">
+              <dd className="font-mono text-slate-800">
                 {video.duration_seconds
                   ? `${Math.round(video.duration_seconds)}s`
                   : "—"}
               </dd>
               <dt className="text-slate-500">Total frames</dt>
-              <dd className="text-slate-800">{video.total_frames ?? "—"}</dd>
+              <dd className="font-mono text-slate-800">
+                {video.total_frames ?? "—"}
+              </dd>
             </dl>
           </div>
           <div>
-            <h3 className="mb-2 text-sm font-semibold text-slate-800">
+            <h3 className="mb-2 text-sm font-semibold text-slate-800 font-display">
               Recommendations
             </h3>
             <dl className="grid grid-cols-2 gap-y-1.5 text-sm">
               <dt className="text-slate-500">Manual review</dt>
               <dd className="text-slate-800">
-                {rec.manual_review_required ?? 0} events
+                <span className="font-mono">
+                  {rec.manual_review_required ?? 0}
+                </span>{" "}
+                events
               </dd>
               <dt className="text-slate-500">Est. review time</dt>
               <dd className="text-slate-800">
-                {rec.estimated_review_time_minutes ?? 0} min
+                <span className="font-mono">
+                  {rec.estimated_review_time_minutes ?? 0}
+                </span>{" "}
+                min
               </dd>
               <dt className="text-slate-500">Attention persons</dt>
-              <dd className="text-slate-800">
+              <dd className="font-mono text-slate-800">
                 {rec.attention_persons?.length
                   ? rec.attention_persons.map((p) => `#${p}`).join(", ")
                   : "—"}

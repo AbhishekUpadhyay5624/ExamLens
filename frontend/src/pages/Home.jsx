@@ -64,46 +64,46 @@ export default function Home() {
   return (
     <div className="space-y-10">
       {/* Hero */}
-      <section className="hero-gradient overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-700 p-8 text-white shadow-lg sm:p-12 anim-fade-in-up">
-        <p className="anim-fade-in-down text-sm font-medium text-blue-100 anim-delay-1">
+      <section className="overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-blue-600 to-blue-700 p-8 text-white shadow-sm sm:p-12">
+        <p className="text-sm font-medium text-blue-100">
           {firstName ? `Welcome back, ${firstName}` : "Welcome to ExamLens"}
         </p>
-        <h1 className="anim-fade-in-up mt-2 max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl anim-delay-2">
+        <h1 className="mt-2 max-w-2xl text-3xl font-semibold leading-tight tracking-tight font-display sm:text-4xl">
           Turn exam CCTV footage into clear proctoring insights.
         </h1>
-        <p className="anim-fade-in-up mt-3 max-w-xl text-blue-100 anim-delay-3">
+        <p className="mt-3 max-w-xl text-blue-100">
           ExamLens watches the recording so you don't have to — tracking people,
           flagging suspicious moments, and assembling the evidence you need to
           make a fair call.
         </p>
-        <div className="anim-fade-in-up mt-6 flex flex-wrap gap-3 anim-delay-4">
+        <div className="mt-6 flex flex-wrap gap-3">
           <Link
             to="/upload"
-            className="btn-press inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-50 hover:shadow-lg"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-blue-700 transition hover:bg-blue-50"
           >
-            <Upload size={16} className="anim-float" style={{ animationDuration: '2.5s' }} />
+            <Upload size={16} />
             Upload footage
           </Link>
           <Link
             to="/uploads"
-            className="btn-press inline-flex items-center gap-2 rounded-lg border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 hover:border-white/50"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
           >
             View uploads
-            <ArrowRight size={16} className="transition-transform hover:translate-x-1" />
+            <ArrowRight size={16} />
           </Link>
         </div>
       </section>
 
       {/* Quote */}
-      <section className="anim-fade-in-up anim-delay-2 relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 shadow-sm hover-glow">
+      <section className="relative rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
         <Quote
           size={40}
-          className="absolute -top-3 left-6 text-blue-100 anim-float"
+          className="absolute -top-3 left-6 text-blue-100"
           fill="currentColor"
         />
         <blockquote className="relative">
           <p className="text-xl font-medium leading-relaxed text-slate-800 sm:text-2xl">
-            "Integrity is doing the right thing, even when no one is watching."
+            “Integrity is doing the right thing, even when no one is watching.”
           </p>
           <footer className="mt-3 text-sm text-slate-500">
             — C. S. Lewis
@@ -116,23 +116,23 @@ export default function Home() {
       </section>
 
       {/* Quick actions */}
-      <section className="anim-fade-in-up anim-delay-3">
-        <h2 className="mb-4 text-lg font-semibold text-slate-900">
+      <section>
+        <h2 className="mb-4 text-lg font-semibold text-slate-900 font-display">
           Get started
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {ACTIONS.map((a, idx) => {
+          {ACTIONS.map((a) => {
             const Icon = a.icon;
             return (
               <Link
                 key={a.to}
                 to={a.to}
-                className={`anim-fade-in-up anim-delay-${idx + 4} hover-card btn-press group flex flex-col rounded-2xl border border-slate-200 p-5 shadow-sm transition ${a.tone} ${
-                  a.primary ? "hover:bg-blue-700 hover:shadow-blue-200/50" : "hover:border-blue-200"
+                className={`group flex flex-col rounded-2xl border border-slate-200 p-5 shadow-sm transition hover:shadow-md ${a.tone} ${
+                  a.primary ? "hover:bg-blue-700" : "hover:border-blue-200"
                 }`}
               >
                 <span
-                  className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg transition-transform group-hover:scale-110 ${
+                  className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg ${
                     a.primary ? "bg-white/15" : "bg-blue-50"
                   } ${a.accent}`}
                 >
@@ -160,7 +160,7 @@ export default function Home() {
                   Open
                   <ArrowRight
                     size={15}
-                    className="transition-transform group-hover:translate-x-1"
+                    className="transition-transform group-hover:translate-x-0.5"
                   />
                 </span>
               </Link>
@@ -170,20 +170,19 @@ export default function Home() {
       </section>
 
       {/* What it does */}
-      <section className="anim-fade-in-up anim-delay-5">
-        <h2 className="mb-4 text-lg font-semibold text-slate-900">
+      <section>
+        <h2 className="mb-4 text-lg font-semibold text-slate-900 font-display">
           What ExamLens does
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {HIGHLIGHTS.map((h, idx) => {
+          {HIGHLIGHTS.map((h) => {
             const Icon = h.icon;
             return (
               <div
                 key={h.title}
-                className={`anim-fade-in-up hover-card btn-press group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm`}
-                style={{ animationDelay: `${0.6 + idx * 0.15}s` }}
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
               >
-                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-all group-hover:bg-blue-100 group-hover:scale-110 group-hover:shadow-md">
+                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
                   <Icon size={20} />
                 </span>
                 <h3 className="text-base font-semibold text-slate-900">
@@ -197,7 +196,7 @@ export default function Home() {
         <div className="mt-4 text-center">
           <Link
             to="/about"
-            className="btn-press inline-flex items-center gap-1 text-sm font-medium text-blue-600 transition hover:text-blue-700 hover:gap-2"
+            className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700"
           >
             Learn more about ExamLens
             <ArrowRight size={15} />

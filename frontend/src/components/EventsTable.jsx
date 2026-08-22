@@ -5,6 +5,7 @@ import { Film, Check } from "lucide-react";
 import { api } from "../lib/api";
 import { SeverityBadge, ConfidencePill } from "./Badge";
 import Pagination from "./Pagination";
+import { SkeletonRows } from "./Skeleton";
 import {
   SEVERITIES,
   EVENT_TYPE_LABELS,
@@ -55,7 +56,7 @@ export default function EventsTable({ examId }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 p-4">
-        <h3 className="mr-auto text-sm font-semibold text-slate-800">
+        <h3 className="mr-auto text-sm font-semibold text-slate-800 font-display">
           Flagged events
         </h3>
         <select value={severity} onChange={onFilter(setSeverity)} className={selectCls}>
@@ -82,11 +83,13 @@ export default function EventsTable({ examId }) {
       </div>
 
       {isLoading ? (
-        <div className="p-10 text-center text-slate-400">Loading events…</div>
+        <SkeletonRows rows={6} cols={7} />
       ) : isError ? (
-        <div className="p-10 text-center text-red-600">Failed to load events.</div>
+        <div className="p-10 text-center text-sm text-red-600">
+          Couldn't load events. Check that the backend is running, then retry.
+        </div>
       ) : items.length === 0 ? (
-        <div className="p-10 text-center text-slate-400">
+        <div className="p-10 text-center text-sm text-slate-400">
           No events match these filters.
         </div>
       ) : (
@@ -111,13 +114,15 @@ export default function EventsTable({ examId }) {
                     onClick={() => navigate(`/events/${ev.id}`)}
                     className="cursor-pointer transition hover:bg-slate-50"
                   >
-                    <td className="whitespace-nowrap px-4 py-3 font-medium text-slate-900">
+                    <td className="whitespace-nowrap px-4 py-3 font-mono font-medium text-slate-900">
                       {ev.startTimeFormatted || formatTimestamp(ev.startTime)}
                     </td>
                     <td className="px-4 py-3 text-slate-600">
                       {EVENT_TYPE_LABELS[ev.eventType] || ev.eventType}
                     </td>
-                    <td className="px-4 py-3 text-slate-600">#{ev.personId}</td>
+                    <td className="px-4 py-3 font-mono text-slate-600">
+                      #{ev.personId}
+                    </td>
                     <td className="px-4 py-3">
                       <SeverityBadge severity={ev.severity} />
                     </td>

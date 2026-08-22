@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Secrets / local config (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Runtime data & uploads — exam videos, generated clips, heatmaps
+storage/
+
+# Model weights (ultralytics auto-downloads yolo11n.pt on first run)
+*.pt
+
+# Logs
+*.log

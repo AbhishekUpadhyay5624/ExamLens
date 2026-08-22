@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Flame, Maximize2, X } from "lucide-react";
 import { useAuthedBlob } from "../lib/useAuthedBlob";
+import Skeleton from "./Skeleton";
 
 // Renders the motion heatmap PNG (auth-protected, so fetched as a blob).
 // Click to open a full-size lightbox.
@@ -14,13 +15,13 @@ export default function HeatmapImage({ examId }) {
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4 flex items-center gap-2">
         <Flame size={18} className="text-orange-500" />
-        <h3 className="text-sm font-semibold text-slate-800">Motion heatmap</h3>
+        <h3 className="text-sm font-semibold text-slate-800 font-display">
+          Motion heatmap
+        </h3>
       </div>
 
       {loading ? (
-        <div className="flex h-64 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-400">
-          Loading heatmap…
-        </div>
+        <Skeleton className="h-64 w-full rounded-xl" />
       ) : error ? (
         <div className="flex h-64 items-center justify-center rounded-xl bg-slate-50 text-sm text-slate-400">
           Heatmap unavailable.

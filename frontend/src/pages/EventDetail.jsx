@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Loader2, Save } from "lucide-react";
 import { api, apiErrorMessage } from "../lib/api";
 import { SeverityBadge, ConfidencePill } from "../components/Badge";
 import ClipPlayer from "../components/ClipPlayer";
+import Skeleton from "../components/Skeleton";
 import { EVENT_TYPE_LABELS, REVIEW_STATUS } from "../lib/constants";
 import { formatTimestamp } from "../lib/format";
 
@@ -53,12 +54,32 @@ export default function EventDetail() {
   }
 
   if (isLoading) {
-    return <div className="py-16 text-center text-slate-400">Loading event…</div>;
+    return (
+      <div className="mx-auto max-w-4xl">
+        <Skeleton className="mb-4 h-4 w-24" />
+        <div className="mb-6 flex items-center gap-3">
+          <Skeleton className="h-7 w-52" />
+          <Skeleton className="h-5 w-16 rounded-full" />
+        </div>
+        <div className="grid gap-6 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <Skeleton className="aspect-video w-full rounded-2xl" />
+          </div>
+          <div className="space-y-4 lg:col-span-2">
+            <Skeleton className="h-44 w-full rounded-2xl" />
+            <Skeleton className="h-56 w-full rounded-2xl" />
+          </div>
+        </div>
+      </div>
+    );
   }
   if (isError || !event) {
     return (
-      <div className="py-16 text-center text-red-600">
-        Event not found or failed to load.
+      <div className="mx-auto max-w-xl py-16 text-center">
+        <p className="text-slate-600">
+          We couldn't load this event. It may have been removed, or the backend
+          isn't reachable.
+        </p>
       </div>
     );
   }
@@ -74,7 +95,7 @@ export default function EventDetail() {
       </Link>
 
       <div className="mb-6 flex flex-wrap items-center gap-3">
-        <h1 className="text-2xl font-semibold text-slate-900">
+        <h1 className="text-2xl font-semibold text-slate-900 font-display">
           {EVENT_TYPE_LABELS[event.eventType] || event.eventType}
         </h1>
         <SeverityBadge severity={event.severity} />
@@ -87,7 +108,7 @@ export default function EventDetail() {
           <ClipPlayer eventId={event.id} hasClip={event.hasClip} />
           {event.description && (
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <h3 className="mb-2 text-sm font-semibold text-slate-800">
+              <h3 className="mb-2 text-sm font-semibold text-slate-800 font-display">
                 Description
               </h3>
               <p className="text-sm text-slate-600">{event.description}</p>
@@ -98,29 +119,33 @@ export default function EventDetail() {
         {/* Metadata + review controls */}
         <div className="space-y-4 lg:col-span-2">
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 className="mb-3 text-sm font-semibold text-slate-800">Details</h3>
+            <h3 className="mb-3 text-sm font-semibold text-slate-800 font-display">
+              Details
+            </h3>
             <dl className="grid grid-cols-2 gap-y-2 text-sm">
               <dt className="text-slate-500">Person</dt>
-              <dd className="text-slate-800">#{event.personId}</dd>
+              <dd className="font-mono text-slate-800">#{event.personId}</dd>
               <dt className="text-slate-500">Start</dt>
-              <dd className="text-slate-800">
+              <dd className="font-mono text-slate-800">
                 {event.startTimeFormatted || formatTimestamp(event.startTime)}
               </dd>
               <dt className="text-slate-500">End</dt>
-              <dd className="text-slate-800">
+              <dd className="font-mono text-slate-800">
                 {event.endTimeFormatted || formatTimestamp(event.endTime)}
               </dd>
               <dt className="text-slate-500">Duration</dt>
-              <dd className="text-slate-800">
+              <dd className="font-mono text-slate-800">
                 {event.duration != null ? `${event.duration.toFixed(1)}s` : "—"}
               </dd>
               <dt className="text-slate-500">Event ID</dt>
-              <dd className="text-slate-800">#{event.eventId}</dd>
+              <dd className="font-mono text-slate-800">#{event.eventId}</dd>
             </dl>
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <h3 className="mb-3 text-sm font-semibold text-slate-800">Review</h3>
+            <h3 className="mb-3 text-sm font-semibold text-slate-800 font-display">
+              Review
+            </h3>
 
             <div className="mb-4 flex gap-2">
               {REVIEW_STATUS.map((r) => {

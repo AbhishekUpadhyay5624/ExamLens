@@ -1,7 +1,37 @@
 @import "tailwindcss";
 
-/* ExamLens — light, professional theme with rich animations.
+/* ExamLens — light, professional theme for a forensic exam-review instrument.
    Tailwind v4 is configured entirely in CSS (no tailwind.config.js). */
+
+@theme {
+  /* ---- Typography -------------------------------------------------------
+     Body: Inter (clean, legible). Display: Space Grotesk (measured, technical
+     character for headings + the wordmark). Mono: JetBrains Mono — used for
+     every technical readout (timecodes, IDs, confidence %, durations), which
+     reads as an instrument display and keeps tabular data aligned. */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk Variable", var(--font-sans);
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular",
+    "Menlo", "Consolas", monospace;
+
+  /* ---- Brand accent -----------------------------------------------------
+     The accent is a refined INDIGO. We override Tailwind's built-in `blue`
+     ramp so every existing `blue-*` utility becomes the brand accent
+     cohesively. Treat `blue-*` in this codebase as "brand accent", not the
+     literal color blue. Severity/status colors (red / amber / slate / green)
+     are intentionally left alone — they are reserved for risk signaling. */
+  --color-blue-50: #eef2ff;
+  --color-blue-100: #e0e7ff;
+  --color-blue-200: #c7d2fe;
+  --color-blue-300: #a5b4fc;
+  --color-blue-400: #818cf8;
+  --color-blue-500: #6366f1;
+  --color-blue-600: #4f46e5;
+  --color-blue-700: #4338ca;
+  --color-blue-800: #3730a3;
+  --color-blue-900: #312e81;
+}
 
 :root {
   color-scheme: light;
@@ -15,330 +45,33 @@ body,
 
 body {
   margin: 0;
-  background-color: #f8fafc; /* slate-50 */
+  background-color: #f6f7f9; /* cool near-white "paper" */
   color: #0f172a; /* slate-900 */
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* ========================================
-   KEYFRAME ANIMATIONS
-   ======================================== */
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes pulse-ring {
-  0% { transform: scale(0.9); opacity: 1; }
-  80%, 100% { transform: scale(1.8); opacity: 0; }
-}
-
-@keyframes gentle-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes count-up {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bounce-in {
-  0% { opacity: 0; transform: scale(0.3); }
-  50% { transform: scale(1.05); }
-  70% { transform: scale(0.95); }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes draw-line {
-  from { stroke-dashoffset: 100; }
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes ripple {
-  0% { transform: scale(0); opacity: 0.6; }
-  100% { transform: scale(4); opacity: 0; }
-}
-
-@keyframes typing-dot {
-  0%, 60%, 100% { opacity: 0; transform: translateY(0); }
-  30% { opacity: 1; transform: translateY(-4px); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-4px); }
-  40% { transform: translateX(4px); }
-  60% { transform: translateX(-3px); }
-  80% { transform: translateX(3px); }
-}
-
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-  50% { box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.15); }
-}
-
-@keyframes progress-glow {
-  0% { box-shadow: 0 0 4px rgba(59, 130, 246, 0.4); }
-  50% { box-shadow: 0 0 16px rgba(59, 130, 246, 0.7); }
-  100% { box-shadow: 0 0 4px rgba(59, 130, 246, 0.4); }
-}
-
-@keyframes slide-down {
-  from { opacity: 0; max-height: 0; }
-  to { opacity: 1; max-height: 500px; }
-}
-
-@keyframes icon-bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-3px) rotate(-5deg); }
-  75% { transform: translateY(-3px) rotate(5deg); }
-}
-
-@keyframes checkmark-draw {
-  to { stroke-dashoffset: 0; }
-}
-
-/* ========================================
-   ANIMATION UTILITY CLASSES
-   ======================================== */
-
-.anim-fade-in {
-  animation: fadeIn 0.5s ease-out both;
-}
-
-.anim-fade-in-up {
-  animation: fadeInUp 0.6s ease-out both;
-}
-
-.anim-fade-in-down {
-  animation: fadeInDown 0.5s ease-out both;
-}
-
-.anim-fade-in-left {
-  animation: fadeInLeft 0.5s ease-out both;
-}
-
-.anim-fade-in-right {
-  animation: fadeInRight 0.5s ease-out both;
-}
-
-.anim-scale-in {
-  animation: scaleIn 0.4s ease-out both;
-}
-
-.anim-slide-up {
-  animation: slideInUp 0.6s ease-out both;
-}
-
-.anim-bounce-in {
-  animation: bounce-in 0.5s ease-out both;
-}
-
-.anim-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.anim-gentle-pulse {
-  animation: gentle-pulse 2s ease-in-out infinite;
-}
-
-.anim-glow-pulse {
-  animation: glow-pulse 2.5s ease-in-out infinite;
-}
-
-.anim-shimmer {
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2s ease-in-out infinite;
-}
-
-.anim-shake {
-  animation: shake 0.5s ease-in-out;
-}
-
-.anim-shake-on-error {
-  animation: shake 0.4s ease-in-out;
-}
-
-/* Stagger delay utilities */
-.anim-delay-1 { animation-delay: 0.1s; }
-.anim-delay-2 { animation-delay: 0.2s; }
-.anim-delay-3 { animation-delay: 0.3s; }
-.anim-delay-4 { animation-delay: 0.4s; }
-.anim-delay-5 { animation-delay: 0.5s; }
-.anim-delay-6 { animation-delay: 0.6s; }
-.anim-delay-7 { animation-delay: 0.7s; }
-.anim-delay-8 { animation-delay: 0.8s; }
-
-/* ========================================
-   HOVER MICRO-INTERACTIONS
-   ======================================== */
-
-.hover-lift {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.hover-lift:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.hover-glow {
-  transition: box-shadow 0.3s ease;
-}
-.hover-glow:hover {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-}
-
-.hover-scale {
-  transition: transform 0.2s ease;
-}
-.hover-scale:hover {
-  transform: scale(1.03);
-}
-
-.hover-scale-sm {
-  transition: transform 0.2s ease;
-}
-.hover-scale-sm:hover {
-  transform: scale(1.015);
-}
-
-.hover-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.hover-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.1);
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-/* Button press effect */
-.btn-press {
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-.btn-press:active {
-  transform: scale(0.97);
-}
-
-/* Ripple effect container */
-.ripple-container {
-  position: relative;
-  overflow: hidden;
-}
-.ripple-container::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
-  transform: scale(0);
-  opacity: 0;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  pointer-events: none;
-}
-.ripple-container:active::after {
-  transform: scale(2.5);
-  opacity: 1;
-  transition: 0s;
-}
-
-/* ========================================
-   HERO GRADIENT ANIMATION
-   ======================================== */
-
-.hero-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-/* ========================================
-   PROGRESS BAR ANIMATION
-   ======================================== */
-
-.progress-animated {
-  animation: progress-glow 1.5s ease-in-out infinite;
-}
-
-/* ========================================
-   DROPZONE ANIMATIONS
-   ======================================== */
-
-.dropzone-active {
-  animation: glow-pulse 1s ease-in-out infinite;
-}
-
-/* ========================================
-   STEP CONNECTOR LINE ANIMATION
-   ======================================== */
-
-.step-connector {
-  position: relative;
-}
-.step-connector::before {
-  content: '';
-  position: absolute;
-  left: 14px;
-  top: 36px;
-  bottom: -16px;
-  width: 2px;
-  background: linear-gradient(to bottom, #e2e8f0, transparent);
-  animation: fadeIn 0.5s ease-out both;
-  animation-delay: inherit;
+/* Tabular figures for mono readouts so columns of numbers line up. */
+.font-mono {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Native video controls sit on a dark surface for contrast */
 video {
   background-color: #000;
+}
+
+/* ---- Accessibility: honor reduced-motion (spinners, pulse, shimmer) ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---- Print styles: used by the investigation report (Report.jsx) ---- */
@@ -360,17 +93,5 @@ video {
   /* Avoid awkward breaks inside cards/rows */
   .print-avoid-break {
     break-inside: avoid;
-  }
-}
-
-/* ========================================
-   REDUCED MOTION PREFERENCE
-   ======================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

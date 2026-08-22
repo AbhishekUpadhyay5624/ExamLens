@@ -1,5 +1,6 @@
 import { Film } from "lucide-react";
 import { useAuthedBlob } from "../lib/useAuthedBlob";
+import Skeleton from "./Skeleton";
 
 // Plays an event's evidence clip. The endpoint needs auth, so we load the clip
 // as a blob URL; the browser can seek freely within the fully-loaded blob.
@@ -18,11 +19,7 @@ export default function ClipPlayer({ eventId, hasClip }) {
   }
 
   if (loading) {
-    return (
-      <div className="flex aspect-video items-center justify-center rounded-xl bg-slate-100 text-sm text-slate-400">
-        Loading clip…
-      </div>
-    );
+    return <Skeleton className="aspect-video w-full rounded-xl" />;
   }
 
   if (error) {

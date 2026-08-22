@@ -68,7 +68,9 @@ const EVENTS = [
 
 function SectionTitle({ children }) {
   return (
-    <h2 className="mb-4 text-lg font-semibold text-slate-900">{children}</h2>
+    <h2 className="mb-4 text-lg font-semibold text-slate-900 font-display">
+      {children}
+    </h2>
   );
 }
 
@@ -76,21 +78,21 @@ export default function About() {
   return (
     <div className="mx-auto max-w-4xl space-y-10">
       {/* Intro */}
-      <section className="anim-fade-in-up overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
-        <span className="anim-bounce-in mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white hover-glow">
-          <ScanEye size={24} className="anim-float" />
+      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
+        <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white">
+          <ScanEye size={24} />
         </span>
-        <h1 className="anim-fade-in-up anim-delay-2 text-3xl font-semibold tracking-tight text-slate-900">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 font-display">
           About ExamLens
         </h1>
-        <p className="anim-fade-in-up anim-delay-3 mt-3 max-w-2xl text-slate-600">
+        <p className="mt-3 max-w-2xl text-slate-600">
           ExamLens is an exam-proctoring assistant that reviews recorded exam
           footage for you. Instead of scrubbing through hours of CCTV, an
           invigilator uploads a recording and ExamLens does the watching —
           tracking each person, flagging behavior that looks suspicious, and
           collecting the evidence into a single dashboard and report.
         </p>
-        <p className="anim-fade-in-up anim-delay-4 mt-3 max-w-2xl text-slate-600">
+        <p className="mt-3 max-w-2xl text-slate-600">
           It doesn't accuse anyone. It surfaces moments worth a human's
           attention and ranks them by severity, so limited review time goes to
           the events that matter most.
@@ -98,7 +100,7 @@ export default function About() {
       </section>
 
       {/* How it works */}
-      <section className="anim-fade-in-up anim-delay-2">
+      <section>
         <SectionTitle>How it works</SectionTitle>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PIPELINE.map((step, i) => {
@@ -106,13 +108,12 @@ export default function About() {
             return (
               <div
                 key={step.title}
-                className="anim-fade-in-up hover-card btn-press group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-                style={{ animationDelay: `${0.3 + i * 0.1}s` }}
+                className="relative rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
               >
-                <span className="absolute right-4 top-4 text-2xl font-bold text-slate-100 transition-all group-hover:text-blue-100 group-hover:scale-125">
+                <span className="absolute right-4 top-4 font-mono text-2xl font-bold text-slate-100">
                   {i + 1}
                 </span>
-                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-all group-hover:bg-blue-100 group-hover:scale-110 group-hover:shadow-sm">
+                <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
                   <Icon size={20} />
                 </span>
                 <h3 className="text-base font-semibold text-slate-900">
@@ -126,18 +127,17 @@ export default function About() {
       </section>
 
       {/* Events detected */}
-      <section className="anim-fade-in-up anim-delay-4">
+      <section>
         <SectionTitle>What it looks for</SectionTitle>
         <div className="space-y-3">
-          {EVENTS.map((e, idx) => {
+          {EVENTS.map((e) => {
             const Icon = e.icon;
             return (
               <div
                 key={e.title}
-                className="anim-fade-in-up hover-card btn-press group flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-                style={{ animationDelay: `${0.5 + idx * 0.15}s` }}
+                className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition-all group-hover:bg-blue-100 group-hover:scale-110">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
                   <Icon size={20} />
                 </span>
                 <div>
@@ -153,7 +153,7 @@ export default function About() {
       </section>
 
       {/* Exam types */}
-      <section className="anim-fade-in-up anim-delay-5">
+      <section>
         <SectionTitle>Tuned to the exam type</SectionTitle>
         <p className="mb-4 max-w-2xl text-sm text-slate-500">
           The same footage means different things in different exams, so
@@ -161,11 +161,10 @@ export default function About() {
           choose at upload.
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
-          {EXAM_TYPES.map((t, idx) => (
+          {EXAM_TYPES.map((t) => (
             <div
               key={t.value}
-              className="anim-fade-in-up hover-card btn-press rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
-              style={{ animationDelay: `${0.6 + idx * 0.1}s` }}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
             >
               <h3 className="text-base font-semibold text-slate-900">
                 {t.label}
@@ -177,9 +176,9 @@ export default function About() {
       </section>
 
       {/* Privacy */}
-      <section className="anim-fade-in-up anim-delay-6 rounded-2xl border border-slate-200 bg-slate-50 p-6 hover-glow transition-all duration-300">
+      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
         <div className="flex gap-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-700 transition-all hover:bg-slate-300 hover:scale-110">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-200 text-slate-700">
             <Lock size={20} />
           </span>
           <div>
@@ -196,10 +195,10 @@ export default function About() {
         </div>
       </section>
 
-      <div className="anim-fade-in-up anim-delay-7 text-center">
+      <div className="text-center">
         <Link
           to="/upload"
-          className="btn-press inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200/50"
+          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           <Upload size={16} />
           Analyze your first recording

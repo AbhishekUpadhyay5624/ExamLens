@@ -1,0 +1,3331 @@
+{
+  "metadata": {
+    "exam_type": "PAPER_PEN",
+    "exam_description": "Paper-Based Exam - No electronic devices allowed",
+    "total_events": 170,
+    "video_frames": 9854,
+    "persons_tracked": 1674,
+    "detection_config": {
+      "LAPTOP_INTERACTION": {
+        "enabled": true,
+        "severity": "HIGH",
+        "min_duration": 5.0
+      },
+      "SUSPICIOUS_STILLNESS": {
+        "enabled": true,
+        "severity": "HIGH",
+        "min_duration": 10.0
+      },
+      "EXCESSIVE_MOVEMENT": {
+        "enabled": true,
+        "severity": "MEDIUM",
+        "min_duration": 15.0
+      }
+    },
+    "events_by_type": {
+      "SUSPICIOUS_STILLNESS": 259,
+      "LAPTOP_INTERACTION": 17,
+      "EXCESSIVE_MOVEMENT": 7
+    },
+    "events_by_severity": {
+      "HIGH": 276,
+      "MEDIUM": 7
+    },
+    "accessibility_detected": 89
+  },
+  "events": [
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 10,
+      "start_time": 14.7270679108054,
+      "end_time": 33.544988019056746,
+      "duration": 18.817920108251343,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 1,
+      "start_time_formatted": "00:14",
+      "end_time_formatted": "00:33",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 8,
+      "start_time": 16.36340878978378,
+      "end_time": 33.544988019056746,
+      "duration": 17.181579229272966,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 2,
+      "start_time_formatted": "00:16",
+      "end_time_formatted": "00:33",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.24909624733306743
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 14,
+      "start_time": 51.5447376878189,
+      "end_time": 71.18082823555943,
+      "duration": 19.63609054774053,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 3,
+      "start_time_formatted": "00:51",
+      "end_time_formatted": "01:11",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.2230108008278828
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 20,
+      "start_time": 67.08997603811349,
+      "end_time": 79.36253263045133,
+      "duration": 12.272556592337835,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 5,
+      "start_time_formatted": "01:07",
+      "end_time_formatted": "01:19",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 54,
+      "start_time": 260.1781997575621,
+      "end_time": 308.4502556874242,
+      "duration": 48.27205592986212,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 9,
+      "start_time_formatted": "04:20",
+      "end_time_formatted": "05:08",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.1957061471274266
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 69,
+      "start_time": 313.35927832435937,
+      "end_time": 389.4491291968539,
+      "duration": 76.08985087249454,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 10,
+      "start_time_formatted": "05:13",
+      "end_time_formatted": "06:29",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08492345301761427
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 81,
+      "start_time": 396.8126631522566,
+      "end_time": 446.7210599610971,
+      "duration": 49.90839680884051,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 13,
+      "start_time_formatted": "06:36",
+      "end_time_formatted": "07:26",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.11714387682321317
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 92,
+      "start_time": 436.90301468722686,
+      "end_time": 449.17557127956474,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 15,
+      "start_time_formatted": "07:16",
+      "end_time_formatted": "07:29",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 108,
+      "start_time": 515.4473768781891,
+      "end_time": 526.0835925915485,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 17,
+      "start_time_formatted": "08:35",
+      "end_time_formatted": "08:46",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 110,
+      "start_time": 523.6290812730809,
+      "end_time": 541.628830941843,
+      "duration": 17.999749668762092,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 18,
+      "start_time_formatted": "08:43",
+      "end_time_formatted": "09:01",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.10772714138992372
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 111,
+      "start_time": 529.3562743495053,
+      "end_time": 539.9924900628647,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 19,
+      "start_time_formatted": "08:49",
+      "end_time_formatted": "08:59",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 114,
+      "start_time": 557.9922397316268,
+      "end_time": 590.7190573111944,
+      "duration": 32.72681757956764,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 21,
+      "start_time_formatted": "09:17",
+      "end_time_formatted": "09:50",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.034758163249301435
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 114,
+      "start_time": 593.9917390691511,
+      "end_time": 741.2624181772052,
+      "duration": 147.27067910805408,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 23,
+      "start_time_formatted": "09:53",
+      "end_time_formatted": "12:21",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.034758163249301435
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 128,
+      "start_time": 753.5349747695429,
+      "end_time": 770.7165539988159,
+      "duration": 17.181579229272984,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 24,
+      "start_time_formatted": "12:33",
+      "end_time_formatted": "12:50",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 127,
+      "start_time": 755.1713156485214,
+      "end_time": 770.7165539988159,
+      "duration": 15.54523835029454,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 26,
+      "start_time_formatted": "12:35",
+      "end_time_formatted": "12:50",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 131,
+      "start_time": 773.9892357567727,
+      "end_time": 784.6254514701321,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 27,
+      "start_time_formatted": "12:53",
+      "end_time_formatted": "13:04",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 130,
+      "start_time": 773.9892357567727,
+      "end_time": 784.6254514701321,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 28,
+      "start_time_formatted": "12:53",
+      "end_time_formatted": "13:04",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 136,
+      "start_time": 794.4434967440025,
+      "end_time": 805.0797124573619,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 29,
+      "start_time_formatted": "13:14",
+      "end_time_formatted": "13:25",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 154,
+      "start_time": 877.0787111324105,
+      "end_time": 908.9873582724889,
+      "duration": 31.908647140078415,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 33,
+      "start_time_formatted": "14:37",
+      "end_time_formatted": "15:08",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.09055666639469565
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 156,
+      "start_time": 894.2602903616835,
+      "end_time": 909.805528711978,
+      "duration": 15.54523835029454,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 34,
+      "start_time_formatted": "14:54",
+      "end_time_formatted": "15:09",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.09814572036266327
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 163,
+      "start_time": 919.6235739858483,
+      "end_time": 930.2597896992078,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 35,
+      "start_time_formatted": "15:19",
+      "end_time_formatted": "15:30",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 161,
+      "start_time": 922.8962557438051,
+      "end_time": 933.5324714571645,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 36,
+      "start_time_formatted": "15:22",
+      "end_time_formatted": "15:33",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.10688673133651415
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 182,
+      "start_time": 1009.6223223296591,
+      "end_time": 1021.8948789219969,
+      "duration": 12.272556592337764,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 38,
+      "start_time_formatted": "16:49",
+      "end_time_formatted": "17:01",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 196,
+      "start_time": 1057.8943782595213,
+      "end_time": 1073.4396166098159,
+      "duration": 15.54523835029454,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 40,
+      "start_time_formatted": "17:37",
+      "end_time_formatted": "17:53",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 214,
+      "start_time": 1136.4387404504835,
+      "end_time": 1160.1656831956698,
+      "duration": 23.726942745186307,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 42,
+      "start_time_formatted": "18:56",
+      "end_time_formatted": "19:20",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.03538489372779926
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 240,
+      "start_time": 1255.0734541764157,
+      "end_time": 1291.8911239534293,
+      "duration": 36.817669777013634,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 44,
+      "start_time_formatted": "20:55",
+      "end_time_formatted": "21:31",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.037017232443137864
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 247,
+      "start_time": 1306.6181918642346,
+      "end_time": 1336.8904981253347,
+      "duration": 30.272306261100084,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 45,
+      "start_time_formatted": "21:46",
+      "end_time_formatted": "22:16",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08829114736711725
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 255,
+      "start_time": 1343.4358616412483,
+      "end_time": 1355.708418233586,
+      "duration": 12.27255659233765,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 46,
+      "start_time_formatted": "22:23",
+      "end_time_formatted": "22:35",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.13954698894346176
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 290,
+      "start_time": 1403.162303723959,
+      "end_time": 1426.0710760296563,
+      "duration": 22.908772305697312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 47,
+      "start_time_formatted": "23:23",
+      "end_time_formatted": "23:46",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.12366155628114939
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 282,
+      "start_time": 1404.7986446029374,
+      "end_time": 1435.0709508640373,
+      "duration": 30.272306261099857,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 48,
+      "start_time_formatted": "23:24",
+      "end_time_formatted": "23:55",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08307860021454257
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 285,
+      "start_time": 1413.7985194373184,
+      "end_time": 1436.7072917430157,
+      "duration": 22.908772305697312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 49,
+      "start_time_formatted": "23:33",
+      "end_time_formatted": "23:56",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.16105980039997533
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 307,
+      "start_time": 1484.9793476728778,
+      "end_time": 1501.3427564626616,
+      "duration": 16.36340878978376,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 50,
+      "start_time_formatted": "24:44",
+      "end_time_formatted": "25:01",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15811005704711342
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 315,
+      "start_time": 1502.97909734164,
+      "end_time": 1515.2516539339779,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 51,
+      "start_time_formatted": "25:02",
+      "end_time_formatted": "25:15",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.10914942893655376
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 344,
+      "start_time": 1570.8872438192427,
+      "end_time": 1598.7050387618751,
+      "duration": 27.817794942632418,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 53,
+      "start_time_formatted": "26:10",
+      "end_time_formatted": "26:38",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.12696232741045488
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 425,
+      "start_time": 1760.7027857807345,
+      "end_time": 1778.7025354494967,
+      "duration": 17.999749668762206,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 57,
+      "start_time_formatted": "29:20",
+      "end_time_formatted": "29:38",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10104388449633238
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 440,
+      "start_time": 1781.9752172074534,
+      "end_time": 1794.2477737997913,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 58,
+      "start_time_formatted": "29:41",
+      "end_time_formatted": "29:54",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 446,
+      "start_time": 1804.8839895131507,
+      "end_time": 1816.3383756659994,
+      "duration": 11.454386152848656,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 59,
+      "start_time_formatted": "30:04",
+      "end_time_formatted": "30:16",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 420,
+      "start_time": 1845.7925114876102,
+      "end_time": 1856.4287272009697,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 60,
+      "start_time_formatted": "30:45",
+      "end_time_formatted": "30:56",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.23321070181688075
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 464,
+      "start_time": 1877.7011586276885,
+      "end_time": 1891.6100560990049,
+      "duration": 13.908897471316322,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 61,
+      "start_time_formatted": "31:17",
+      "end_time_formatted": "31:31",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 420,
+      "start_time": 1880.1556699461562,
+      "end_time": 1893.246396977983,
+      "duration": 13.090727031826873,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 62,
+      "start_time_formatted": "31:20",
+      "end_time_formatted": "31:33",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.23321070181688075
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 475,
+      "start_time": 1919.4278510416373,
+      "end_time": 1939.882112028867,
+      "duration": 20.454260987229645,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 63,
+      "start_time_formatted": "31:59",
+      "end_time_formatted": "32:19",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.09069864484755431
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 481,
+      "start_time": 1936.60943027091,
+      "end_time": 1947.2456459842697,
+      "duration": 10.636215713359661,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 64,
+      "start_time_formatted": "32:16",
+      "end_time_formatted": "32:27",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 465,
+      "start_time": 2002.0630654300453,
+      "end_time": 2044.607928283483,
+      "duration": 42.544862853437735,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 67,
+      "start_time_formatted": "33:22",
+      "end_time_formatted": "34:04",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.22737036732690674
+      },
+      "confidence_relative": 0.8925
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 485,
+      "start_time": 2069.971211907648,
+      "end_time": 2080.6074276210074,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 69,
+      "start_time_formatted": "34:29",
+      "end_time_formatted": "34:40",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10699047770276479
+      },
+      "confidence_relative": 0.8925,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 553,
+      "start_time": 2083.8801093789643,
+      "end_time": 2097.78900685028,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 71,
+      "start_time_formatted": "34:43",
+      "end_time_formatted": "34:57",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.36261427311881167
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 485,
+      "start_time": 2091.243643334367,
+      "end_time": 2099.4253477292586,
+      "duration": 8.181704394891767,
+      "severity": "HIGH",
+      "confidence": 0.8615889747131601,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 72,
+      "start_time_formatted": "34:51",
+      "end_time_formatted": "34:59",
+      "confidence_global": 0.8615889747131601,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10699047770276479
+      },
+      "confidence_relative": 0.8615889747131601,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 485,
+      "start_time": 2122.334120034956,
+      "end_time": 2132.152165308826,
+      "duration": 9.818045273870212,
+      "severity": "HIGH",
+      "confidence": 0.8894067696557935,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 74,
+      "start_time_formatted": "35:22",
+      "end_time_formatted": "35:32",
+      "confidence_global": 0.8894067696557935,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10699047770276479
+      },
+      "confidence_relative": 0.8894067696557935,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 485,
+      "start_time": 2166.515323767372,
+      "end_time": 2213.151038818256,
+      "duration": 46.635715050883846,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 76,
+      "start_time_formatted": "36:06",
+      "end_time_formatted": "36:53",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10699047770276479
+      },
+      "confidence_relative": 0.8925,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 465,
+      "start_time": 2167.3334942068614,
+      "end_time": 2174.697028162264,
+      "duration": 7.363533955402545,
+      "severity": "HIGH",
+      "confidence": 0.8476800772418432,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 78,
+      "start_time_formatted": "36:07",
+      "end_time_formatted": "36:14",
+      "confidence_global": 0.8476800772418432,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.22737036732690674
+      },
+      "confidence_relative": 0.8476800772418432
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 485,
+      "start_time": 2223.7872545316154,
+      "end_time": 2230.3326180475287,
+      "duration": 6.545363515913323,
+      "severity": "HIGH",
+      "confidence": 0.8337711797705264,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 81,
+      "start_time_formatted": "37:03",
+      "end_time_formatted": "37:10",
+      "confidence_global": 0.8337711797705264,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10699047770276479
+      },
+      "confidence_relative": 0.8337711797705264,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 618,
+      "start_time": 2250.786879034759,
+      "end_time": 2264.6957765060747,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 83,
+      "start_time_formatted": "37:30",
+      "end_time_formatted": "37:44",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 615,
+      "start_time": 2256.514072111183,
+      "end_time": 2267.1502878245424,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 85,
+      "start_time_formatted": "37:36",
+      "end_time_formatted": "37:47",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.4148892037443478
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 631,
+      "start_time": 2270.4229695824993,
+      "end_time": 2282.695526174837,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 86,
+      "start_time_formatted": "37:50",
+      "end_time_formatted": "38:02",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 645,
+      "start_time": 2291.695401009218,
+      "end_time": 2305.6042984805345,
+      "duration": 13.908897471316322,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 87,
+      "start_time_formatted": "38:11",
+      "end_time_formatted": "38:25",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 671,
+      "start_time": 2330.14941166521,
+      "end_time": 2342.4219682575476,
+      "duration": 12.272556592337423,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 88,
+      "start_time_formatted": "38:50",
+      "end_time_formatted": "39:02",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 693,
+      "start_time": 2402.966580779748,
+      "end_time": 2424.2390122064667,
+      "duration": 21.272431426718867,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 90,
+      "start_time_formatted": "40:02",
+      "end_time_formatted": "40:24",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 699,
+      "start_time": 2422.602671327488,
+      "end_time": 2433.2388870408477,
+      "duration": 10.636215713359434,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 92,
+      "start_time_formatted": "40:22",
+      "end_time_formatted": "40:33",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 704,
+      "start_time": 2441.42059143574,
+      "end_time": 2472.511068136329,
+      "duration": 31.09047670058908,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 94,
+      "start_time_formatted": "40:41",
+      "end_time_formatted": "41:12",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.10974954390677355
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 744,
+      "start_time": 2590.327611422772,
+      "end_time": 2614.0545541679585,
+      "duration": 23.726942745186534,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 97,
+      "start_time_formatted": "43:10",
+      "end_time_formatted": "43:34",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.0828142852494211
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 747,
+      "start_time": 2600.9638271361314,
+      "end_time": 2617.3272359259154,
+      "duration": 16.36340878978399,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 98,
+      "start_time_formatted": "43:20",
+      "end_time_formatted": "43:37",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.0611034375748464
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 776,
+      "start_time": 2737.598290530826,
+      "end_time": 2757.2343810785665,
+      "duration": 19.636090547740423,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 103,
+      "start_time_formatted": "45:37",
+      "end_time_formatted": "45:57",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08904447402901851
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 866,
+      "start_time": 2974.0495475432017,
+      "end_time": 2989.5947858934965,
+      "duration": 15.545238350294767,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 105,
+      "start_time_formatted": "49:34",
+      "end_time_formatted": "49:49",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 882,
+      "start_time": 2992.0492972119637,
+      "end_time": 3024.776114791531,
+      "duration": 32.72681757956752,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 106,
+      "start_time_formatted": "49:52",
+      "end_time_formatted": "50:24",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08984137889929115
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 881,
+      "start_time": 3012.5035581991933,
+      "end_time": 3024.776114791531,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 107,
+      "start_time_formatted": "50:12",
+      "end_time_formatted": "50:24",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.20118841914968058
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 895,
+      "start_time": 3018.230751275618,
+      "end_time": 3043.594034899783,
+      "duration": 25.36328362416498,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 108,
+      "start_time_formatted": "50:18",
+      "end_time_formatted": "50:43",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 881,
+      "start_time": 3032.139648746934,
+      "end_time": 3048.5030575367177,
+      "duration": 16.363408789783534,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 109,
+      "start_time_formatted": "50:32",
+      "end_time_formatted": "50:48",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.20118841914968058
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 907,
+      "start_time": 3050.9575688551854,
+      "end_time": 3065.684636765991,
+      "duration": 14.727067910805545,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 110,
+      "start_time_formatted": "50:50",
+      "end_time_formatted": "51:05",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 910,
+      "start_time": 3065.684636765991,
+      "end_time": 3082.8662159952637,
+      "duration": 17.181579229272756,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 111,
+      "start_time_formatted": "51:05",
+      "end_time_formatted": "51:22",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.10847007044621053
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 975,
+      "start_time": 3164.6832599441827,
+      "end_time": 3180.228498294477,
+      "duration": 15.545238350294312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 112,
+      "start_time_formatted": "52:44",
+      "end_time_formatted": "53:00",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.22600268391948758
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 966,
+      "start_time": 3173.6831347785637,
+      "end_time": 3185.9556913709016,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 113,
+      "start_time_formatted": "52:53",
+      "end_time_formatted": "53:05",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13131591656378339
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 997,
+      "start_time": 3212.955315874045,
+      "end_time": 3226.864213345361,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 114,
+      "start_time_formatted": "53:32",
+      "end_time_formatted": "53:46",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1021,
+      "start_time": 3259.5910309249284,
+      "end_time": 3299.681382459899,
+      "duration": 40.09035153497052,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 115,
+      "start_time_formatted": "54:19",
+      "end_time_formatted": "54:59",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.01981813053372411
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1024,
+      "start_time": 3264.5000535618638,
+      "end_time": 3277.590780593691,
+      "duration": 13.0907270318271,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 116,
+      "start_time_formatted": "54:24",
+      "end_time_formatted": "54:37",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1020,
+      "start_time": 3277.590780593691,
+      "end_time": 3289.0451667465395,
+      "duration": 11.454386152848656,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 117,
+      "start_time_formatted": "54:37",
+      "end_time_formatted": "54:49",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.11245058465283364
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1037,
+      "start_time": 3302.954064217856,
+      "end_time": 3314.408450370704,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 118,
+      "start_time_formatted": "55:02",
+      "end_time_formatted": "55:14",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1078,
+      "start_time": 3406.0435395934933,
+      "end_time": 3418.316096185831,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 119,
+      "start_time_formatted": "56:46",
+      "end_time_formatted": "56:58",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.27989748800578323
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1177,
+      "start_time": 3645.767478363826,
+      "end_time": 3670.3125915485016,
+      "duration": 24.545113184675756,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 120,
+      "start_time_formatted": "60:45",
+      "end_time_formatted": "61:10",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.239694410334191
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1209,
+      "start_time": 3849.491917796634,
+      "end_time": 3861.764474388972,
+      "duration": 12.272556592337878,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 122,
+      "start_time_formatted": "64:09",
+      "end_time_formatted": "64:21",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.2673592700349881
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 1255,
+      "start_time": 4019.671369210385,
+      "end_time": 4029.4894144842556,
+      "duration": 9.818045273870666,
+      "severity": "HIGH",
+      "confidence": 0.8894067696558012,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 127,
+      "start_time_formatted": "66:59",
+      "end_time_formatted": "67:09",
+      "confidence_global": 0.8894067696558012,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.09071222495117466
+      },
+      "confidence_relative": 0.8894067696558012,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1344,
+      "start_time": 4098.2157314013475,
+      "end_time": 4109.670117554196,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 129,
+      "start_time_formatted": "68:18",
+      "end_time_formatted": "68:29",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.14209494014468158
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 1331,
+      "start_time": 4185.759968426691,
+      "end_time": 4196.39618414005,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 132,
+      "start_time_formatted": "69:45",
+      "end_time_formatted": "69:56",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.2184390352340415
+      },
+      "confidence_relative": 0.8925,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1385,
+      "start_time": 4201.305206776985,
+      "end_time": 4211.941422490345,
+      "duration": 10.636215713359888,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 133,
+      "start_time_formatted": "70:01",
+      "end_time_formatted": "70:11",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1442,
+      "start_time": 4322.394431821385,
+      "end_time": 4333.030647534744,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 135,
+      "start_time_formatted": "72:02",
+      "end_time_formatted": "72:13",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.22214010365307332
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1450,
+      "start_time": 4345.303204127083,
+      "end_time": 4366.5756355538015,
+      "duration": 21.272431426718867,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 136,
+      "start_time_formatted": "72:25",
+      "end_time_formatted": "72:46",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.055842756169537704
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1465,
+      "start_time": 4379.666362585628,
+      "end_time": 4394.393430496433,
+      "duration": 14.72706791080509,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 137,
+      "start_time_formatted": "72:59",
+      "end_time_formatted": "73:14",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1497,
+      "start_time": 4422.211225439066,
+      "end_time": 4439.392804668339,
+      "duration": 17.181579229272756,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 138,
+      "start_time_formatted": "73:42",
+      "end_time_formatted": "73:59",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1561,
+      "start_time": 4608.754085642601,
+      "end_time": 4622.662983113917,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 139,
+      "start_time_formatted": "76:48",
+      "end_time_formatted": "77:02",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.11684695991377035
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1570,
+      "start_time": 4610.39042652158,
+      "end_time": 4633.299198827277,
+      "duration": 22.908772305697312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 140,
+      "start_time_formatted": "76:50",
+      "end_time_formatted": "77:13",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1580,
+      "start_time": 4654.571630253996,
+      "end_time": 4665.207845967355,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 141,
+      "start_time_formatted": "77:34",
+      "end_time_formatted": "77:45",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1599,
+      "start_time": 4722.479776731599,
+      "end_time": 4738.025015081893,
+      "duration": 15.545238350294312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 142,
+      "start_time_formatted": "78:42",
+      "end_time_formatted": "78:58",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15734139699784536
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1604,
+      "start_time": 4744.570378597807,
+      "end_time": 4756.024764750655,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 143,
+      "start_time_formatted": "79:04",
+      "end_time_formatted": "79:16",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 1599,
+      "start_time": 4769.933662221972,
+      "end_time": 4812.478525075409,
+      "duration": 42.544862853437735,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 144,
+      "start_time_formatted": "79:29",
+      "end_time_formatted": "80:12",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15734139699784536
+      },
+      "confidence_relative": 0.8925
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1632,
+      "start_time": 4840.296320018041,
+      "end_time": 4851.75070617089,
+      "duration": 11.45438615284911,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 145,
+      "start_time_formatted": "80:40",
+      "end_time_formatted": "80:51",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1636,
+      "start_time": 4865.659603642206,
+      "end_time": 4877.932160234544,
+      "duration": 12.272556592338333,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 146,
+      "start_time_formatted": "81:05",
+      "end_time_formatted": "81:17",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.11028533936317625
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1636,
+      "start_time": 4890.204716826882,
+      "end_time": 4917.204341330025,
+      "duration": 26.999624503143423,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 147,
+      "start_time_formatted": "81:30",
+      "end_time_formatted": "81:57",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.11028533936317625
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1653,
+      "start_time": 4919.658852648493,
+      "end_time": 4941.749454514701,
+      "duration": 22.09060186620809,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 148,
+      "start_time_formatted": "81:59",
+      "end_time_formatted": "82:21",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.09068405057393736
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1667,
+      "start_time": 4973.65810165478,
+      "end_time": 4987.566999126096,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 149,
+      "start_time_formatted": "82:53",
+      "end_time_formatted": "83:07",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.0992222276587899
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 1674,
+      "start_time": 5007.203089673836,
+      "end_time": 5026.8391802215765,
+      "duration": 19.636090547740423,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 150,
+      "start_time_formatted": "83:27",
+      "end_time_formatted": "83:46",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.12179491621072731
+      },
+      "confidence_relative": 0.8925,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1683,
+      "start_time": 5030.111861979533,
+      "end_time": 5052.2024638457415,
+      "duration": 22.09060186620809,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 151,
+      "start_time_formatted": "83:50",
+      "end_time_formatted": "84:12",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.14714134871635748
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1667,
+      "start_time": 5062.020509119612,
+      "end_time": 5091.474644941222,
+      "duration": 29.45413582161018,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 152,
+      "start_time_formatted": "84:22",
+      "end_time_formatted": "84:51",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.0992222276587899
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 1674,
+      "start_time": 5090.656474501733,
+      "end_time": 5124.20146252079,
+      "duration": 33.5449880190572,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 154,
+      "start_time_formatted": "84:50",
+      "end_time_formatted": "85:24",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.12179491621072731
+      },
+      "confidence_relative": 0.8925,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1667,
+      "start_time": 5093.110985820201,
+      "end_time": 5147.928405265977,
+      "duration": 54.81741944577607,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 155,
+      "start_time_formatted": "84:53",
+      "end_time_formatted": "85:47",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.0992222276587899
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1704,
+      "start_time": 5189.655097679925,
+      "end_time": 5203.563995151241,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 156,
+      "start_time_formatted": "86:29",
+      "end_time_formatted": "86:43",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.1322767442261631
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1720,
+      "start_time": 5295.1990843740305,
+      "end_time": 5307.471640966369,
+      "duration": 12.272556592338333,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 157,
+      "start_time_formatted": "88:15",
+      "end_time_formatted": "88:27",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13034735405769374
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1720,
+      "start_time": 5314.835174921771,
+      "end_time": 5361.470889972655,
+      "duration": 46.635715050883846,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 158,
+      "start_time_formatted": "88:34",
+      "end_time_formatted": "89:21",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13034735405769374
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1762,
+      "start_time": 5363.107230851633,
+      "end_time": 5381.925150959884,
+      "duration": 18.8179201082512,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 159,
+      "start_time_formatted": "89:23",
+      "end_time_formatted": "89:41",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1720,
+      "start_time": 5363.925401291122,
+      "end_time": 5389.288684915287,
+      "duration": 25.36328362416498,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 160,
+      "start_time_formatted": "89:23",
+      "end_time_formatted": "89:49",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13034735405769374
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1767,
+      "start_time": 5395.834048431201,
+      "end_time": 5412.197457220985,
+      "duration": 16.363408789783534,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 161,
+      "start_time_formatted": "89:55",
+      "end_time_formatted": "90:12",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1791,
+      "start_time": 5599.558487864009,
+      "end_time": 5627.376282806641,
+      "duration": 27.817794942631735,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 166,
+      "start_time_formatted": "93:19",
+      "end_time_formatted": "93:47",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.14073267099854436
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1791,
+      "start_time": 5634.739816762044,
+      "end_time": 5651.921395991317,
+      "duration": 17.181579229272756,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 168,
+      "start_time_formatted": "93:54",
+      "end_time_formatted": "94:11",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.14073267099854436
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1815,
+      "start_time": 5707.556985876582,
+      "end_time": 5731.283928621769,
+      "duration": 23.726942745186534,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 170,
+      "start_time_formatted": "95:07",
+      "end_time_formatted": "95:31",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.09984475362204737
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1820,
+      "start_time": 5741.920144335128,
+      "end_time": 5762.374405322357,
+      "duration": 20.454260987229645,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 171,
+      "start_time_formatted": "95:41",
+      "end_time_formatted": "96:02",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1828,
+      "start_time": 5796.737563780904,
+      "end_time": 5812.282802131198,
+      "duration": 15.545238350294312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 172,
+      "start_time_formatted": "96:36",
+      "end_time_formatted": "96:52",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.08148961886763573
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1848,
+      "start_time": 5973.462378710568,
+      "end_time": 5984.098594423927,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 175,
+      "start_time_formatted": "99:33",
+      "end_time_formatted": "99:44",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1869,
+      "start_time": 6047.097718264596,
+      "end_time": 6059.370274856933,
+      "duration": 12.272556592337423,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 176,
+      "start_time_formatted": "100:47",
+      "end_time_formatted": "100:59",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.5704569294457398
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1958,
+      "start_time": 6285.185316155949,
+      "end_time": 6317.093963296027,
+      "duration": 31.908647140077846,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 177,
+      "start_time_formatted": "104:45",
+      "end_time_formatted": "105:17",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.20118703477321162
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1983,
+      "start_time": 6332.639201646322,
+      "end_time": 6344.093587799171,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 179,
+      "start_time_formatted": "105:32",
+      "end_time_formatted": "105:44",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1986,
+      "start_time": 6371.093212302314,
+      "end_time": 6385.00210977363,
+      "duration": 13.908897471315868,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 180,
+      "start_time_formatted": "106:11",
+      "end_time_formatted": "106:25",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15045476326902668
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1998,
+      "start_time": 6420.1834386716655,
+      "end_time": 6442.274040537874,
+      "duration": 22.09060186620809,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 182,
+      "start_time_formatted": "107:00",
+      "end_time_formatted": "107:22",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1986,
+      "start_time": 6423.456120429622,
+      "end_time": 6442.274040537874,
+      "duration": 18.8179201082512,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 183,
+      "start_time_formatted": "107:03",
+      "end_time_formatted": "107:22",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15045476326902668
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1986,
+      "start_time": 6496.2732895441595,
+      "end_time": 6506.909505257519,
+      "duration": 10.636215713359888,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 185,
+      "start_time_formatted": "108:16",
+      "end_time_formatted": "108:26",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15045476326902668
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1986,
+      "start_time": 6567.454117779719,
+      "end_time": 6623.907878104474,
+      "duration": 56.45376032475451,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 190,
+      "start_time_formatted": "109:27",
+      "end_time_formatted": "110:23",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15045476326902668
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 1986,
+      "start_time": 6641.907627773236,
+      "end_time": 6678.725297550249,
+      "duration": 36.81766977701318,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 191,
+      "start_time_formatted": "110:41",
+      "end_time_formatted": "111:18",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.15045476326902668
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2069,
+      "start_time": 6713.906626448284,
+      "end_time": 6735.9972283144925,
+      "duration": 22.09060186620809,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 194,
+      "start_time_formatted": "111:53",
+      "end_time_formatted": "112:15",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.06586564666567704
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2096,
+      "start_time": 6778.54209116793,
+      "end_time": 6798.178181715671,
+      "duration": 19.636090547740423,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 196,
+      "start_time_formatted": "112:58",
+      "end_time_formatted": "113:18",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2099,
+      "start_time": 6787.541966002311,
+      "end_time": 6807.99622698954,
+      "duration": 20.454260987229645,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 199,
+      "start_time_formatted": "113:07",
+      "end_time_formatted": "113:27",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.22663505375385284
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2104,
+      "start_time": 6803.087204352606,
+      "end_time": 6821.905124460857,
+      "duration": 18.8179201082512,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 200,
+      "start_time_formatted": "113:23",
+      "end_time_formatted": "113:41",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2146,
+      "start_time": 6971.6303148873785,
+      "end_time": 7051.81101795732,
+      "duration": 80.18070306994105,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 208,
+      "start_time_formatted": "116:11",
+      "end_time_formatted": "117:31",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.12227781471966576
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2192,
+      "start_time": 6983.902871479717,
+      "end_time": 6994.539087193076,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 209,
+      "start_time_formatted": "116:23",
+      "end_time_formatted": "116:34",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2225,
+      "start_time": 7133.628061906238,
+      "end_time": 7170.445731683251,
+      "duration": 36.81766977701318,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 221,
+      "start_time_formatted": "118:53",
+      "end_time_formatted": "119:30",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.05090429215549917
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2227,
+      "start_time": 7137.718914103684,
+      "end_time": 7149.1733002565325,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 222,
+      "start_time_formatted": "118:57",
+      "end_time_formatted": "119:09",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2237,
+      "start_time": 7192.536333549459,
+      "end_time": 7217.899617173624,
+      "duration": 25.36328362416498,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 223,
+      "start_time_formatted": "119:52",
+      "end_time_formatted": "120:17",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.04840541750724826
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2240,
+      "start_time": 7198.263526625884,
+      "end_time": 7228.535832886984,
+      "duration": 30.27230626110031,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 224,
+      "start_time_formatted": "119:58",
+      "end_time_formatted": "120:28",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13436065804213285
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 2230,
+      "start_time": 7259.626309587573,
+      "end_time": 7269.444354861444,
+      "duration": 9.818045273870666,
+      "severity": "HIGH",
+      "confidence": 0.8894067696558012,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 229,
+      "start_time_formatted": "120:59",
+      "end_time_formatted": "121:09",
+      "confidence_global": 0.8894067696558012,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.17119190842173368
+      },
+      "confidence_relative": 0.8894067696558012,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2260,
+      "start_time": 7264.535332224508,
+      "end_time": 7295.625808925098,
+      "duration": 31.090476700589534,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 230,
+      "start_time_formatted": "121:04",
+      "end_time_formatted": "121:35",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.04891283510540448
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2261,
+      "start_time": 7278.444229695824,
+      "end_time": 7292.353127167141,
+      "duration": 13.908897471316777,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 232,
+      "start_time_formatted": "121:18",
+      "end_time_formatted": "121:32",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.45049381570196617
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2277,
+      "start_time": 7310.352876835903,
+      "end_time": 7384.806386829419,
+      "duration": 74.45350999351649,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 235,
+      "start_time_formatted": "121:50",
+      "end_time_formatted": "123:04",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.03285908933368421
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2332,
+      "start_time": 7438.805635835705,
+      "end_time": 7451.896362867533,
+      "duration": 13.090727031827555,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 243,
+      "start_time_formatted": "123:58",
+      "end_time_formatted": "124:11",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2337,
+      "start_time": 7441.260147154173,
+      "end_time": 7456.805385504467,
+      "duration": 15.545238350294312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 244,
+      "start_time_formatted": "124:01",
+      "end_time_formatted": "124:16",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2352,
+      "start_time": 7472.3506238547625,
+      "end_time": 7500.986589236883,
+      "duration": 28.635965382120958,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 246,
+      "start_time_formatted": "124:32",
+      "end_time_formatted": "125:00",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13746907904099387
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2343,
+      "start_time": 7487.077691765568,
+      "end_time": 7505.07744143433,
+      "duration": 17.99974966876198,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 247,
+      "start_time_formatted": "124:47",
+      "end_time_formatted": "125:05",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.14514467553769955
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2352,
+      "start_time": 7503.441100555351,
+      "end_time": 7517.349998026668,
+      "duration": 13.908897471316777,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 249,
+      "start_time_formatted": "125:03",
+      "end_time_formatted": "125:17",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13746907904099387
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2352,
+      "start_time": 7554.98583824317,
+      "end_time": 7565.62205395653,
+      "duration": 10.636215713359888,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 251,
+      "start_time_formatted": "125:54",
+      "end_time_formatted": "126:05",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.13746907904099387
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 2364,
+      "start_time": 7578.712780988357,
+      "end_time": 7588.5308262622275,
+      "duration": 9.818045273870666,
+      "severity": "HIGH",
+      "confidence": 0.8894067696558012,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 252,
+      "start_time_formatted": "126:18",
+      "end_time_formatted": "126:28",
+      "confidence_global": 0.8894067696558012,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.22527109951204885
+      },
+      "confidence_relative": 0.8894067696558012,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Wheelchair",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2406,
+      "start_time": 7583.621803625292,
+      "end_time": 7599.1670419755865,
+      "duration": 15.545238350294312,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 253,
+      "start_time_formatted": "126:23",
+      "end_time_formatted": "126:39",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2408,
+      "start_time": 7587.712655822738,
+      "end_time": 7598.348871536097,
+      "duration": 10.636215713358979,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 254,
+      "start_time_formatted": "126:27",
+      "end_time_formatted": "126:38",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 2420,
+      "start_time": 7608.985087249457,
+      "end_time": 7637.621052631578,
+      "duration": 28.635965382120958,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 255,
+      "start_time_formatted": "126:48",
+      "end_time_formatted": "127:17",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.1865077045125266
+      },
+      "confidence_relative": 0.8925
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2420,
+      "start_time": 7617.166791644348,
+      "end_time": 7627.803007357708,
+      "duration": 10.636215713359888,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 256,
+      "start_time_formatted": "126:57",
+      "end_time_formatted": "127:07",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "MODERATE",
+        "mean_motion": 0.1865077045125266
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2479,
+      "start_time": 7706.34736954867,
+      "end_time": 7739.892357567727,
+      "duration": 33.5449880190572,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 258,
+      "start_time_formatted": "128:26",
+      "end_time_formatted": "128:59",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.04212035255177932
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2481,
+      "start_time": 7713.710903504073,
+      "end_time": 7725.98346009641,
+      "duration": 12.272556592337423,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 259,
+      "start_time_formatted": "128:33",
+      "end_time_formatted": "128:45",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.07766198165862277
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2469,
+      "start_time": 7725.98346009641,
+      "end_time": 7739.074187128238,
+      "duration": 13.090727031827555,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 260,
+      "start_time_formatted": "128:45",
+      "end_time_formatted": "128:59",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.3606411294092106
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2481,
+      "start_time": 7753.801255039043,
+      "end_time": 7775.073686465762,
+      "duration": 21.272431426718867,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 262,
+      "start_time_formatted": "129:13",
+      "end_time_formatted": "129:35",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.07766198165862277
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2500,
+      "start_time": 7769.346493389337,
+      "end_time": 7788.1644134975895,
+      "duration": 18.81792010825211,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 263,
+      "start_time_formatted": "129:29",
+      "end_time_formatted": "129:48",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.0870904549302762
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 2481,
+      "start_time": 7775.891856905251,
+      "end_time": 7782.437220421165,
+      "duration": 6.5453635159137775,
+      "severity": "HIGH",
+      "confidence": 0.8337711797705342,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 264,
+      "start_time_formatted": "129:35",
+      "end_time_formatted": "129:42",
+      "confidence_global": 0.8337711797705342,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.07766198165862277
+      },
+      "confidence_relative": 0.8337711797705342,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2481,
+      "start_time": 7776.71002734474,
+      "end_time": 7802.073310968905,
+      "duration": 25.36328362416498,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 265,
+      "start_time_formatted": "129:36",
+      "end_time_formatted": "130:02",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.07766198165862277
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2500,
+      "start_time": 7789.800754376568,
+      "end_time": 7802.073310968905,
+      "duration": 12.272556592337423,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 266,
+      "start_time_formatted": "129:49",
+      "end_time_formatted": "130:02",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.0870904549302762
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "LAPTOP_INTERACTION",
+      "person_id": 2527,
+      "start_time": 7847.8908555803,
+      "end_time": 7859.345241733148,
+      "duration": 11.454386152848201,
+      "severity": "HIGH",
+      "confidence": 0.8925,
+      "description": "Laptop interaction during PAPER_PEN exam",
+      "event_id": 267,
+      "start_time_formatted": "130:47",
+      "end_time_formatted": "130:59",
+      "confidence_global": 0.8925,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.17042012798289458
+      },
+      "confidence_relative": 0.8925
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2532,
+      "start_time": 7850.345366898768,
+      "end_time": 7867.52694612804,
+      "duration": 17.181579229272756,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 268,
+      "start_time_formatted": "130:50",
+      "end_time_formatted": "131:07",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2542,
+      "start_time": 7874.072309643954,
+      "end_time": 7908.4354681025,
+      "duration": 34.36315845854551,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 269,
+      "start_time_formatted": "131:14",
+      "end_time_formatted": "131:48",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.04885212451410599
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2546,
+      "start_time": 7901.071934147098,
+      "end_time": 7914.162661178924,
+      "duration": 13.090727031826646,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 270,
+      "start_time_formatted": "131:41",
+      "end_time_formatted": "131:54",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "VERY_STILL",
+        "mean_motion": 0.056809100632866226
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2560,
+      "start_time": 7922.3443655738165,
+      "end_time": 7935.435092605643,
+      "duration": 13.090727031826646,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 271,
+      "start_time_formatted": "132:02",
+      "end_time_formatted": "132:15",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2578,
+      "start_time": 7972.252762382656,
+      "end_time": 7984.525318974995,
+      "duration": 12.272556592338333,
+      "severity": "HIGH",
+      "confidence": 0.9,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 272,
+      "start_time_formatted": "132:52",
+      "end_time_formatted": "133:04",
+      "confidence_global": 0.9,
+      "confidence_relative": 0.9
+    },
+    {
+      "event_type": "SUSPICIOUS_STILLNESS",
+      "person_id": 2596,
+      "start_time": 8021.342988752008,
+      "end_time": 8061.433340286978,
+      "duration": 40.09035153497007,
+      "severity": "HIGH",
+      "confidence": 0.54,
+      "description": "Prolonged suspicious stillness - potential hidden device usage",
+      "event_id": 276,
+      "start_time_formatted": "133:41",
+      "end_time_formatted": "134:21",
+      "confidence_global": 0.9,
+      "person_baseline": {
+        "behavior_type": "CALM",
+        "mean_motion": 0.06066359227353876
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "Limited mobility - threshold adjusted"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 6,
+      "start_time": 37.63584021650269,
+      "end_time": 53.18107856679728,
+      "duration": 15.54523835029459,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 277,
+      "start_time_formatted": "00:37",
+      "end_time_formatted": "00:53",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.9386513210944275
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 384,
+      "start_time": 1716.5215820483184,
+      "end_time": 1732.066820398613,
+      "duration": 15.54523835029454,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 278,
+      "start_time_formatted": "28:36",
+      "end_time_formatted": "28:52",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.6213063039912248
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 384,
+      "start_time": 1745.9757178699292,
+      "end_time": 1761.5209562202238,
+      "duration": 15.54523835029454,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 279,
+      "start_time_formatted": "29:05",
+      "end_time_formatted": "29:21",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.6213063039912248
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 1001,
+      "start_time": 3245.6821334536126,
+      "end_time": 3261.227371803907,
+      "duration": 15.545238350294312,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 280,
+      "start_time_formatted": "54:05",
+      "end_time_formatted": "54:21",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.768522735027706
+      },
+      "confidence_relative": 0.4
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 2116,
+      "start_time": 6847.268408085022,
+      "end_time": 6862.8136464353165,
+      "duration": 15.545238350294312,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 281,
+      "start_time_formatted": "114:07",
+      "end_time_formatted": "114:22",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.9673791495236483
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 2163,
+      "start_time": 6940.53983818679,
+      "end_time": 6956.085076537084,
+      "duration": 15.545238350294312,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 282,
+      "start_time_formatted": "115:40",
+      "end_time_formatted": "115:56",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.9590519152838608
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    },
+    {
+      "event_type": "EXCESSIVE_MOVEMENT",
+      "person_id": 2346,
+      "start_time": 7492.804884841992,
+      "end_time": 7512.440975389733,
+      "duration": 19.636090547740423,
+      "severity": "MEDIUM",
+      "confidence": 0.6749999999999999,
+      "description": "Sustained excessive movement detected",
+      "event_id": 283,
+      "start_time_formatted": "124:52",
+      "end_time_formatted": "125:12",
+      "confidence_global": 0.6749999999999999,
+      "person_baseline": {
+        "behavior_type": "FIDGETY",
+        "mean_motion": 0.9222391345671245
+      },
+      "confidence_relative": 0.4,
+      "accessibility_adjustment": {
+        "applied": true,
+        "profile_type": "Limited Mobility",
+        "reason": "None"
+      }
+    }
+  ]
+}

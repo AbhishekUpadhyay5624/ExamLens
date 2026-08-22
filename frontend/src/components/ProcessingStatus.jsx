@@ -1,32 +1,28 @@
 import { Check, Loader2, AlertTriangle } from "lucide-react";
 import { STATUS_STAGES } from "../lib/constants";
 
-// Vertical stepper with animated stages and pulse effects.
+// Vertical stepper over the pipeline stages. Highlights the current stage,
+// checks off completed ones, and renders a failure banner if status==failed.
 export default function ProcessingStatus({ status, error }) {
   const failed = status === "failed";
   // Index of the current stage within the ordered stage list.
   const currentIndex = STATUS_STAGES.findIndex((s) => s.value === status);
 
   return (
-    <div className="anim-slide-up rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="mb-5 flex items-center gap-2">
         {failed ? (
-          <span className="relative flex h-6 w-6 items-center justify-center">
-            <AlertTriangle size={18} className="text-red-600 anim-scale-in" />
-          </span>
+          <AlertTriangle size={18} className="text-red-600" />
         ) : (
-          <span className="relative flex h-6 w-6 items-center justify-center">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-30" />
-            <Loader2 size={18} className="animate-spin text-blue-600" />
-          </span>
+          <Loader2 size={18} className="animate-spin text-blue-600" />
         )}
-        <h2 className="text-base font-semibold text-slate-900">
+        <h2 className="text-base font-semibold text-slate-900 font-display">
           {failed ? "Processing failed" : "Analyzing footage…"}
         </h2>
       </div>
 
       {failed && error && (
-        <div className="anim-shake mb-5 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-inset ring-red-600/20">
+        <div className="mb-5 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 ring-1 ring-inset ring-red-600/20">
           {error}
         </div>
       )}
@@ -38,24 +34,20 @@ export default function ProcessingStatus({ status, error }) {
           const isFailedHere = failed && currentIndex === i;
 
           return (
-            <li
-              key={stage.value}
-              className="flex items-center gap-3 anim-fade-in-left"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
+            <li key={stage.value} className="flex items-center gap-3">
               <span
-                className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium ring-1 ring-inset transition-all duration-300 ${
+                className={`flex h-7 w-7 items-center justify-center rounded-full font-mono text-xs font-medium ring-1 ring-inset ${
                   done
-                    ? "bg-green-100 text-green-700 ring-green-600/20 scale-100"
+                    ? "bg-green-100 text-green-700 ring-green-600/20"
                     : active
-                    ? "bg-blue-100 text-blue-700 ring-blue-600/20 scale-110 shadow-md shadow-blue-100"
+                    ? "bg-blue-100 text-blue-700 ring-blue-600/20"
                     : isFailedHere
-                    ? "bg-red-100 text-red-700 ring-red-600/20 anim-shake"
+                    ? "bg-red-100 text-red-700 ring-red-600/20"
                     : "bg-slate-100 text-slate-400 ring-slate-500/20"
                 }`}
               >
                 {done ? (
-                  <Check size={14} className="anim-scale-in" />
+                  <Check size={14} />
                 ) : active ? (
                   <Loader2 size={14} className="animate-spin" />
                 ) : (
@@ -63,7 +55,7 @@ export default function ProcessingStatus({ status, error }) {
                 )}
               </span>
               <span
-                className={`text-sm transition-all duration-300 ${
+                className={`text-sm ${
                   active
                     ? "font-medium text-slate-900"
                     : done
@@ -79,7 +71,7 @@ export default function ProcessingStatus({ status, error }) {
       </ol>
 
       {!failed && (
-        <p className="mt-5 text-xs text-slate-400 anim-gentle-pulse">
+        <p className="mt-5 text-xs text-slate-400">
           This can take a few minutes depending on footage length. The page
           updates automatically.
         </p>

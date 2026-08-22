@@ -14,7 +14,9 @@ import { EVENT_TYPE_LABELS, SEVERITIES } from "../lib/constants";
 function ChartCard({ title, children, empty }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <h3 className="mb-4 text-sm font-semibold text-slate-800">{title}</h3>
+      <h3 className="mb-4 text-sm font-semibold text-slate-800 font-display">
+        {title}
+      </h3>
       {empty ? (
         <div className="flex h-56 items-center justify-center text-sm text-slate-400">
           No events detected
@@ -53,7 +55,7 @@ export default function SeverityCharts({ summary }) {
         <BarChart data={severityData} margin={{ top: 4, right: 8, bottom: 0, left: -20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
           <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#64748b" }} axisLine={false} tickLine={false} />
-          <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: "#64748b" }} axisLine={false} tickLine={false} />
+          <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: "#64748b", fontFamily: "var(--font-mono)" }} axisLine={false} tickLine={false} />
           <Tooltip
             cursor={{ fill: "#f8fafc" }}
             contentStyle={{ borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 12 }}
@@ -70,12 +72,12 @@ export default function SeverityCharts({ summary }) {
         <BarChart data={typeData} margin={{ top: 4, right: 8, bottom: 0, left: -20 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
           <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#64748b" }} axisLine={false} tickLine={false} interval={0} />
-          <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: "#64748b" }} axisLine={false} tickLine={false} />
+          <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: "#64748b", fontFamily: "var(--font-mono)" }} axisLine={false} tickLine={false} />
           <Tooltip
             cursor={{ fill: "#f8fafc" }}
             contentStyle={{ borderRadius: 8, border: "1px solid #e2e8f0", fontSize: 12 }}
           />
-          <Bar dataKey="count" fill="#2563eb" radius={[6, 6, 0, 0]} maxBarSize={64} />
+          <Bar dataKey="count" fill="#4f46e5" radius={[6, 6, 0, 0]} maxBarSize={64} />
         </BarChart>
       </ChartCard>
     </div>

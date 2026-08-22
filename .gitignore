@@ -1,0 +1,11 @@
+# Claude Code local settings (user-specific)
+.claude/settings.local.json
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / backup files
+*.bak
+*.swp

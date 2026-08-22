@@ -5,6 +5,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { AuthProvider } from "./lib/auth";
 import App from "./App";
+
+// Self-hosted variable fonts (weight axis) — no external CDN, so the dashboard
+// works fully offline, matching the product's private-by-design positioning.
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource-variable/space-grotesk/wght.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
+
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

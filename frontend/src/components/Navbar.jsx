@@ -19,20 +19,22 @@ export default function Navbar() {
   }
 
   const linkClass = ({ isActive }) =>
-    `rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
+    `rounded-lg px-3 py-1.5 text-sm font-medium transition ${
       isActive
-        ? "bg-blue-50 text-blue-700 shadow-sm"
-        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900 hover:shadow-sm"
+        ? "bg-blue-50 text-blue-700"
+        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
     }`;
 
   return (
-    <header className="no-print anim-fade-in-down border-b border-slate-200 bg-white/80 backdrop-blur-sm">
+    <header className="no-print border-b border-slate-200 bg-white">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="/" className="flex shrink-0 items-center gap-2 text-slate-900 group">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white transition-all group-hover:shadow-lg group-hover:shadow-blue-200/50 group-hover:scale-105">
-            <ScanEye size={18} className="transition-transform group-hover:rotate-12" />
+        <Link to="/" className="flex shrink-0 items-center gap-2 text-slate-900">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+            <ScanEye size={18} />
           </span>
-          <span className="text-lg font-semibold tracking-tight">ExamLens</span>
+          <span className="text-lg font-semibold tracking-tight font-display">
+            ExamLens
+          </span>
         </Link>
 
         {/* Primary navigation */}
@@ -47,7 +49,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 sm:gap-4">
           <Link
             to="/upload"
-            className="btn-press inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200/50"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
           >
             <Upload size={16} />
             <span className="hidden sm:inline">New upload</span>
@@ -66,7 +68,7 @@ export default function Navbar() {
               <button
                 onClick={handleLogout}
                 title="Log out"
-                className="btn-press inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:border-slate-300 hover:shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50"
               >
                 <LogOut size={16} />
                 <span className="hidden sm:inline">Log out</span>

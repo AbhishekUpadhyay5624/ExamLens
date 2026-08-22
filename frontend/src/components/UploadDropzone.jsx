@@ -5,7 +5,7 @@ import { formatBytes } from "../lib/format";
 const ACCEPT = ".mp4,.avi,.mov,.mkv,.webm,.m4v";
 const ALLOWED = /\.(mp4|avi|mov|mkv|webm|m4v)$/i;
 
-// Drag-and-drop + click-to-pick video selector with animated states.
+// Drag-and-drop + click-to-pick video selector. Controlled: parent owns `file`.
 export default function UploadDropzone({ file, onFile, disabled }) {
   const inputRef = useRef(null);
   const [dragging, setDragging] = useState(false);
@@ -30,23 +30,25 @@ export default function UploadDropzone({ file, onFile, disabled }) {
 
   if (file) {
     return (
-      <div className="anim-bounce-in flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-4 hover:border-blue-200 hover:shadow-sm transition-all duration-300">
+      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 p-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600 anim-scale-in">
+          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
             <Film size={20} />
           </span>
           <div>
             <div className="text-sm font-medium text-slate-900">
               {file.name}
             </div>
-            <div className="text-xs text-slate-500">{formatBytes(file.size)}</div>
+            <div className="font-mono text-xs text-slate-500">
+              {formatBytes(file.size)}
+            </div>
           </div>
         </div>
         {!disabled && (
           <button
             type="button"
             onClick={() => onFile(null)}
-            className="btn-press rounded-lg p-1.5 text-slate-400 transition hover:bg-red-50 hover:text-red-500"
+            className="rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-200 hover:text-slate-600"
             title="Remove"
           >
             <X size={18} />
@@ -66,21 +68,17 @@ export default function UploadDropzone({ file, onFile, disabled }) {
         }}
         onDragLeave={() => setDragging(false)}
         onDrop={handleDrop}
-        className={`btn-press flex cursor-pointer flex-col items-center rounded-xl border-2 border-dashed px-6 py-10 text-center transition-all duration-300 ${
+        className={`flex cursor-pointer flex-col items-center rounded-xl border-2 border-dashed px-6 py-10 text-center transition ${
           dragging
-            ? "border-blue-400 bg-blue-50 scale-[1.02] dropzone-active shadow-lg shadow-blue-100/50"
-            : "border-slate-300 bg-white hover:border-blue-300 hover:bg-blue-50/30 hover:shadow-md"
+            ? "border-blue-400 bg-blue-50"
+            : "border-slate-300 bg-white hover:border-slate-400"
         } ${disabled ? "cursor-not-allowed opacity-60" : ""}`}
       >
-        <span className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 ${
-          dragging
-            ? "bg-blue-200 text-blue-600 scale-110"
-            : "bg-slate-100 text-slate-500"
-        }`}>
-          <UploadCloud size={24} className={dragging ? "anim-float" : ""} />
+        <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+          <UploadCloud size={24} />
         </span>
         <p className="text-sm font-medium text-slate-800">
-          {dragging ? "Release to upload" : "Drop exam footage here, or click to browse"}
+          Drop exam footage here, or click to browse
         </p>
         <p className="mt-1 text-xs text-slate-500">
           MP4, AVI, MOV, MKV, WEBM, or M4V
@@ -95,7 +93,7 @@ export default function UploadDropzone({ file, onFile, disabled }) {
         />
       </div>
       {rejected && (
-        <p className="anim-shake mt-2 text-sm text-red-600">{rejected}</p>
+        <p className="mt-2 text-sm text-red-600">{rejected}</p>
       )}
     </div>
   );
