@@ -76,6 +76,10 @@ def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> None:
 
     docs = []
     for e in results["events"]:
+        clip_filename = clip_by_event.get(e["event_id"]) or e.get("clip_filename")
+        if not clip_filename:
+            # Omit extra events that don't have clips
+            continue
         docs.append({
             "examId": exam_oid,
             "eventId": e["event_id"],
@@ -89,7 +93,7 @@ def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> None:
             "startTimeFormatted": e.get("start_time_formatted"),
             "endTimeFormatted": e.get("end_time_formatted"),
             "description": e.get("description"),
-            "clipFilename": clip_by_event.get(e["event_id"]),
+            "clipFilename": clip_filename,
             "reviewed": False,
             "reviewStatus": None,
             "reviewerNotes": "",

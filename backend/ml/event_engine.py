@@ -44,8 +44,13 @@ def calculate_event_confidence(event_type: str, duration: float, signal_strength
     return float(min(1.0, max(0.0, confidence)))
 
 
-def merge_consecutive_events(events: List[dict], max_gap: float = 2.0) -> List[dict]:
-    """Merge same-type, same-person events that are within ``max_gap`` seconds."""
+def merge_consecutive_events(
+    events: List[dict],
+    max_gap: float = 5.0,
+    max_duration: float = 20.0,
+) -> List[dict]:
+    """Merge same-type, same-person events that are within ``max_gap`` seconds,
+    capping total duration at ``max_duration`` (so evidence clip is <= 25s)."""
     if len(events) == 0:
         return []
 
@@ -54,10 +59,12 @@ def merge_consecutive_events(events: List[dict], max_gap: float = 2.0) -> List[d
     current = events[0].copy()
 
     for event in events[1:]:
+        potential_duration = event["end_time"] - current["start_time"]
         if (
             event["event_type"] == current["event_type"]
             and event["person_id"] == current["person_id"]
             and event["start_time"] - current["end_time"] <= max_gap
+            and potential_duration <= max_duration
         ):
             current["end_time"] = event["end_time"]
             current["duration"] = current["end_time"] - current["start_time"]
@@ -72,6 +79,42 @@ def merge_consecutive_events(events: List[dict], max_gap: float = 2.0) -> List[d
             current = event.copy()
     merged.append(current)
     return merged
+
+
+def consolidate_proximate_events(
+    events: List[dict],
+    proximity_window: float = 3.5,
+    max_duration: float = 20.0,
+) -> List[dict]:
+    """Consolidate closely occurring events (within 3.5s) into a unified incident clip (max 25s total)."""
+    if len(events) <= 1:
+        return events
+
+    events = sorted(events, key=lambda x: x["start_time"])
+    consolidated: List[dict] = []
+    current = events[0].copy()
+
+    for event in events[1:]:
+        potential_duration = max(current["end_time"], event["end_time"]) - current["start_time"]
+        if (
+            (event["start_time"] - current["start_time"] <= proximity_window or event["start_time"] - current["end_time"] <= 2.0)
+            and potential_duration <= max_duration
+            and event["event_type"] == current["event_type"]
+        ):
+            current["end_time"] = max(current["end_time"], event["end_time"])
+            current["duration"] = current["end_time"] - current["start_time"]
+            current["confidence"] = max(current["confidence"], event["confidence"])
+            curr_bboxes = current.get("event_bboxes", [])
+            new_bboxes = event.get("event_bboxes", [])
+            current["event_bboxes"] = curr_bboxes + new_bboxes
+            if event["person_id"] != current["person_id"]:
+                current["description"] = f"{current['description']} (Involves Person #{event['person_id']})"
+        else:
+            consolidated.append(current)
+            current = event.copy()
+    consolidated.append(current)
+    return consolidated
+
 
 
 def format_timestamp(seconds: float) -> str:
@@ -325,6 +368,7 @@ def run_event_engine(
     all_events += detect_excessive_movement(student_tracks, event_config["EXCESSIVE_MOVEMENT"])
 
     all_events = merge_consecutive_events(all_events, max_gap=config.EVENT_MERGE_GAP_GLOBAL)
+    all_events = consolidate_proximate_events(all_events, proximity_window=3.5, max_duration=20.0)
     filtered = [e for e in all_events if e["confidence"] >= config.MIN_EVENT_CONFIDENCE]
     filtered = sorted(
         filtered, key=lambda x: (_SEVERITY_ORDER.get(x["severity"], 3), x["start_time"])

@@ -103,36 +103,8 @@ export default function ExamDashboard() {
             </h1>
             <StatusBadge status={exam.status} />
           </div>
-          <p className="mt-1 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {EXAM_TYPE_LABELS[exam.examType] || exam.examType}
-            {vp?.durationSeconds ? (
-              <>
-                {" · "}
-                <span className="font-mono">
-                  {Math.round(vp.durationSeconds)}s
-                </span>
-              </>
-            ) : (
-              ""
-            )}
-            {vp?.resolution ? (
-              <>
-                {" · "}
-                <span className="font-mono">{vp.resolution}</span>
-              </>
-            ) : (
-              ""
-            )}
-            {exam.uploadedAt ? (
-              <>
-                {" · uploaded "}
-                <span className="font-mono">
-                  {formatDateTime(exam.uploadedAt)}
-                </span>
-              </>
-            ) : (
-              ""
-            )}
           </p>
         </div>
 

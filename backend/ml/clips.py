@@ -170,7 +170,7 @@ def extract_evidence_clips(
         end_time = event["end_time"] + context_seconds
         if video_duration:
             end_time = min(video_duration, end_time)
-        duration = max(0.1, end_time - start_time)
+        duration = min(25.0, max(1.5, end_time - start_time))
 
         filename = _clip_filename(event)
         clip_path = out / filename

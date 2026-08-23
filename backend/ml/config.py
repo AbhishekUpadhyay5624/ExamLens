@@ -37,9 +37,9 @@ FULL_FRAME_INTERVAL_SECONDS = 5
 # ---------------------------------------------------------------------------
 # Phase 2 — event-engine general settings (notebook Cell 3 / Cell 9 / Cell 13)
 # ---------------------------------------------------------------------------
-MIN_EVENT_CONFIDENCE = 0.5     # drop events below this confidence
-EVENT_MERGE_GAP_GLOBAL = 2.0   # default merge gap (seconds)
-CONTEXT_SECONDS = 4            # padding added before/after each evidence clip
+MIN_EVENT_CONFIDENCE = 0.55    # drop events below this confidence
+EVENT_MERGE_GAP_GLOBAL = 5.0   # default merge gap (seconds) to consolidate proximate events
+CONTEXT_SECONDS = 2.5          # padding added before/after each evidence clip (keeps clips <= 25s)
 
 VALID_EXAM_TYPES = ("CBT", "PAPER_PEN", "PHYSICAL", "HYBRID")
 
