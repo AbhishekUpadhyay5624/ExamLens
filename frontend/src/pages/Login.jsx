@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ScanEye } from "lucide-react";
+import { ScanEye, ArrowLeft } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useAuth } from "../lib/auth";
 import { apiErrorMessage } from "../lib/api";
+import AnimatedGridBackground from "../components/AnimatedGridBackground";
 
 export default function Login() {
   const { login, googleLogin } = useAuth();
@@ -50,24 +51,42 @@ export default function Login() {
   });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100/70 dark:bg-slate-950 px-4 py-8">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-12">
+      {/* Dynamic Animated Grid & Constellation Canvas */}
+      <AnimatedGridBackground />
+
+      {/* Ambient background soft glow */}
+      <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-purple-600/15 blur-3xl" />
+
+      {/* Top Left Return to Landing Page Link */}
+      <div className="absolute top-6 left-6 z-20">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 backdrop-blur-md px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300 transition hover:bg-white dark:hover:bg-slate-850 shadow-sm"
+        >
+          <ArrowLeft size={14} />
+          <span>Back to Home</span>
+        </Link>
+      </div>
+
       <motion.div 
         initial={{ opacity: 0, scale: 0.95, y: 15 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 15 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
-        className="w-full max-w-sm"
+        className="relative z-10 w-full max-w-sm"
       >
         <div className="mb-6 flex flex-col items-center text-center">
           <motion.span
             layoutId="app-logo-icon"
-            className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md"
+            className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-600/30"
           >
-            <ScanEye size={22} />
+            <ScanEye size={24} />
           </motion.span>
           <motion.h1 
             layoutId="app-logo-text"
-            className="text-xl font-bold text-slate-900 dark:text-slate-100 font-display"
+            className="text-2xl font-bold text-slate-900 dark:text-slate-100 font-display"
           >
             Sign in to ExamLens
           </motion.h1>
@@ -76,7 +95,7 @@ export default function Login() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl">
+        <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/85 dark:bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 shadow-2xl">
           {error && (
             <div className="mb-4 rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-400 ring-1 ring-inset ring-red-600/20 dark:ring-red-500/20">
               {error}
@@ -94,7 +113,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mb-4 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="mb-4 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
 
             <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -106,7 +125,7 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mb-5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="mb-5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
 
             <button
@@ -160,7 +179,7 @@ export default function Login() {
           No account yet?{" "}
           <Link
             to="/register"
-            className="font-semibold text-blue-600 hover:text-blue-700"
+            className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400"
           >
             Create one
           </Link>
