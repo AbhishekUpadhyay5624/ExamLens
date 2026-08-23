@@ -18,42 +18,34 @@ import {
   Lock,
   Sparkles,
   CheckCircle2,
-  Calendar,
-  Building2,
-  UserCheck,
-  Zap,
   ScanEye,
-  BarChart3,
 } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useAuth } from "../lib/auth";
-import CCTVHeroMockup from "../components/CCTVHeroMockup";
+import AISurveillanceRadar from "../components/AISurveillanceRadar";
 import { ShinyText, GlitchText } from "../components/TextEffects";
 import TiltCard from "../components/TiltCard";
 import { EXAM_TYPES } from "../lib/constants";
 
-const STATS = [
-  {
-    icon: UserCheck,
-    value: "50,000+",
-    label: "Students Proctored",
+// Animation Variants for Scroll Reveals
+const fadeInUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
   },
-  {
-    icon: Building2,
-    value: "140+",
-    label: "Exam Centers",
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+    },
   },
-  {
-    icon: Zap,
-    value: "99.4%",
-    label: "Detection Precision",
-  },
-  {
-    icon: ShieldCheck,
-    value: "100%",
-    label: "Verifiable Evidence",
-  },
-];
+};
 
 const ACTIONS = [
   {
@@ -160,7 +152,12 @@ export default function Home() {
     return (
       <div className="space-y-10 pb-16">
         {/* Welcome Hero Card */}
-        <section className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 p-8 text-white shadow-lg sm:p-10">
+        <motion.section 
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 p-8 text-white shadow-lg sm:p-10"
+        >
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-0.5 text-xs font-semibold text-blue-100 border border-white/20">
@@ -190,10 +187,16 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Quick Actions Matrix */}
-        <section className="space-y-4">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={staggerContainer}
+          className="space-y-4"
+        >
           <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 font-display">
             Quick Actions
           </h2>
@@ -201,7 +204,7 @@ export default function Home() {
             {ACTIONS.map((a) => {
               const Icon = a.icon;
               return (
-                <div key={a.to} className="relative group">
+                <motion.div key={a.to} variants={fadeInUp} className="relative group">
                   <Link to={a.to} className="absolute inset-0 z-20" aria-label={a.title} />
                   <TiltCard className="flex flex-col justify-between h-full p-7 min-h-[200px]">
                     <div>
@@ -225,57 +228,70 @@ export default function Home() {
                       Open <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                     </span>
                   </TiltCard>
-                </div>
+                </motion.div>
               );
             })}
           </div>
-        </section>
+        </motion.section>
 
         {/* System Overview & Specs */}
-        <section className="space-y-4">
+        <motion.section 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={staggerContainer}
+          className="space-y-4"
+        >
           <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100 font-display">
             Proctoring Engine Specs
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {Object.entries(EXAM_TYPES).map(([typeKey, profile]) => (
-              <TiltCard key={typeKey} className="p-5 flex flex-col justify-between">
-                <div>
-                  <span className="inline-block px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                    {typeKey}
-                  </span>
-                  <h3 className="mt-2 text-sm font-bold text-slate-900 dark:text-slate-100">
-                    {profile.label}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                    {profile.description}
-                  </p>
-                </div>
-                <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 flex justify-between">
-                  <span>Device Detection:</span>
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
-                    {profile.laptopDetection ? "Active" : "Suppressed"}
-                  </span>
-                </div>
-              </TiltCard>
+              <motion.div key={typeKey} variants={fadeInUp}>
+                <TiltCard className="p-5 flex flex-col justify-between h-full">
+                  <div>
+                    <span className="inline-block px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                      {typeKey}
+                    </span>
+                    <h3 className="mt-2 text-sm font-bold text-slate-900 dark:text-slate-100">
+                      {profile.label}
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                      {profile.description}
+                    </p>
+                  </div>
+                  <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-[11px] text-slate-400 flex justify-between">
+                    <span>Device Detection:</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                      {profile.laptopDetection ? "Active" : "Suppressed"}
+                    </span>
+                  </div>
+                </TiltCard>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
       </div>
     );
   }
 
   // =========================================================================
-  // GUEST LANDING PAGE: TWO-COLUMN HERO + ABOUT EXAMLENS INTEGRATION
+  // GUEST LANDING PAGE: RESTRUCTURED HERO + SCROLL-TRIGGERED ANIMATIONS
   // =========================================================================
   return (
     <div className="space-y-24 pb-20">
-      {/* 1. HERO SECTION (Two-Column Surveillance Theme) */}
-      <section className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-6 sm:p-10 lg:p-12 text-white shadow-2xl">
+      {/* 1. HERO SECTION (Large Brand Anchor, Subheading, CTAs & Clean Telemetry Radar) */}
+      <motion.section 
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-12 lg:p-14 text-white shadow-2xl"
+      >
         <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-purple-600/15 blur-3xl" />
 
         <div className="relative z-10 grid gap-10 lg:grid-cols-12 lg:items-center">
-          {/* Left Column: Headline, Copy, Actions, Stats */}
+          {/* Left Column: Pill, Large Brand Anchor, Subheading & CTAs */}
           <div className="space-y-6 lg:col-span-7">
             {/* Security Pill Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-300 backdrop-blur-md">
@@ -286,20 +302,25 @@ export default function Home() {
               <span>🔒 AI-Powered Surveillance • Zero Blind Spots</span>
             </div>
 
-            {/* Bold 2-Line Headline */}
-            <h1 className="text-3xl font-extrabold tracking-tight font-display sm:text-4xl lg:text-5xl leading-[1.15]">
+            {/* Large Bold ExamLens Logo + Title Anchor */}
+            <div className="flex items-center gap-3.5 sm:gap-4">
+              <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-blue-600/40">
+                <ScanEye size={36} />
+              </div>
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight font-display text-white">
+                ExamLens
+              </h1>
+            </div>
+
+            {/* Tagline Subtext */}
+            <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-200">
               Monitor. Detect.{" "}
               <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
                 Protect Academic Integrity.
               </span>
-            </h1>
-
-            {/* 3-Line Supporting Paragraph */}
-            <p className="max-w-xl text-sm sm:text-base leading-relaxed text-slate-300">
-              ExamLens monitors CCTV recordings so invigilators don't have to scrub through hours of footage — tracking every candidate in real time, flagging suspicious behavior, and delivering timestamped bounding-box video proof.
             </p>
 
-            {/* CTA Buttons */}
+            {/* Action CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
                 type="button"
@@ -314,43 +335,30 @@ export default function Home() {
 
               <a
                 href="#about"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-850/60 px-5 py-3.5 font-semibold text-slate-200 backdrop-blur-md transition-all hover:bg-slate-800 hover:border-slate-600 active:scale-95"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-5 py-3.5 font-semibold text-slate-200 backdrop-blur-md transition-all hover:bg-slate-750 hover:border-slate-600 active:scale-95"
               >
                 <span>Learn More</span>
                 <span className="text-blue-400">↓</span>
               </a>
             </div>
-
-            {/* Trust Metrics Bar */}
-            <div className="pt-6 border-t border-slate-800/80">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {STATS.map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <div key={s.label} className="space-y-1">
-                      <div className="flex items-center gap-1.5 text-slate-400">
-                        <Icon size={14} className="text-blue-400" />
-                        <span className="text-xs font-medium">{s.label}</span>
-                      </div>
-                      <div className="text-xl font-bold font-display text-white">
-                        {s.value}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
-          {/* Right Column: CCTV Surveillance Mockup */}
+          {/* Right Column: Sleek AI Surveillance Radar Component */}
           <div className="flex justify-center lg:col-span-5 lg:justify-end">
-            <CCTVHeroMockup />
+            <AISurveillanceRadar />
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* 2. ABOUT EXAMLENS (Integrated Core Mission Section) */}
-      <section id="about" className="space-y-6">
+      {/* 2. ABOUT EXAMLENS (Integrated Core Mission Section with Scroll Trigger) */}
+      <motion.section 
+        id="about" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={fadeInUp}
+        className="space-y-6"
+      >
         <TiltCard className="p-8 sm:p-12 relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl">
@@ -369,22 +377,29 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 w-full md:w-auto shrink-0">
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 p-5 text-center space-y-1">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-display">100%</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">Explainable AI</div>
+              <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/80 p-5 text-center space-y-1">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-display">AI</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">Explainable Model</div>
               </div>
-              <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/80 p-5 text-center space-y-1">
+              <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/80 p-5 text-center space-y-1">
                 <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-display">H.264</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400">Evidence Clips</div>
               </div>
             </div>
           </div>
         </TiltCard>
-      </section>
+      </motion.section>
 
-      {/* 3. HOW IT WORKS (6-STAGE PIPELINE) */}
-      <section id="pipeline" className="space-y-8">
-        <div>
+      {/* 3. HOW IT WORKS (6-STAGE PIPELINE WITH STAGGERED SCROLL ANIMATIONS) */}
+      <motion.section 
+        id="pipeline" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={staggerContainer}
+        className="space-y-8"
+      >
+        <motion.div variants={fadeInUp}>
           <div className="inline-flex items-center gap-1.5 rounded-md bg-blue-50 dark:bg-blue-900/30 px-2.5 py-1 text-xs font-semibold text-blue-700 dark:text-blue-300 mb-2 border border-blue-200 dark:border-blue-800">
             <Activity size={13} />
             <span>AI Architecture</span>
@@ -395,36 +410,45 @@ export default function Home() {
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mt-1">
             Raw CCTV recordings are converted into explainable, timestamped video evidence through a deterministic 6-stage pipeline.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PIPELINE_STEPS.map((step, idx) => {
             const Icon = step.icon;
             return (
-              <TiltCard key={step.title} className="p-6 relative overflow-hidden flex flex-col justify-between">
-                <div>
-                  <span className="absolute right-4 top-4 font-mono text-3xl font-extrabold text-slate-100 dark:text-slate-800/60 select-none">
-                    0{idx + 1}
-                  </span>
-                  <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 shadow-sm">
-                    <Icon size={22} />
-                  </span>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                    {step.body}
-                  </p>
-                </div>
-              </TiltCard>
+              <motion.div key={step.title} variants={fadeInUp}>
+                <TiltCard className="p-6 relative overflow-hidden flex flex-col justify-between h-full">
+                  <div>
+                    <span className="absolute right-4 top-4 font-mono text-3xl font-extrabold text-slate-100 dark:text-slate-800/60 select-none">
+                      0{idx + 1}
+                    </span>
+                    <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 shadow-sm">
+                      <Icon size={22} />
+                    </span>
+                    <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                      {step.body}
+                    </p>
+                  </div>
+                </TiltCard>
+              </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. TARGETED ANOMALY CLASSIFICATION */}
-      <section id="detectors" className="space-y-8">
-        <div>
+      <motion.section 
+        id="detectors" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={staggerContainer}
+        className="space-y-8"
+      >
+        <motion.div variants={fadeInUp}>
           <div className="inline-flex items-center gap-1.5 rounded-md bg-red-50 dark:bg-red-900/30 px-2.5 py-1 text-xs font-semibold text-red-700 dark:text-red-300 mb-2 border border-red-200 dark:border-red-800">
             <ShieldAlert size={13} />
             <span>Targeted Detectors</span>
@@ -435,44 +459,53 @@ export default function Home() {
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mt-1">
             Engineered rules designed to pinpoint common cheating behaviors while suppressing normal fidgeting.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-5 md:grid-cols-3">
           {ANOMALY_TYPES.map((anomaly) => {
             const Icon = anomaly.icon;
             return (
-              <TiltCard key={anomaly.title} className="p-7 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">
-                      <Icon size={24} />
-                    </span>
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                      {anomaly.badge}
+              <motion.div key={anomaly.title} variants={fadeInUp}>
+                <TiltCard className="p-7 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">
+                        <Icon size={24} />
+                      </span>
+                      <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        {anomaly.badge}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                      {anomaly.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
+                      {anomaly.body}
+                    </p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
+                    <span className="text-slate-400">Severity Tier:</span>
+                    <span className={anomaly.severity === "HIGH" ? "text-red-600 dark:text-red-400 font-bold" : "text-amber-600 dark:text-amber-400 font-bold"}>
+                      {anomaly.severity} PRIORITY
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
-                    {anomaly.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                    {anomaly.body}
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs font-semibold">
-                  <span className="text-slate-400">Severity Tier:</span>
-                  <span className={anomaly.severity === "HIGH" ? "text-red-600 dark:text-red-400 font-bold" : "text-amber-600 dark:text-amber-400 font-bold"}>
-                    {anomaly.severity} PRIORITY
-                  </span>
-                </div>
-              </TiltCard>
+                </TiltCard>
+              </motion.div>
             );
           })}
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. ADAPTIVE EXAM PROFILES */}
-      <section id="profiles" className="space-y-8">
-        <div>
+      <motion.section 
+        id="profiles" 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={staggerContainer}
+        className="space-y-8"
+      >
+        <motion.div variants={fadeInUp}>
           <div className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 dark:bg-emerald-900/30 px-2.5 py-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300 mb-2 border border-emerald-200 dark:border-emerald-800">
             <CheckCircle2 size={13} />
             <span>Context-Aware</span>
@@ -483,57 +516,72 @@ export default function Home() {
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mt-1">
             ExamLens automatically alters its sensitivity thresholds based on whether the exam is computerized, written, or physical.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {Object.entries(EXAM_TYPES).map(([typeKey, profile]) => (
-            <TiltCard key={typeKey} className="p-6 flex flex-col justify-between">
-              <div>
-                <span className="inline-block px-3 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800">
-                  {typeKey}
-                </span>
-                <h3 className="mt-3 text-base font-bold text-slate-900 dark:text-slate-100">
-                  {profile.label}
-                </h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
-                  {profile.description}
-                </p>
-              </div>
-              <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-400 space-y-1">
-                <div className="flex justify-between">
-                  <span>Device Policy:</span>
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
-                    {profile.laptopDetection ? "Forbidden (Flagged)" : "Expected (Suppressed)"}
+            <motion.div key={typeKey} variants={fadeInUp}>
+              <TiltCard className="p-6 flex flex-col justify-between h-full">
+                <div>
+                  <span className="inline-block px-3 py-1 rounded-md text-xs font-mono font-bold bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800">
+                    {typeKey}
                   </span>
+                  <h3 className="mt-3 text-base font-bold text-slate-900 dark:text-slate-100">
+                    {profile.label}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                    {profile.description}
+                  </p>
                 </div>
-              </div>
-            </TiltCard>
+                <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-400 space-y-1">
+                  <div className="flex justify-between">
+                    <span>Device Policy:</span>
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                      {profile.laptopDetection ? "Forbidden (Flagged)" : "Expected (Suppressed)"}
+                    </span>
+                  </div>
+                </div>
+              </TiltCard>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* 6. INTEGRITY STATEMENT & QUOTE */}
-      <TiltCard className="p-8 sm:p-10 relative overflow-hidden">
-        <Quote
-          size={56}
-          className="absolute -top-3 left-6 text-blue-100 dark:text-blue-900/40"
-          fill="currentColor"
-        />
-        <blockquote className="relative z-10">
-          <p className="text-xl font-semibold leading-relaxed text-slate-800 dark:text-slate-200 sm:text-2xl font-display">
-            “<GlitchText text="Integrity is doing the right thing, even when no one is watching." />”
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={fadeInUp}
+      >
+        <TiltCard className="p-8 sm:p-10 relative overflow-hidden">
+          <Quote
+            size={56}
+            className="absolute -top-3 left-6 text-blue-100 dark:text-blue-900/40"
+            fill="currentColor"
+          />
+          <blockquote className="relative z-10">
+            <p className="text-xl font-semibold leading-relaxed text-slate-800 dark:text-slate-200 sm:text-2xl font-display">
+              “<GlitchText text="Integrity is doing the right thing, even when no one is watching." />”
+            </p>
+            <footer className="mt-3 text-sm font-medium text-slate-500 dark:text-slate-400">
+              — C. S. Lewis
+            </footer>
+          </blockquote>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 relative z-10">
+            When someone does need to review, ExamLens ensures the evaluation is objective, deterministic, and backed by verifiable video evidence — protecting honest students while surfacing real violations.
           </p>
-          <footer className="mt-3 text-sm font-medium text-slate-500 dark:text-slate-400">
-            — C. S. Lewis
-          </footer>
-        </blockquote>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 relative z-10">
-          When someone does need to review, ExamLens ensures the evaluation is objective, deterministic, and backed by verifiable video evidence — protecting honest students while surfacing real violations.
-        </p>
-      </TiltCard>
+        </TiltCard>
+      </motion.div>
 
       {/* 7. BOTTOM CALL TO ACTION: ANALYZE YOUR FIRST RECORDING */}
-      <section className="rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-12 text-center space-y-5 text-white shadow-xl">
+      <motion.section 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={fadeInUp}
+        className="rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-12 text-center space-y-5 text-white shadow-xl"
+      >
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight font-display">
           Analyze Your First Recording
         </h2>
@@ -558,7 +606,7 @@ export default function Home() {
             <ArrowRight size={16} />
           </Link>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

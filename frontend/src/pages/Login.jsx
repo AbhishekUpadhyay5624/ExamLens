@@ -50,19 +50,24 @@ export default function Login() {
   });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
-      <div className="w-full max-w-sm animate-fade-up">
+    <div className="flex min-h-screen items-center justify-center bg-slate-100/70 dark:bg-slate-950 px-4 py-8">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
+        className="w-full max-w-sm"
+      >
         <div className="mb-6 flex flex-col items-center text-center">
           <motion.span
             layoutId="app-logo-icon"
-            className="mb-3 flex h-11 w-11 animate-scale-in items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm"
-            style={{ animationDelay: "150ms" }}
+            className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md"
           >
             <ScanEye size={22} />
           </motion.span>
           <motion.h1 
             layoutId="app-logo-text"
-            className="text-xl font-semibold text-slate-900 dark:text-slate-100 font-display"
+            className="text-xl font-bold text-slate-900 dark:text-slate-100 font-display"
           >
             Sign in to ExamLens
           </motion.h1>
@@ -71,7 +76,7 @@ export default function Login() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 backdrop-blur-md p-6 shadow-sm">
+        <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md p-6 shadow-xl">
           {error && (
             <div className="mb-4 rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-400 ring-1 ring-inset ring-red-600/20 dark:ring-red-500/20">
               {error}
@@ -89,7 +94,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mb-4 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="mb-4 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
 
             <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
@@ -101,13 +106,13 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mb-5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-transparent dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              className="mb-5 w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-3 py-2 text-sm dark:text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
             />
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60"
+              className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0 disabled:translate-y-0 disabled:opacity-60 shadow-md shadow-blue-600/20"
             >
               {submitting ? "Signing in…" : "Sign in"}
             </button>
@@ -116,7 +121,7 @@ export default function Login() {
           {/* Divider */}
           <div className="relative my-5 flex items-center justify-center">
             <div className="w-full border-t border-slate-200 dark:border-slate-800" />
-            <span className="bg-white dark:bg-slate-900 px-3 text-xs font-medium uppercase tracking-wider text-slate-400">
+            <span className="bg-white dark:bg-slate-900 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">
               Or
             </span>
             <div className="w-full border-t border-slate-200 dark:border-slate-800" />
@@ -155,12 +160,12 @@ export default function Login() {
           No account yet?{" "}
           <Link
             to="/register"
-            className="font-medium text-blue-600 hover:text-blue-700"
+            className="font-semibold text-blue-600 hover:text-blue-700"
           >
             Create one
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
