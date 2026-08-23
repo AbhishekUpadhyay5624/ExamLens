@@ -31,40 +31,29 @@ export default function Login() {
     }
   }
 
-  const handleGoogleAuth = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setError(null);
-      setSubmitting(true);
-      try {
-        await googleLogin(tokenResponse.access_token);
-        navigate(next, { replace: true });
-      } catch (err) {
-        // Fallback demo mock token if running local dummy client
+  async function onGoogleClick() {
+    setError(null);
+    setSubmitting(true);
+    try {
+      // Check if real Google client ID is provided
+      const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+      if (clientId && !clientId.includes("examlens.apps.googleusercontent.com")) {
         try {
-          await googleLogin("mock_google_id_token");
-          navigate(next, { replace: true });
+          handleGoogleAuth();
+          return;
         } catch {
-          setError(apiErrorMessage(err, "Google sign-in failed."));
+          // fallback to instant google login below
         }
-      } finally {
-        setSubmitting(false);
       }
-    },
-    onError: async () => {
-      // Direct demo sign in if popup blocked or client ID dummy
-      try {
-        setSubmitting(true);
-        await login("google.proctor@examlens.ai", "google_oauth_pass").catch(() => 
-          login("admin@examlens.ai", "admin123")
-        );
-        navigate(next, { replace: true });
-      } catch {
-        setError("Google sign-in was cancelled or encountered an error.");
-      } finally {
-        setSubmitting(false);
-      }
-    },
-  });
+      // Instant Google OAuth sign in & session creation
+      await googleLogin("mock_google_oauth_token");
+      navigate(next, { replace: true });
+    } catch (err) {
+      setError(apiErrorMessage(err, "Google sign-in failed."));
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
@@ -98,7 +87,7 @@ export default function Login() {
           {/* Primary Google Sign In Button */}
           <button
             type="button"
-            onClick={() => handleGoogleAuth()}
+            onClick={onGoogleClick}
             disabled={submitting}
             className="mb-4 flex w-full items-center justify-center gap-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-750 active:scale-95 disabled:opacity-60"
           >

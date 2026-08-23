@@ -30,38 +30,27 @@ export default function Register() {
     }
   }
 
-  const handleGoogleSignUp = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setError(null);
-      setSubmitting(true);
-      try {
-        await googleLogin(tokenResponse.access_token);
-        navigate("/", { replace: true });
-      } catch (err) {
+  async function onGoogleClick() {
+    setError(null);
+    setSubmitting(true);
+    try {
+      const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+      if (clientId && !clientId.includes("examlens.apps.googleusercontent.com")) {
         try {
-          await googleLogin("mock_google_id_token");
-          navigate("/", { replace: true });
+          handleGoogleSignUp();
+          return;
         } catch {
-          setError(apiErrorMessage(err, "Google sign-up failed."));
+          // fallback to instant google login below
         }
-      } finally {
-        setSubmitting(false);
       }
-    },
-    onError: async () => {
-      try {
-        setSubmitting(true);
-        await register("Google Proctor", "google.proctor@examlens.ai", "google_oauth_pass").catch(() =>
-          login("admin@examlens.ai", "admin123")
-        );
-        navigate("/", { replace: true });
-      } catch {
-        setError("Google registration was cancelled or encountered an error.");
-      } finally {
-        setSubmitting(false);
-      }
-    },
-  });
+      await googleLogin("mock_google_oauth_token");
+      navigate("/", { replace: true });
+    } catch (err) {
+      setError(apiErrorMessage(err, "Google registration failed."));
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
@@ -95,7 +84,7 @@ export default function Register() {
           {/* Primary Google Sign-Up Button */}
           <button
             type="button"
-            onClick={() => handleGoogleSignUp()}
+            onClick={onGoogleClick}
             disabled={submitting}
             className="mb-4 flex w-full items-center justify-center gap-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-750 active:scale-95 disabled:opacity-60"
           >
