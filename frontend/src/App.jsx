@@ -20,11 +20,23 @@ export default function App() {
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        {/* Public */}
+        {/* Public authentication */}
         <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
         <Route path="/register" element={<PageTransition><Register /></PageTransition>} />
 
-        {/* Protected — share the Layout (navbar + content column) */}
+        {/* Public Landing & About Pages (with Layout Navbar) */}
+        <Route
+          element={
+            <PageTransition>
+              <Layout />
+            </PageTransition>
+          }
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Route>
+
+        {/* Protected examination management routes */}
         <Route
           element={
             <ProtectedRoute>
@@ -34,10 +46,8 @@ export default function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Home />} />
           <Route path="/uploads" element={<ExamsList />} />
           <Route path="/reports" element={<Reports />} />
-          <Route path="/about" element={<About />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/exams/:id" element={<ExamDashboard />} />
           <Route path="/exams/:id/report" element={<Report />} />
