@@ -1,17 +1,36 @@
-# ExamLens
+# ExamLens — AI Exam Proctoring & Behavioral Analysis System
 
-**ExamLens is an exam-proctoring assistant that reviews recorded exam footage for you.**
-Instead of scrubbing through hours of CCTV, an invigilator uploads a recording and
-ExamLens does the watching — it tracks each person in frame, flags behavior that
-looks suspicious (laptop/phone use, prolonged stillness, excessive movement), cuts a
-short evidence clip around each flagged moment, renders a motion heatmap of the room,
-and produces a ranked investigation report. It doesn't accuse anyone; it surfaces the
-moments worth a human's attention so limited review time goes where it matters most.
+**ExamLens is an intelligent exam-proctoring assistant that automatically monitors recorded examination footage for academic integrity violations.**
 
-The system is a **React single-page app** (the dashboard) talking to a **FastAPI REST
-service** (the ML pipeline + data), backed by **MongoDB** and on-disk storage. It runs
-entirely on your own machine — footage, clips, and reports never leave it, and no
-internet connection is needed to process a recording.
+Instead of manual scrubbing through hours of CCTV recordings, invigilators upload exam footage to ExamLens. The AI engine continuously tracks candidates in frame, detects suspicious behaviors (electronic device usage, unauthorized paper chits, prolonged stillness, excessive movement), extracts precise H.264 evidence clips with glowing bounding box overlays, generates motion heatmaps of the exam hall, and produces a 100% synchronized investigation report. 
+
+ExamLens does not make blind accusations — it surfaces actionable, prioritized evidence so human reviewers can verify integrity in minutes rather than hours.
+
+---
+
+## Key Technical Highlights & Features
+
+- **Dynamic Duration-Based Frame Skipping**: Automatically scales processing speed for long CCTV footage (1hr, 2hr+):
+  - **< 10 mins**: Process 100% of frames (`frame_skip = 1`)
+  - **10–15 mins**: Skip 3 frames (`frame_skip = 3`)
+  - **15–20 mins**: Skip 7 frames (`frame_skip = 7`)
+  - **20–30 mins**: Skip 10 frames (`frame_skip = 10`)
+  - **30+ mins**: Skip 25 frames (`frame_skip = 25`)
+  - *ByteTrack matching scaling*: ByteTrack scales `effective_fps` dynamically so candidate track IDs remain smooth and continuous without tracking loss across skipped frames.
+- **Consolidated Proximity Merging & 25s Clip Cap**:
+  - Automatically merges closely occurring candidate incidents (within 3.5s) into unified event clips.
+  - Caps maximum evidence clip duration to **25 seconds** (`min(25.0, duration)`), eliminating redundant 2-second clip fragments.
+- **100% Event Count & Summary Synchronization**:
+  - Dynamically synchronizes event counts, severity breakdowns, and event types across the **Investigation Report**, **Dashboard KPI Cards**, **Recharts Bar Graphs**, and **Flagged Events Table**.
+  - Automatically filters out clip-less orphaned rows so reviewers only see reviewable events with playable H.264 video clips.
+- **Interactive Deletion & Upload Cancellation**:
+  - **Trash Can Delete**: Purge exam recordings, MongoDB records, and extracted evidence files via `DELETE /api/exams/{id}`.
+  - **Upload Cancellation**: Abort in-flight video uploads instantly via `AbortController`.
+  - **Job Cancellation**: Cancel running analysis jobs directly from the processing dashboard.
+- **Animated Landing Page & Adaptive Theme**:
+  - Continuous scroll-triggered Framer Motion entrance animations.
+  - Interactive AI Surveillance Radar with telemetry node sweeps.
+  - Light/Dark mode context adaptation with clean date formatting (`Aug 23, 2026`).
 
 ---
 
@@ -19,50 +38,42 @@ internet connection is needed to process a recording.
 
 1. [Requirements](#requirements)
 2. [Architecture](#architecture)
-3. [Frontend — what it's built with](#frontend--what-its-built-with)
-4. [Backend — what it's built with](#backend--what-its-built-with)
-5. [Setup & run](#setup--run)
-6. [Configuration](#configuration)
-7. [The processing pipeline](#the-processing-pipeline)
-8. [API reference](#api-reference)
+3. [Frontend Stack](#frontend-stack)
+4. [Backend & ML Stack](#backend--ml-stack)
+5. [Setup & Local Run](#setup--local-run)
+6. [Dynamic Frame Skipping & Pipeline Configuration](#dynamic-frame-skipping--pipeline-configuration)
+7. [API Reference](#api-reference)
 
 ---
 
 ## Requirements
 
-You run the two halves locally (no Docker required):
+The application runs locally without mandatory cloud dependencies:
 
-| Requirement | Version / notes |
+| Requirement | Version / Notes |
 |-------------|-----------------|
-| **Python** | 3.11+ — for the backend API and ML pipeline |
-| **Node.js + npm** | Node 18+ (npm 9+) — for the frontend dev server / build |
-| **MongoDB** | MongoDB Community running locally at `mongodb://localhost:27017` (or an Atlas URI) |
-| **YOLO weights** | `backend/yolo11n.pt` (already included — ~5.6 MB, so nothing is downloaded at runtime) |
-| **ffmpeg** | *Optional.* A bundled `imageio-ffmpeg` binary is used as a fallback; without either, clips are written via OpenCV |
-| **OS** | Developed and run on Windows 11. macOS / Linux work too (only the activate/copy commands differ) |
+| **Python** | 3.11+ — FastAPI backend and PyTorch / YOLO ML pipeline |
+| **Node.js + npm** | Node 18+ (npm 9+) — React Vite frontend |
+| **MongoDB** | MongoDB Community running locally at `mongodb://localhost:27017` (or MongoDB Atlas URI) |
+| **YOLO Weights** | `backend/yolo11m.pt` (or `yolo11n.pt`) included out-of-the-box |
+| **ffmpeg** | *Optional.* Bundled `imageio-ffmpeg` used as fallback; OpenCV used if missing |
+| **OS** | Windows 10/11, macOS, or Linux |
 
-**Ports:** the API runs on **8000**, the frontend dev server on **5173** (already in the
-API's CORS allowlist).
-
-> **Offline:** after the one-time `npm install` / `pip install`, everything runs offline.
-> The only network traffic is the browser talking to the local API.
+**Default Ports:** API runs on **`8000`**, Frontend runs on **`5173`**.
 
 ---
 
 ## Architecture
 
-ExamLens is three cooperating processes: the **browser SPA**, the **API**, and a
-**background worker** that runs the ML pipeline. MongoDB holds metadata and results;
-large binaries (the uploaded video, evidence clips, the heatmap PNG) live on disk and
-MongoDB stores only their paths.
+ExamLens consists of three main decoupled services: the **React Single Page App**, the **FastAPI REST API**, and the **Asynchronous Background Worker**.
 
 ```
                                               ┌──────────────────────────────┐
    Browser (React SPA, :5173)                 │        FastAPI API (:8000)   │
    ┌───────────────────────────┐              │                              │
-   │  Login / Upload / Dashboard│  JWT + JSON  │  routers → services          │
-   │  Reports / Event review    │ ───────────▶ │  (async Motor driver)        │
-   │  Heatmap + clip (blob auth)│ ◀─────────── │                              │
+   │  Landing / Upload Library │  JWT + JSON  │  routers → services          │
+   │  Dashboard / Event Review │ ───────────▶ │  (async Motor driver)        │
+   │  Report / Heatmap & Clips │ ◀─────────── │                              │
    └───────────────────────────┘              │        │ enqueue upload       │
                                               │        ▼                      │
                                               │  background worker            │
@@ -81,240 +92,117 @@ MongoDB stores only their paths.
                                                             └──────────────┘
 ```
 
-**Key design points**
-
-- **Two Mongo drivers on purpose.** The API uses async **Motor**; the worker runs in
-  background threads (no event loop) and uses sync **PyMongo**.
-- **The ML pipeline is storage-agnostic.** `ml/` reports progress via a callback and
-  returns a results dict; the `worker/` layer is what persists it. This keeps the ML
-  code reusable (there's also a standalone CLI, `scripts/run_pipeline.py`).
-- **Binary endpoints need auth.** `GET .../heatmap` (PNG) and `GET .../clip` (mp4)
-  require the `Authorization` header, so the SPA can't use them as a plain `<img>` /
-  `<video>` `src`. The frontend fetches them as blobs through the authed Axios client
-  and wraps them with `URL.createObjectURL` (see `src/lib/useAuthedBlob.js`).
-- **Polling, not sockets.** After upload, the dashboard polls `GET /api/exams/{id}`
-  every 3 s and advances a stepper until the status is terminal (`done` / `failed`).
-
-### Repository layout
+### Repository Layout
 
 ```
 ExamLens/
-├── README.md               ← you are here (the only README)
-├── docker-compose.yml      ← optional containerized run (Mongo + API)
-├── backend/                ← FastAPI service + ML pipeline
-│   ├── app/                ← API: main, routers/, services/, schemas/, deps, security, db, config
-│   ├── ml/                 ← pipeline: config, detector, tracker, event_engine, clips, heatmap, pipeline
-│   ├── worker/             ← background job runner (thread pool + Celery-ready)
-│   ├── scripts/            ← run_pipeline.py (standalone, no DB)
-│   ├── tests/              ← pytest
-│   ├── storage/            ← uploaded videos, clips, heatmaps (created at runtime)
-│   ├── yolo11n.pt          ← YOLO11n weights (bundled)
+├── README.md               ← Documentation
+├── docker-compose.yml      ← Containerized environment (Mongo + API)
+├── backend/                ← FastAPI service & ML pipeline
+│   ├── app/                ← REST API: main, routers/, services/, schemas/, deps
+│   ├── ml/                 ← ML pipeline: config, detector, tracker, event_engine, clips, heatmap, pipeline
+│   ├── worker/             ← Background processing runner & persistence
+│   ├── scripts/            ← Standalone CLI pipeline runner
+│   ├── tests/              ← pytest suite
+│   ├── storage/            ← Uploaded videos, clips, and heatmaps
 │   └── requirements.txt
-└── frontend/               ← React + Vite dashboard
+└── frontend/               ← React + Vite Web Application
     └── src/
-        ├── lib/            ← api (axios), auth, queryClient, constants, format, useAuthedBlob
-        ├── components/     ← Layout, Navbar, Badge, charts, EventsTable, HeatmapImage, ClipPlayer, …
-        └── pages/          ← Home, About, Upload, ExamsList (Uploads), Reports, ExamDashboard, EventDetail, Report, Login, Register
+        ├── components/     ← AISurveillanceRadar, EventsTable, SummaryCards, SeverityCharts, UploadDropzone, …
+        ├── pages/          ← Home, ExamsList (Uploads Library), Upload, ExamDashboard, EventDetail, Report, Login, Register
+        └── lib/            ← api (axios), auth, queryClient, constants, format
 ```
 
-**The ML core** is refactored from the original research notebooks:
-**Phase 1B** (MOG2 motion ROIs + YOLO11n detection + ByteTrack tracking) and
-**Phase 2** (a rule-based event engine with a per-exam-type detection profile).
+---
+
+## Frontend Stack
+
+- **React 18**: Component-driven UI framework
+- **Vite 6**: Fast dev server and build pipeline
+- **Tailwind CSS v4**: Utility-first styling via `@tailwindcss/vite`
+- **Framer Motion**: Smooth continuous scroll animations & modal overlays
+- **TanStack Query v5**: Server-state management and real-time polling
+- **Recharts**: Responsive severity and event-type bar charts
+- **Lucide React**: Modern icon set
 
 ---
 
-## Frontend — what it's built with
+## Backend & ML Stack
 
-A JavaScript (JSX) single-page app with a light, professional theme.
-
-| Tool | Role |
-|------|------|
-| **React 18** | UI library |
-| **Vite 6** | Dev server + build tooling |
-| **Tailwind CSS v4** | Styling — via `@tailwindcss/vite`, configured in `src/index.css` (no `tailwind.config.js`) |
-| **React Router v7** | Client-side routing |
-| **TanStack Query v5** | Server-state fetching, caching, and the 3 s status polling |
-| **Recharts** | Severity / event-type charts |
-| **Axios** | HTTP client with JWT request/response interceptors |
-| **lucide-react** | Icons |
-
-**Pages:** Home, Uploads (exam list), Upload, Reports, About, plus the per-exam
-Dashboard, Event detail (with clip player + review controls), and the printable
-Investigation Report. Auth state lives in an `AuthContext`; the JWT is kept in
-`localStorage` and attached to every request, and a `401` clears it and routes to login.
+- **FastAPI + Uvicorn**: Async Python web backend
+- **Motor (async) & PyMongo (sync)**: Dual MongoDB access strategy for API routes and worker threads
+- **Ultralytics YOLOv11**: Real-time object detection (Person #0, Laptop #63, Cell Phone #67, Book/Paper #73)
+- **Supervision (ByteTrack)**: Multi-object temporal tracking across frames
+- **OpenCV (MOG2)**: Motion region-of-interest detection & H.264 video bounding box overlay rendering
+- **Matplotlib**: Motion heatmap generator
 
 ---
 
-## Backend — what it's built with
+## Setup & Local Run
 
-An async FastAPI service that owns the data model, auth, and the ML pipeline.
-
-| Tool | Role |
-|------|------|
-| **FastAPI** + **Uvicorn** | Async web framework + ASGI server |
-| **Motor** (async) / **PyMongo** (sync) | MongoDB drivers — async for the API, sync for the worker threads |
-| **Pydantic v2** + **pydantic-settings** | Request/response models and environment-based config |
-| **PyJWT** + **bcrypt** | JWT bearer auth and password hashing |
-| **ThreadPoolExecutor worker** | In-process background processing (Celery-ready — set `USE_CELERY=true`) |
-| **Ultralytics YOLO11n** | Person detection |
-| **OpenCV** (MOG2) | Motion ROIs + video I/O |
-| **supervision** (ByteTrack) | Multi-object tracking across frames |
-| **matplotlib** | Motion-heatmap rendering |
-| **imageio-ffmpeg** | Evidence-clip extraction (OpenCV fallback) |
-
-Data lives in MongoDB (`examlens` database); videos, clips, and heatmaps are written
-under `backend/storage/`.
-
----
-
-## Setup & run
-
-Start MongoDB first, then the backend, then the frontend. Commands below are for
-**Windows PowerShell**; macOS/Linux notes follow each block.
-
-### 1. Backend (API + pipeline)
+### 1. Backend Server
 
 ```powershell
 cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1        # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-copy .env.example .env              # macOS/Linux: cp .env.example .env  — then set MONGODB_URI / JWT_SECRET
 python -m uvicorn app.main:app --reload
 ```
 
-The API boots even if MongoDB is down (the connection is lazy); `GET /health` reports
-live DB connectivity, and interactive docs are at <http://localhost:8000/docs>.
+Interactive API documentation available at: `http://localhost:8000/docs`
 
-> **Fast first run:** set `MAX_FRAMES=300` in `backend/.env` before starting the API so
-> a test video finishes processing in seconds instead of minutes.
-
-### 2. Frontend (dashboard)
+### 2. Frontend Development Server
 
 In a second terminal:
 
 ```powershell
 cd frontend
 npm install
-copy .env.example .env              # sets VITE_API_BASE_URL=http://localhost:8000
 npm run dev
 ```
 
-Open <http://localhost:5173>. The Axios client appends `/api` to the base URL.
-
-```powershell
-npm run build      # production build -> dist/
-npm run preview    # serve the production build on :5173
-```
-
-### 3. First use
-
-1. **Register** the first account — it automatically becomes the administrator and logs you in.
-2. **New upload** → drop a short exam video, choose the exam type, submit. You're redirected to that exam's dashboard.
-3. Watch the **stepper** advance through the pipeline (polling every 3 s) to `done`.
-4. Review the **summary cards, charts, motion heatmap, and events table**.
-5. Open an **event** to play its evidence clip and mark it confirmed / false-positive with notes.
-6. Open the **investigation report** and use **Print / Save as PDF**.
-
-### Optional: Docker
-
-A `docker-compose.yml` (Mongo + API) is included if you prefer containers:
-
-```bash
-docker compose up --build
-```
-
-The frontend is not containerized — run it with `npm run dev` as above.
+Open your browser at: `http://localhost:5173`
 
 ---
 
-## Configuration
+## Dynamic Frame Skipping & Pipeline Configuration
 
-Backend settings are environment variables (see `backend/.env.example`). The important ones:
+Pipeline parameters can be customized in `backend/ml/config.py` or `.env`:
 
-| Var | Default | Notes |
-|-----|---------|-------|
-| `MONGODB_URI` | `mongodb://localhost:27017` | Local, Docker (`mongodb://mongo:27017`), or Atlas |
-| `JWT_SECRET` | dev placeholder | **Change in production** |
-| `ALLOW_OPEN_REGISTRATION` | `true` | Set `false` after bootstrapping the first admin |
-| `STORAGE_DIR` | `backend/storage` | Where videos / clips / heatmaps are written |
-| `YOLO_WEIGHTS` | `yolo11n.pt` | Model weights |
-| `WORKER_THREADS` | `1` | Background thread-pool size |
-| `TOP_CLIPS` | `10` | Max evidence clips per exam |
-| `MAX_FRAMES` | *unset* | Cap frames per job (useful for demos) |
-| `USE_CELERY` | `false` | Dispatch to Celery instead of the in-process thread |
-
-The frontend reads a single variable from `frontend/.env`:
-
-```
-VITE_API_BASE_URL=http://localhost:8000
-```
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `MIN_EVENT_CONFIDENCE` | `0.55` | Confidence cutoff for event detection |
+| `EVENT_MERGE_GAP_GLOBAL` | `5.0s` | Maximum gap between consecutive same-person events |
+| `CONTEXT_SECONDS` | `2.5s` | Time padding added before/after evidence clips |
+| `MAX_CLIP_DURATION` | `25.0s` | Strict upper limit for extracted clip duration |
+| `TEACHER_TRAVEL_THRESHOLD_PX` | `500.0` | Travel distance to distinguish invigilators from seated students |
 
 ---
 
-## The processing pipeline
+## API Reference
 
-Each uploaded exam moves through these statuses (the dashboard polls until it reaches a
-terminal one):
+All protected endpoints require `Authorization: Bearer <token>`.
 
-```
-uploaded → tracking → detecting_events → generating_clips → generating_heatmap → done
-                                                                              (or failed + error)
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| **POST** | `/api/auth/register` | Register new account (first user becomes Admin) |
+| **POST** | `/api/auth/login` | Authenticate user and issue JWT |
+| **GET** | `/api/auth/me` | Fetch current user credentials |
+| **POST** | `/api/exams` | Upload CCTV footage & enqueue analysis job |
+| **GET** | `/api/exams` | List uploaded exam sessions with pagination |
+| **GET** | `/api/exams/{id}` | Fetch exam metadata, status, & synchronized summary |
+| **DELETE** | `/api/exams/{id}` | Delete exam recording, DB records, and evidence files |
+| **GET** | `/api/exams/{id}/events` | Fetch flagged evidence events |
+| **GET** | `/api/exams/{id}/report` | Retrieve investigation report JSON |
+| **GET** | `/api/exams/{id}/heatmap` | Fetch generated motion heatmap PNG |
+| **GET** | `/api/events/{id}` | Fetch specific event detail |
+| **PATCH** | `/api/events/{id}` | Review event (`confirmed` / `false_positive` + notes) |
+| **GET** | `/api/events/{id}/clip` | Stream H.264 evidence video clip |
 
-**What it detects**, and how the exam type tunes it:
-
-| Event | Meaning |
-|-------|---------|
-| **Laptop interaction** | Use of a laptop / phone / screen |
-| **Suspicious stillness** | A person unusually motionless for a long stretch |
-| **Excessive movement** | Repeated turning, reaching, or leaving position |
-
-`examType` ∈ `CBT`, `PAPER_PEN`, `PHYSICAL`, `HYBRID` — each applies a different
-detection profile. For example, laptop detection is off for **CBT** (screens are
-expected) and escalated for **PAPER_PEN**, while movement detection is relaxed for
-**PHYSICAL** exams. Every flagged event is ranked **HIGH / MEDIUM / LOW**.
-
-### Standalone pipeline (no DB)
-
-The ML core can run without the API or MongoDB:
-
-```bash
-python -m scripts.run_pipeline /path/to/video.mp4 --exam-type PHYSICAL --output out/ --max-frames 300
-```
-
-It writes `events.json`, `report.json`, `metadata.json`, the clips, and a heatmap to
-the output directory.
-
----
-
-## API reference
-
-All `/api` routes except register/login require `Authorization: Bearer <token>`.
-
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/api/auth/register` | Create account (**first account becomes admin**) |
-| POST | `/api/auth/login` | Get a JWT |
-| GET  | `/api/auth/me` | Current user |
-| POST | `/api/exams` | Upload video (multipart: `examName`, `examType`, `video`) → enqueues processing |
-| GET  | `/api/exams` | List exams (`?page&page_size&status`) |
-| GET  | `/api/exams/{id}` | Exam detail + status + summary |
-| GET  | `/api/exams/{id}/events` | Events (`?page&page_size&severity&eventType&personId&reviewed`) |
-| GET  | `/api/exams/{id}/report` | Investigation report JSON |
-| GET  | `/api/exams/{id}/heatmap` | Motion heatmap PNG *(needs auth header)* |
-| GET  | `/api/events/{id}` | Event detail |
-| PATCH| `/api/events/{id}` | Review an event (`reviewed`, `reviewStatus`, `reviewerNotes`) |
-| GET  | `/api/events/{id}/clip` | Evidence clip, mp4 with HTTP Range / seeking *(needs auth header)* |
-
-### Tests
+### Automated Testing
 
 ```bash
 cd backend
 pytest
 ```
-
-- `test_event_engine.py` runs the Phase 2 engine against recorded Phase 1B output plus
-  unit tests for the pure helpers (recorded-data tests skip automatically if that data
-  folder is absent).
-- `test_api_smoke.py` boots the app and checks routing / auth wiring — no MongoDB required.
