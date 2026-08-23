@@ -4,13 +4,14 @@ from __future__ import annotations
 import datetime as dt
 from typing import Any, Dict, Optional
 
+import jwt
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from ..config import settings
 from ..deps import db_dep, get_current_user
-from ..schemas import LoginRequest, Token, UserCreate, UserPublic
+from ..schemas import GoogleLoginRequest, LoginRequest, Token, UserCreate, UserPublic
 from ..security import create_access_token, decode_access_token, hash_password, verify_password
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -93,6 +94,49 @@ async def login(
             detail="Incorrect email or password.",
         )
     token = create_access_token(subject=str(user["_id"]), role=user["role"])
+    return Token(access_token=token, user=_user_public(user))
+
+
+@router.post("/google", response_model=Token)
+async def google_login(
+    payload: GoogleLoginRequest,
+    db: AsyncIOMotorDatabase = Depends(db_dep),
+) -> Token:
+    """Authenticate with Google OAuth credential token."""
+    email = None
+    name = "Google User"
+
+    try:
+        # Decode the Google ID token JWT payload
+        decoded = jwt.decode(payload.token, options={"verify_signature": False})
+        email = decoded.get("email")
+        name = decoded.get("name", decoded.get("given_name", "Google User"))
+    except Exception:
+        pass
+
+    if not email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid Google OAuth credential token.",
+        )
+
+    # Check if user already exists in database
+    user = await db.users.find_one({"email": email})
+    if not user:
+        total_users = await db.users.count_documents({})
+        role = "admin" if total_users == 0 else "invigilator"
+        doc = {
+            "name": name,
+            "email": email,
+            "role": role,
+            "createdAt": dt.datetime.now(dt.timezone.utc),
+            "googleAuth": True,
+        }
+        result = await db.users.insert_one(doc)
+        doc["_id"] = result.inserted_id
+        user = doc
+
+    token = create_access_token(subject=str(user["_id"]), role=user.get("role", "invigilator"))
     return Token(access_token=token, user=_user_public(user))
 
 

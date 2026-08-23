@@ -73,6 +73,15 @@ export function AuthProvider({ children }) {
     return u;
   }
 
+  async function googleLogin(token) {
+    const res = await api.post("/auth/google", { token });
+    const { access_token, user: u } = res.data;
+    persistSession(access_token, u);
+    setUser(u);
+    setTokenState(access_token);
+    return u;
+  }
+
   function logout() {
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(USER_KEY);
@@ -88,6 +97,7 @@ export function AuthProvider({ children }) {
       bootstrapping,
       login,
       register,
+      googleLogin,
       logout,
     }),
     [user, token, bootstrapping]

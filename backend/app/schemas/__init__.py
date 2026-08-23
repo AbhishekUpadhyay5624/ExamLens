@@ -1,7 +1,7 @@
 from .common import Message, Page
 from .event import EventPublic, EventUpdate
 from .exam import ExamCreated, ExamPublic, ExamSummary, VideoProperties
-from .user import LoginRequest, Token, UserCreate, UserPublic
+from .user import GoogleLoginRequest, LoginRequest, Token, UserCreate, UserPublic
 
 __all__ = [
     "Message",
@@ -13,6 +13,7 @@ __all__ = [
     "ExamSummary",
     "VideoProperties",
     "LoginRequest",
+    "GoogleLoginRequest",
     "Token",
     "UserCreate",
     "UserPublic",

@@ -6,6 +6,7 @@ import { queryClient } from "./lib/queryClient";
 import { AuthProvider } from "./lib/auth";
 import App from "./App";
 
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 // Self-hosted variable fonts (weight axis) — no external CDN, so the dashboard
@@ -16,16 +17,20 @@ import "@fontsource-variable/jetbrains-mono/wght.css";
 
 import "./index.css";
 
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "1082265007328-examlens.apps.googleusercontent.com";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ThemeProvider>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </ThemeProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <ThemeProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </ThemeProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
