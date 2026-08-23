@@ -17,6 +17,7 @@ from ml.event_engine import (
     calculate_distance,
     calculate_event_confidence,
     format_timestamp,
+    identify_invigilators_and_teachers,
     merge_consecutive_events,
     run_event_engine,
 )
@@ -90,6 +91,28 @@ def test_exam_profiles_toggle_detectors():
     for cfg in (cbt, paper, physical):
         assert cfg["SUSPICIOUS_STILLNESS"]["enabled"] is True
         assert set(cfg) == {"LAPTOP_INTERACTION", "SUSPICIOUS_STILLNESS", "EXCESSIVE_MOVEMENT"}
+
+    # CBT has relaxed stillness min duration (30s) vs normal paper (5s)
+    assert cbt["SUSPICIOUS_STILLNESS"]["min_duration"] == 30.0
+    assert paper["SUSPICIOUS_STILLNESS"]["min_duration"] == 5.0
+
+
+def test_identify_invigilators_and_teachers():
+    # Person 12 leans back (displaces by ~280px < 500px threshold -> student)
+    # Person 99 walks across room (displaces by 600px >= 500px threshold -> teacher)
+    tracks = {
+        12: [
+            {"bbox": [100, 100, 200, 200]},
+            {"bbox": [300, 300, 400, 400]},  # center moves from (150,150) to (350,350) -> distance sqrt(200^2+200^2)=~282.8px
+        ],
+        99: [
+            {"bbox": [50, 50, 150, 150]},
+            {"bbox": [650, 50, 750, 150]},  # center moves from (100,100) to (700,100) -> distance 600px
+        ]
+    }
+    invigilators = identify_invigilators_and_teachers(tracks, travel_threshold=500.0)
+    assert 99 in invigilators
+    assert 12 not in invigilators
 
 
 # --------------------------------------------------------------------------- #

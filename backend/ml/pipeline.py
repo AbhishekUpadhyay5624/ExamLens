@@ -33,7 +33,7 @@ def process_exam_video(
     output_dir: str,
     *,
     weights: str = config.YOLO_WEIGHTS_DEFAULT,
-    top_clips: int = 10,
+    top_clips: int = 50,
     max_frames: Optional[int] = None,
     write_video: bool = False,
     status_cb: StatusCb = None,

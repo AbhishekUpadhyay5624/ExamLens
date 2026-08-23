@@ -12,8 +12,8 @@ from typing import Any, Dict
 # ---------------------------------------------------------------------------
 # Phase 1B — tracking parameters (notebook Cell 3 / Cell 4)
 # ---------------------------------------------------------------------------
-YOLO_WEIGHTS_DEFAULT = "yolo11n.pt"
-YOLO_CONFIDENCE = 0.5          # minimum YOLO detection confidence
+YOLO_WEIGHTS_DEFAULT = "yolo11m.pt"
+YOLO_CONFIDENCE = 0.25         # minimum YOLO detection confidence
 FRAME_SKIP = 1                 # process every Nth frame (1 = all frames)
 MIN_MOTION_AREA = 500          # minimum motion region size (pixels^2)
 MOTION_THRESHOLD = 25          # MOG2 background-subtraction sensitivity (varThreshold)
@@ -21,7 +21,9 @@ MOTION_HISTORY_SIZE = 30       # frames considered for a motion score
 
 PERSON_CLASS_ID = 0            # COCO "person"
 LAPTOP_CLASS_ID = 63           # COCO "laptop"
-TRACK_CLASS_IDS = [PERSON_CLASS_ID, LAPTOP_CLASS_ID]
+CELL_PHONE_CLASS_ID = 67       # COCO "cell phone"
+BOOK_CLASS_ID = 73             # COCO "book"
+TRACK_CLASS_IDS = [PERSON_CLASS_ID, LAPTOP_CLASS_ID, CELL_PHONE_CLASS_ID, BOOK_CLASS_ID]
 
 # ByteTrack
 BYTETRACK_ACTIVATION_THRESHOLD = 0.25
@@ -37,9 +39,12 @@ FULL_FRAME_INTERVAL_SECONDS = 5
 # ---------------------------------------------------------------------------
 MIN_EVENT_CONFIDENCE = 0.5     # drop events below this confidence
 EVENT_MERGE_GAP_GLOBAL = 2.0   # default merge gap (seconds)
-CONTEXT_SECONDS = 10           # padding added before/after each evidence clip
+CONTEXT_SECONDS = 4            # padding added before/after each evidence clip
 
 VALID_EXAM_TYPES = ("CBT", "PAPER_PEN", "PHYSICAL", "HYBRID")
+
+# Teacher / invigilator detection threshold (pixels of bbox displacement across room)
+TEACHER_TRAVEL_THRESHOLD_PX = 500.0
 
 # ---------------------------------------------------------------------------
 # Exam profiles (notebook Phase 2 Cell 2.5)
@@ -49,8 +54,10 @@ EXAM_PROFILES: Dict[str, Dict[str, Any]] = {
         "description": "Computer-Based Test - Students use laptops throughout exam",
         "laptop_detection": False,
         "laptop_severity": "LOW",
-        "movement_threshold": 0.85,
+        "movement_threshold": 0.38,   # Sensitive to desk-leaning, chit sliding, and head tilt
         "stillness_threshold": 0.10,
+        "stillness_min_duration": 30.0,
+        "movement_min_duration": 3.0,
     },
     "PAPER_PEN": {
         "description": "Paper-Based Exam - No electronic devices allowed",
@@ -58,6 +65,7 @@ EXAM_PROFILES: Dict[str, Dict[str, Any]] = {
         "laptop_severity": "HIGH",
         "movement_threshold": 0.7,
         "stillness_threshold": 0.15,
+        "stillness_min_duration": 5.0,
     },
     "PHYSICAL": {
         "description": "Physical Fitness Test - High movement expected",
@@ -65,6 +73,7 @@ EXAM_PROFILES: Dict[str, Dict[str, Any]] = {
         "laptop_severity": "HIGH",
         "movement_threshold": 999,  # disabled
         "stillness_threshold": 0.20,
+        "stillness_min_duration": 5.0,
     },
     "HYBRID": {
         "description": "Mixed Format Exam",
@@ -72,6 +81,7 @@ EXAM_PROFILES: Dict[str, Dict[str, Any]] = {
         "laptop_severity": "MEDIUM",
         "movement_threshold": 0.7,
         "stillness_threshold": 0.15,
+        "stillness_min_duration": 5.0,
     },
 }
 
@@ -105,7 +115,7 @@ def build_event_config(exam_type: str) -> Dict[str, Dict[str, Any]]:
         "SUSPICIOUS_STILLNESS": {
             "enabled": True,
             "motion_threshold": profile["stillness_threshold"],
-            "min_duration": 5.0,
+            "min_duration": profile.get("stillness_min_duration", 5.0),
             "merge_gap": 3.0,
             "severity": "HIGH",
             "color": "red",
@@ -114,10 +124,10 @@ def build_event_config(exam_type: str) -> Dict[str, Dict[str, Any]]:
         "EXCESSIVE_MOVEMENT": {
             "enabled": profile["movement_threshold"] < 999,
             "motion_threshold": profile["movement_threshold"],
-            "min_duration": 10.0,
+            "min_duration": profile.get("movement_min_duration", 10.0),
             "merge_gap": 3.0,
-            "severity": "MEDIUM",
-            "color": "yellow",
-            "description": "Sustained excessive movement detected",
+            "severity": "HIGH" if exam_type == "CBT" else "MEDIUM",
+            "color": "red" if exam_type == "CBT" else "yellow",
+            "description": f"Suspicious movement / desk activity detected during {exam_type} exam",
         },
     }

@@ -62,6 +62,11 @@ def merge_consecutive_events(events: List[dict], max_gap: float = 2.0) -> List[d
             current["end_time"] = event["end_time"]
             current["duration"] = current["end_time"] - current["start_time"]
             current["confidence"] = max(current["confidence"], event["confidence"])
+            curr_bboxes = current.get("event_bboxes", [])
+            new_bboxes = event.get("event_bboxes", [])
+            current["event_bboxes"] = curr_bboxes + new_bboxes
+            if not current.get("bbox") and event.get("bbox"):
+                current["bbox"] = event["bbox"]
         else:
             merged.append(current)
             current = event.copy()
@@ -92,17 +97,51 @@ def build_person_tracks(tracking_data: List[dict]) -> Dict[int, List[dict]]:
     return dict(person_tracks)
 
 
+def identify_invigilators_and_teachers(
+    person_tracks: Dict[int, List[dict]],
+    travel_threshold: float = config.TEACHER_TRAVEL_THRESHOLD_PX,
+) -> set[int]:
+    """Identify invigilators and teachers based on bounding box travel across the room.
+
+    Students generally remain in their seats, while invigilators pace across aisles.
+    If a person's bounding box centroid displacement spans more than `travel_threshold`
+    pixels across the entire video, they are flagged as an invigilator/teacher.
+    """
+    invigilator_ids: set[int] = set()
+    for person_id, detections in person_tracks.items():
+        if len(detections) < 2:
+            continue
+        centroids = [
+            ((d["bbox"][0] + d["bbox"][2]) / 2.0, (d["bbox"][1] + d["bbox"][3]) / 2.0)
+            for d in detections
+        ]
+        xs = [c[0] for c in centroids]
+        ys = [c[1] for c in centroids]
+        span = float(np.sqrt((max(xs) - min(xs)) ** 2 + (max(ys) - min(ys)) ** 2))
+        if span >= travel_threshold:
+            invigilator_ids.add(person_id)
+    return invigilator_ids
+
+
 # ---------------------------------------------------------------------------
 # Event detectors (notebook Cells 6-8)
 # ---------------------------------------------------------------------------
-def detect_laptop_interactions(tracking_data: List[dict], cfg: dict) -> List[dict]:
+def detect_laptop_interactions(
+    tracking_data: List[dict],
+    cfg: dict,
+    ignore_person_ids: set[int] | None = None,
+) -> List[dict]:
     """Person-near-laptop interactions, filtered to a plausible duration window."""
     if not cfg["enabled"]:
         return []
 
+    ignore_ids = ignore_person_ids or set()
     frame_interactions: List[dict] = []
     for frame_data in tracking_data:
-        persons = [d for d in frame_data["detections"] if d["class"] == "person"]
+        persons = [
+            d for d in frame_data["detections"]
+            if d["class"] == "person" and d["track_id"] not in ignore_ids
+        ]
         laptops = [d for d in frame_data["detections"] if d["class"] == "laptop"]
         for person in persons:
             for laptop in laptops:
@@ -111,6 +150,7 @@ def detect_laptop_interactions(tracking_data: List[dict], cfg: dict) -> List[dic
                     frame_interactions.append({
                         "timestamp": frame_data["timestamp"],
                         "person_id": person["track_id"],
+                        "bbox": person["bbox"],
                     })
 
     if not frame_interactions:
@@ -129,10 +169,18 @@ def detect_laptop_interactions(tracking_data: List[dict], cfg: dict) -> List[dic
         def _flush(start, end):
             duration = end - start
             if cfg["min_duration"] <= duration <= cfg["max_duration"]:
+                ev_bboxes = [
+                    {"timestamp": item["timestamp"], "bbox": item["bbox"]}
+                    for item in interactions
+                    if start <= item["timestamp"] <= end
+                ]
+                pri_bbox = ev_bboxes[0]["bbox"] if ev_bboxes else []
                 events.append(_make_event(
                     "LAPTOP_INTERACTION", person_id, start, end, cfg["severity"],
                     calculate_event_confidence("LAPTOP_INTERACTION", duration, 0.85),
                     "Brief laptop interaction detected",
+                    bbox=pri_bbox,
+                    event_bboxes=ev_bboxes,
                 ))
 
         for i in range(1, len(interactions)):
@@ -165,8 +213,25 @@ def _detect_motion_events(
     for person_id, track in person_tracks.items():
         if len(track) < 2:
             continue
+        def _emit_event(s, dur):
+            ev_bboxes = [
+                {"timestamp": d["timestamp"], "bbox": d["bbox"]}
+                for d in track
+                if s <= d["timestamp"] <= s + dur
+            ]
+            pri_bbox = ev_bboxes[0]["bbox"] if ev_bboxes else (track[0]["bbox"] if track else [])
+            events.append(_make_event(
+                event_type, person_id, s, s + dur,
+                cfg["severity"],
+                calculate_event_confidence(event_type, dur, signal),
+                description,
+                bbox=pri_bbox,
+                event_bboxes=ev_bboxes,
+            ))
+
         run_start = None
         run_duration = 0.0
+
         for detection in track:
             motion = detection["motion_score"]
             triggered = motion < threshold if comparison == "<" else motion > threshold
@@ -176,21 +241,11 @@ def _detect_motion_events(
                 run_duration = detection["timestamp"] - run_start
             else:
                 if run_start is not None and run_duration >= cfg["min_duration"]:
-                    events.append(_make_event(
-                        event_type, person_id, run_start, run_start + run_duration,
-                        cfg["severity"],
-                        calculate_event_confidence(event_type, run_duration, signal),
-                        description,
-                    ))
+                    _emit_event(run_start, run_duration)
                 run_start = None
                 run_duration = 0.0
         if run_start is not None and run_duration >= cfg["min_duration"]:
-            events.append(_make_event(
-                event_type, person_id, run_start, run_start + run_duration,
-                cfg["severity"],
-                calculate_event_confidence(event_type, run_duration, signal),
-                description,
-            ))
+            _emit_event(run_start, run_duration)
     return events
 
 
@@ -204,20 +259,33 @@ def detect_suspicious_stillness(person_tracks: Dict[int, List[dict]], cfg: dict)
 def detect_excessive_movement(person_tracks: Dict[int, List[dict]], cfg: dict) -> List[dict]:
     return _detect_motion_events(
         person_tracks, cfg, "EXCESSIVE_MOVEMENT", 0.7,
-        "Sustained excessive movement detected", ">",
+        "Sustained excessive movement / suspicious desk interaction detected", ">",
     )
 
 
-def _make_event(event_type, person_id, start, end, severity, confidence, description) -> dict:
+def _make_event(
+    event_type: str,
+    person_id: int,
+    start: float,
+    end: float,
+    severity: str,
+    confidence: float,
+    description: str,
+    bbox: list | None = None,
+    event_bboxes: list | None = None,
+) -> dict:
     return {
         "event_type": event_type,
         "person_id": int(person_id),
+        "track_id": int(person_id),
         "start_time": float(start),
         "end_time": float(end),
         "duration": float(end - start),
         "severity": severity,
         "confidence": float(confidence),
         "description": description,
+        "bbox": bbox or [],
+        "event_bboxes": event_bboxes or [],
     }
 
 
@@ -239,11 +307,22 @@ def run_event_engine(
     """
     event_config = config.build_event_config(exam_type)
     person_tracks = build_person_tracks(tracking_data)
+    invigilator_ids = identify_invigilators_and_teachers(
+        person_tracks, travel_threshold=config.TEACHER_TRAVEL_THRESHOLD_PX
+    )
+    student_tracks = {
+        pid: track for pid, track in person_tracks.items()
+        if pid not in invigilator_ids
+    }
 
     all_events: List[dict] = []
-    all_events += detect_laptop_interactions(tracking_data, event_config["LAPTOP_INTERACTION"])
-    all_events += detect_suspicious_stillness(person_tracks, event_config["SUSPICIOUS_STILLNESS"])
-    all_events += detect_excessive_movement(person_tracks, event_config["EXCESSIVE_MOVEMENT"])
+    all_events += detect_laptop_interactions(
+        tracking_data,
+        event_config["LAPTOP_INTERACTION"],
+        ignore_person_ids=invigilator_ids,
+    )
+    all_events += detect_suspicious_stillness(student_tracks, event_config["SUSPICIOUS_STILLNESS"])
+    all_events += detect_excessive_movement(student_tracks, event_config["EXCESSIVE_MOVEMENT"])
 
     all_events = merge_consecutive_events(all_events, max_gap=config.EVENT_MERGE_GAP_GLOBAL)
     filtered = [e for e in all_events if e["confidence"] >= config.MIN_EVENT_CONFIDENCE]
@@ -267,6 +346,8 @@ def run_event_engine(
         "total_events": len(filtered),
         "video_frames": len(tracking_data),
         "persons_tracked": len(person_tracks),
+        "students_tracked": len(student_tracks),
+        "invigilators_identified": sorted(list(invigilator_ids)),
         "detection_config": event_config,
         "events_by_type": dict(events_by_type),
         "events_by_severity": dict(events_by_severity),
