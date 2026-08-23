@@ -17,7 +17,7 @@ import "@fontsource-variable/jetbrains-mono/wght.css";
 
 import "./index.css";
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "1082265007328-examlens.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || "414424681275-k5fkjinc1i1h4q6pnfec75brgs7fpkoq.apps.googleusercontent.com";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

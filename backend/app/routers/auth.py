@@ -107,12 +107,29 @@ async def google_login(
     name = "Google User"
 
     try:
-        # Decode the Google ID token JWT payload
+        # 1. Try decoding as a Google ID token JWT
         decoded = jwt.decode(payload.token, options={"verify_signature": False})
         email = decoded.get("email")
         name = decoded.get("name", decoded.get("given_name", "Google User"))
     except Exception:
         pass
+
+    if not email:
+        try:
+            # 2. If it's an OAuth2 access token, verify with Google UserInfo endpoint
+            import httpx
+            async with httpx.AsyncClient() as client:
+                resp = await client.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    headers={"Authorization": f"Bearer {payload.token}"},
+                    timeout=5.0,
+                )
+                if resp.status_code == 200:
+                    info = resp.json()
+                    email = info.get("email")
+                    name = info.get("name", "Google User")
+        except Exception:
+            pass
 
     if not email:
         raise HTTPException(
