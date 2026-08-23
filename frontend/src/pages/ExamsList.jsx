@@ -7,7 +7,7 @@ import { StatusBadge } from "../components/Badge";
 import Pagination from "../components/Pagination";
 import { SkeletonRows } from "../components/Skeleton";
 import { EXAM_TYPE_LABELS, DEFAULT_PAGE_SIZE } from "../lib/constants";
-import { formatDateTime } from "../lib/format";
+import { formatDate } from "../lib/format";
 
 function fetchExams({ page, pageSize }) {
   return api
@@ -131,7 +131,7 @@ export default function ExamsList() {
                         {exam.summary?.totalEvents ?? "—"}
                       </td>
                       <td className="px-6 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">
-                        {formatDateTime(exam.uploadedAt)}
+                        {formatDate(exam.uploadedAt)}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button
