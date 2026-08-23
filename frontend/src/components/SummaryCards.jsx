@@ -35,19 +35,19 @@ export default function SummaryCards({ summary }) {
     },
     {
       label: "High severity",
-      value: bySeverity.HIGH ?? 0,
+      value: bySeverity.HIGH ?? bySeverity.high ?? 0,
       icon: ShieldAlert,
       tone: "text-red-600 bg-red-100",
     },
     {
       label: "Medium severity",
-      value: bySeverity.MEDIUM ?? 0,
+      value: bySeverity.MEDIUM ?? bySeverity.medium ?? 0,
       icon: AlertTriangle,
       tone: "text-amber-600 bg-amber-100",
     },
     {
       label: "Low severity",
-      value: bySeverity.LOW ?? 0,
+      value: bySeverity.LOW ?? bySeverity.low ?? 0,
       icon: Shield,
       tone: "text-slate-500 bg-slate-100",
     },

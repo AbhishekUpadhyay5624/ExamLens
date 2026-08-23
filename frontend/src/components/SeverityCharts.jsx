@@ -38,7 +38,7 @@ export default function SeverityCharts({ summary }) {
 
   const severityData = SEVERITIES.map((s) => ({
     name: s,
-    count: bySeverity[s] || 0,
+    count: bySeverity[s] ?? bySeverity[s.toLowerCase()] ?? bySeverity[s.toUpperCase()] ?? 0,
   }));
 
   const typeData = Object.entries(byType).map(([type, count]) => ({

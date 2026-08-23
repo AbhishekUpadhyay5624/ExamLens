@@ -108,6 +108,28 @@ async def get_exam(
     current_user: Dict[str, Any] = Depends(get_current_user),
 ) -> ExamPublic:
     exam = await _load_exam(db, exam_id)
+    if exam.get("status") == "done":
+        cursor = db.events.find({"examId": exam["_id"]})
+        event_docs = await cursor.to_list(length=1000)
+        if event_docs:
+            by_sev = {"HIGH": 0, "MEDIUM": 0, "LOW": 0}
+            by_type = {}
+            for ed in event_docs:
+                s = str(ed.get("severity", "MEDIUM")).upper()
+                by_sev[s] = by_sev.get(s, 0) + 1
+                t = ed.get("eventType", "")
+                if t:
+                    by_type[t] = by_type.get(t, 0) + 1
+            
+            synced_summary = {
+                "personsTracked": (exam.get("summary") or {}).get("personsTracked", 0),
+                "totalEvents": len(event_docs),
+                "eventsBySeverity": by_sev,
+                "eventsByType": by_type,
+            }
+            exam["summary"] = synced_summary
+            await db.exams.update_one({"_id": exam["_id"]}, {"$set": {"summary": synced_summary}})
+
     return ExamPublic(**exam_service.serialize_exam(exam))
 
 

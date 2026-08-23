@@ -65,11 +65,11 @@ def process_and_persist(exam_id: str) -> None:
         )
         raise
 
-    _persist_events(db, oid, results)
-    _persist_summary(db, oid, results)
+    persisted_docs = _persist_events(db, oid, results)
+    _persist_summary(db, oid, results, persisted_docs)
 
 
-def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> None:
+def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> List[dict]:
     # Idempotent: clear any events from a previous run of the same exam.
     db.events.delete_many({"examId": exam_oid})
     clip_by_event = {c["event_id"]: c["filename"] for c in results.get("clips", [])}
@@ -85,7 +85,7 @@ def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> None:
             "eventId": e["event_id"],
             "eventType": e["event_type"],
             "personId": e["person_id"],
-            "severity": e["severity"],
+            "severity": e["severity"].upper() if isinstance(e["severity"], str) else e["severity"],
             "startTime": e["start_time"],
             "endTime": e["end_time"],
             "duration": e["duration"],
@@ -101,15 +101,28 @@ def _persist_events(db: Database, exam_oid: ObjectId, results: dict) -> None:
         })
     if docs:
         db.events.insert_many(docs)
+    return docs
 
 
-def _persist_summary(db: Database, exam_oid: ObjectId, results: dict) -> None:
+def _persist_summary(db: Database, exam_oid: ObjectId, results: dict, persisted_docs: List[dict]) -> None:
     meta = results["metadata"]
+
+    by_sev = {"HIGH": 0, "MEDIUM": 0, "LOW": 0}
+    by_type = {}
+
+    for doc in persisted_docs:
+        sev = str(doc.get("severity", "MEDIUM")).upper()
+        by_sev[sev] = by_sev.get(sev, 0) + 1
+
+        etype = doc.get("eventType", "")
+        if etype:
+            by_type[etype] = by_type.get(etype, 0) + 1
+
     summary = {
         "personsTracked": meta.get("persons_tracked", 0),
-        "totalEvents": meta.get("total_events", 0),
-        "eventsBySeverity": meta.get("events_by_severity", {}),
-        "eventsByType": meta.get("events_by_type", {}),
+        "totalEvents": len(persisted_docs),
+        "eventsBySeverity": by_sev,
+        "eventsByType": by_type,
     }
     db.exams.update_one(
         {"_id": exam_oid},
