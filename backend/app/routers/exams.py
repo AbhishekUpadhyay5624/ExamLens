@@ -163,3 +163,25 @@ async def get_exam_heatmap(
     if not path.exists():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Heatmap file missing on disk")
     return FileResponse(str(path), media_type="image/png", filename=f"heatmap_{exam_id}.png")
+
+
+@router.delete("/{exam_id}", status_code=status.HTTP_200_OK)
+async def delete_exam(
+    exam_id: str,
+    db: AsyncIOMotorDatabase = Depends(db_dep),
+    current_user: Dict[str, Any] = Depends(get_current_user),
+) -> Dict[str, Any]:
+    """Delete an exam recording, its database records, and all extracted evidence files."""
+    exam = await _load_exam(db, exam_id)
+    await db.exams.delete_one({"_id": exam["_id"]})
+    await db.events.delete_many({"examId": exam_id})
+    await db.events.delete_many({"exam_id": exam_id})
+
+    # Remove storage directory and video files
+    exam_dir = storage.exam_dir(exam_id)
+    if exam_dir.exists():
+        import shutil
+        shutil.rmtree(exam_dir, ignore_errors=True)
+
+    return {"ok": True, "id": exam_id, "message": "Exam and associated evidence files deleted successfully"}
+

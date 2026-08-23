@@ -149,7 +149,7 @@ export default function ExamDashboard() {
 
       {(isActive || isFailed) && (
         <div className="mx-auto max-w-xl">
-          <ProcessingStatus status={exam.status} error={exam.error} />
+          <ProcessingStatus status={exam.status} error={exam.error} examId={id} />
         </div>
       )}
 
