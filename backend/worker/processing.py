@@ -22,11 +22,7 @@ logger = logging.getLogger("examlens.worker")
 _client: Optional[MongoClient] = None
 
 
-def get_sync_db() -> Database:
-    global _client
-    if _client is None:
-        _client = MongoClient(settings.mongodb_uri, serverSelectionTimeoutMS=5000)
-    return _client[settings.db_name]
+from app.db import get_sync_db
 
 
 def _now() -> dt.datetime:
