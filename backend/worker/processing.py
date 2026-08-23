@@ -124,6 +124,16 @@ def _persist_summary(db: Database, exam_oid: ObjectId, results: dict, persisted_
         "eventsBySeverity": by_sev,
         "eventsByType": by_type,
     }
+
+    report = results.get("report")
+    if isinstance(report, dict) and "events_summary" in report:
+        report["events_summary"] = {
+            "total_events": len(persisted_docs),
+            "high_severity": by_sev.get("HIGH", 0),
+            "medium_severity": by_sev.get("MEDIUM", 0),
+            "by_type": by_type,
+        }
+
     db.exams.update_one(
         {"_id": exam_oid},
         {"$set": {
@@ -132,7 +142,7 @@ def _persist_summary(db: Database, exam_oid: ObjectId, results: dict, persisted_
             "videoProperties": results.get("video_properties"),
             "summary": summary,
             "heatmapFilename": results.get("heatmap_filename"),
-            "report": results.get("report"),
+            "report": report,
             "error": None,
         }},
     )

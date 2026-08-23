@@ -222,9 +222,9 @@ export default function Report() {
 
         {/* Key stats */}
         <div className="mb-6 grid grid-cols-3 gap-3">
-          <Stat label="Total events" value={events.total_events ?? 0} />
-          <Stat label="High severity" value={events.high_severity ?? 0} />
-          <Stat label="Medium severity" value={events.medium_severity ?? 0} />
+          <Stat label="Total events" value={exam?.summary?.totalEvents ?? eventsList?.length ?? events.total_events ?? 0} />
+          <Stat label="High severity" value={exam?.summary?.eventsBySeverity?.HIGH ?? exam?.summary?.eventsBySeverity?.high ?? events.high_severity ?? 0} />
+          <Stat label="Medium severity" value={exam?.summary?.eventsBySeverity?.MEDIUM ?? exam?.summary?.eventsBySeverity?.medium ?? events.medium_severity ?? 0} />
         </div>
 
         {/* Video + processing details */}
