@@ -285,16 +285,16 @@ export default function Home() {
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
-        className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-12 lg:p-14 text-white shadow-2xl"
+        className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white/95 via-blue-50/60 to-slate-100/90 p-8 sm:p-12 lg:p-14 text-slate-900 shadow-xl dark:border-slate-800/80 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-white dark:shadow-2xl"
       >
-        <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-blue-600/15 blur-3xl" />
-        <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-purple-600/15 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-600/15" />
+        <div className="pointer-events-none absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl dark:bg-purple-600/15" />
 
         <div className="relative z-10 grid gap-10 lg:grid-cols-12 lg:items-center">
           {/* Left Column: Pill, Large Brand Anchor, Subheading & CTAs */}
           <div className="space-y-6 lg:col-span-7">
             {/* Security Pill Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-300 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1 text-xs font-semibold text-blue-700 dark:border-blue-500/30 dark:text-blue-300 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
@@ -304,18 +304,18 @@ export default function Home() {
 
             {/* Large Bold ExamLens Logo + Title Anchor */}
             <div className="flex items-center gap-3.5 sm:gap-4">
-              <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-blue-600/40">
+              <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-cyan-500 text-white shadow-lg shadow-blue-600/30">
                 <ScanEye size={36} />
               </div>
-              <h1 className="text-4xl sm:text-6xl font-black tracking-tight font-display text-white">
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight font-display text-slate-900 dark:text-white">
                 ExamLens
               </h1>
             </div>
 
             {/* Tagline Subtext */}
-            <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-200">
+            <p className="text-xl sm:text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-200">
               Monitor. Detect.{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-300 dark:to-purple-400 bg-clip-text text-transparent">
                 Protect Academic Integrity.
               </span>
             </p>
@@ -335,10 +335,10 @@ export default function Home() {
 
               <a
                 href="#about"
-                className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 px-5 py-3.5 font-semibold text-slate-200 backdrop-blur-md transition-all hover:bg-slate-750 hover:border-slate-600 active:scale-95"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-300/80 bg-white/90 px-5 py-3.5 font-semibold text-slate-700 backdrop-blur-md transition-all hover:bg-slate-100 hover:border-slate-400 active:scale-95 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-200 dark:hover:bg-slate-750 dark:hover:border-slate-600"
               >
                 <span>Learn More</span>
-                <span className="text-blue-400">↓</span>
+                <span className="text-blue-600 dark:text-blue-400">↓</span>
               </a>
             </div>
           </div>
