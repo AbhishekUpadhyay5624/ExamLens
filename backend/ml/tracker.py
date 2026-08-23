@@ -189,17 +189,23 @@ def run_tracking(
     if max_frames:
         frames_to_process = min(total_frames, max_frames) if total_frames > 0 else max_frames
 
+    video_duration_seconds = (total_frames / fps) if (total_frames > 0 and fps > 0) else 0.0
+    if frame_skip == config.FRAME_SKIP and video_duration_seconds > 0:
+        frame_skip = config.calculate_dynamic_frame_skip(video_duration_seconds, default_skip=frame_skip)
+
+    effective_fps = max(1.0, fps / frame_skip)
+
     # Background subtractor (MOG2)
     bg_subtractor = cv2.createBackgroundSubtractorMOG2(
         history=500, varThreshold=config.MOTION_THRESHOLD, detectShadows=False
     )
 
-    # ByteTrack configured with the *actual* FPS
+    # ByteTrack configured with the effective FPS
     tracker = sv.ByteTrack(
         track_activation_threshold=config.BYTETRACK_ACTIVATION_THRESHOLD,
-        lost_track_buffer=int(fps * config.BYTETRACK_LOST_BUFFER_SECONDS),
+        lost_track_buffer=int(effective_fps * config.BYTETRACK_LOST_BUFFER_SECONDS),
         minimum_matching_threshold=config.BYTETRACK_MIN_MATCHING_THRESHOLD,
-        frame_rate=int(fps),
+        frame_rate=int(effective_fps),
     )
 
     writer = None

@@ -14,10 +14,32 @@ from typing import Any, Dict
 # ---------------------------------------------------------------------------
 YOLO_WEIGHTS_DEFAULT = "yolo11m.pt"
 YOLO_CONFIDENCE = 0.25         # minimum YOLO detection confidence
-FRAME_SKIP = 1                 # process every Nth frame (1 = all frames)
+FRAME_SKIP = 1                 # process every Nth frame (1 = all frames for short clips)
 MIN_MOTION_AREA = 500          # minimum motion region size (pixels^2)
 MOTION_THRESHOLD = 25          # MOG2 background-subtraction sensitivity (varThreshold)
 MOTION_HISTORY_SIZE = 30       # frames considered for a motion score
+
+
+def calculate_dynamic_frame_skip(duration_seconds: float, default_skip: int = 1) -> int:
+    """Dynamic frame skipping rules for long videos:
+    - < 10 mins: skip 1 (process every frame)
+    - 10 - 15 mins: skip 3 frames
+    - 15 - 20 mins: skip 7 frames
+    - 20 - 30 mins: skip 10 frames
+    - 30+ mins: skip 25 frames
+    """
+    duration_mins = duration_seconds / 60.0
+    if duration_mins < 10.0:
+        return default_skip
+    elif 10.0 <= duration_mins < 15.0:
+        return 3
+    elif 15.0 <= duration_mins < 20.0:
+        return 7
+    elif 20.0 <= duration_mins < 30.0:
+        return 10
+    else:  # 30+ mins
+        return 25
+
 
 PERSON_CLASS_ID = 0            # COCO "person"
 LAPTOP_CLASS_ID = 63           # COCO "laptop"
