@@ -1,5 +1,7 @@
-# Claude Code local settings (user-specific)
-.claude/settings.local.json
+# IDE & Agent config
+.claude/
+.freebuff/
+.vscode/
 
 # OS cruft
 .DS_Store
@@ -9,3 +11,4 @@ desktop.ini
 # Editor / backup files
 *.bak
 *.swp
+
