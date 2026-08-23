@@ -350,42 +350,29 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* 2. ABOUT EXAMLENS (Integrated Core Mission Section with Scroll Trigger) */}
+      {/* 2. EXAMLENS (Core Mission Section with Scroll Trigger) */}
       <motion.section 
         id="about" 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.2 }}
         variants={fadeInUp}
         className="space-y-6"
       >
         <TiltCard className="p-8 sm:p-12 relative overflow-hidden">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div className="space-y-4 max-w-2xl">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
-                <ScanEye size={24} />
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-display">
-                About ExamLens
-              </h2>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                ExamLens is an exam-proctoring assistant that reviews recorded exam footage for you. Instead of scrubbing through hours of CCTV, an invigilator uploads a recording and ExamLens does the watching — tracking each person, flagging behavior that looks suspicious, and collecting the evidence into a single dashboard and report.
-              </p>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                It doesn't accuse anyone. It surfaces moments worth a human's attention and ranks them by severity, so limited review time goes to the events that matter most.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 w-full md:w-auto shrink-0">
-              <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/80 p-5 text-center space-y-1">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-display">AI</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">Explainable Model</div>
-              </div>
-              <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/80 p-5 text-center space-y-1">
-                <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400 font-display">H.264</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">Evidence Clips</div>
-              </div>
-            </div>
+          <div className="space-y-4 max-w-4xl">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
+              <ScanEye size={24} />
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100 font-display">
+              ExamLens
+            </h2>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+              ExamLens is an exam-proctoring assistant that reviews recorded exam footage for you. Instead of scrubbing through hours of CCTV, an invigilator uploads a recording and ExamLens does the watching — tracking each person, flagging behavior that looks suspicious, and collecting the evidence into a single dashboard and report.
+            </p>
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg">
+              It doesn't accuse anyone. It surfaces moments worth a human's attention and ranks them by severity, so limited review time goes to the events that matter most.
+            </p>
           </div>
         </TiltCard>
       </motion.section>
@@ -395,7 +382,7 @@ export default function Home() {
         id="pipeline" 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={staggerContainer}
         className="space-y-8"
       >
@@ -444,7 +431,7 @@ export default function Home() {
         id="detectors" 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={staggerContainer}
         className="space-y-8"
       >
@@ -501,7 +488,7 @@ export default function Home() {
         id="profiles" 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={staggerContainer}
         className="space-y-8"
       >
@@ -551,7 +538,7 @@ export default function Home() {
       <motion.div 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={fadeInUp}
       >
         <TiltCard className="p-8 sm:p-10 relative overflow-hidden">
@@ -578,7 +565,7 @@ export default function Home() {
       <motion.section 
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={fadeInUp}
         className="rounded-3xl border border-slate-800 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 sm:p-12 text-center space-y-5 text-white shadow-xl"
       >

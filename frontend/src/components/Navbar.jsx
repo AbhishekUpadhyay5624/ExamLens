@@ -11,7 +11,7 @@ const LOGGED_IN_LINKS = [
 ];
 
 const GUEST_NAV_LINKS = [
-  { href: "#features", label: "Features" },
+  { href: "#about", label: "Overview" },
   { href: "#pipeline", label: "How It Works" },
   { href: "#detectors", label: "Anomaly Rules" },
   { href: "#profiles", label: "Exam Profiles" },
